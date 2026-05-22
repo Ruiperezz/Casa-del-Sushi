@@ -247,7 +247,7 @@ export default function Matchmaker() {
                   {/* Drink Match */}
                   <div className="bg-sushi-dark/50 border border-sushi-neon/25 p-4 rounded-xl">
                     <span className="font-accent text-[9px] uppercase tracking-widest text-sushi-neon font-bold flex items-center gap-1.5 mb-1">
-                      <GlassWater className="w-3 H-3" />
+                      <GlassWater className="w-3 h-3" />
                       <span>Maridaje Ideal</span>
                     </span>
                     <h4 className="font-sans text-xs sm:text-sm font-bold text-white mb-2 leading-snug">
