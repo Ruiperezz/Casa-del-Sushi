@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syncopate:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", serif;
+  --font-accent: "Outfit", sans-serif;
+  --font-wide: "Syncopate", sans-serif;
+
+  --color-sushi-dark: #070B0A;       /* Deepest shade of black-green */
+  --color-sushi-green: #0F251E;      /* Dark green ceiling style */
+  --color-sushi-coral: #FF5F49;      /* Vibrant orange/coral banquets */
+  --color-sushi-neon: #00F0FF;       /* Electric blue neon */
+  --color-sushi-gold: #C5A059;       /* Hexagonal golden lamps */
+  --color-sushi-gold-hover: #E8C98B; /* Golden highlight */
+  --color-sushi-marble: #0B0C0E;     /* Core black marble slate */
+  
+  --animate-neon-pulse: neon-pulse 2.5s infinite alternate;
+}
+
+@keyframes neon-pulse {
+  0% {
+    text-shadow: 0 0 4px rgba(0, 240, 255, 0.4), 0 0 10px rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 4px rgba(0, 240, 255, 0.2), inset 0 0 4px rgba(0, 240, 255, 0.2);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.9), 0 0 20px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5), inset 0 0 8px rgba(0, 240, 255, 0.3);
+  }
+}
+
+/* Custom premium scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #070B0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #1C2724;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A059;
+}
+
+/* Gold marble veining effect background */
+.gold-veins {
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(197, 160, 89, 0.05) 1px, transparent 90px),
+    radial-gradient(circle at 80% 70%, rgba(197, 160, 89, 0.04) 2px, transparent 120px);
+}
+
+.gold-border-glow-hover {
+  transition: all 0.3s ease;
+}
+.gold-border-glow-hover:hover {
+  border-color: #C5A059;
+  box-shadow: 0 0 12px rgba(197, 160, 89, 0.25);
+}

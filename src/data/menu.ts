@@ -1,0 +1,183 @@
+import { MenuItem, Review } from "../types";
+
+export const MENU_ITEMS: MenuItem[] = [
+  // Buffet Starters
+  {
+    id: "star-1",
+    name: "Edamame Flambeado al Sésamo",
+    description: "Vainas de soja tiernas salteadas al wok con escamas de sal de Maldon y aceite curado de sésamo.",
+    category: "buffet-starters",
+    tags: ["Buffet Incluido", "Vegano", "Sin Gluten"],
+    allergens: ["Sésamo", "Soja"],
+    isPopular: false
+  },
+  {
+    id: "star-2",
+    name: "Gyozas Crujientes de Langostino (4 uds)",
+    description: "Empanadillas japonesas artesanales rellenas de langostinos y jengibre fresco, servidas con salsa dulce de soja.",
+    category: "buffet-starters",
+    tags: ["Buffet Incluido", "Se Recomienda Caliente"],
+    allergens: ["Gluten", "Crustáceos", "Soja"],
+    isPopular: true
+  },
+  {
+    id: "star-3",
+    name: "Tártaro Premium de Salmón y Aguacate",
+    description: "Cama de aguacate cremoso coronada con salmón fresco picado a cuchillo, marinado en salsa Ponzu y huevas de tobiko.",
+    category: "buffet-starters",
+    tags: ["Buffet Incluido", "Top Selección"],
+    allergens: ["Pescado", "Soja", "Gluten"],
+    isPopular: true
+  },
+  {
+    id: "star-4",
+    name: "Wakame con Sésamo Tostado",
+    description: "Ensalada de alga marina crujiente e hidratada, aliñada con vinagre de arroz dulce y sésamo negro.",
+    category: "buffet-starters",
+    tags: ["Buffet Incluido", "Vegano"],
+    allergens: ["Sésamo", "Soja"],
+  },
+
+  // Nigiri / Sashimi
+  {
+    id: "nig-1",
+    name: "Nigiri de Salmón Flameado con Trufa",
+    description: "Bola de arroz artesanal cubierta de salmón de primera calidad flameado con soplete, finalizado con un toque de crema de trufa negra.",
+    category: "nigiri-sashimi",
+    tags: ["Buffet Incluido", "Favorito del Chef"],
+    allergens: ["Pescado"],
+    isPopular: true
+  },
+  {
+    id: "nig-2",
+    name: "Nigiri de Atún Rojo Bluefin con Lámina de Oro",
+    description: "Atún rojo de almadraba seleccionado, corte limpio sobre arroz con un toque delicado de wasabi fresco.",
+    category: "nigiri-sashimi",
+    tags: ["Buffet Incluido", "Premium"],
+    allergens: ["Pescado"],
+    isPopular: true
+  },
+  {
+    id: "nig-3",
+    name: "Sashimi de Salmón Noruego (5 cortes)",
+    description: "Filetes gruesos y frescos de salmón noruego premium cortados al momento por nuestros sushimen.",
+    category: "nigiri-sashimi",
+    tags: ["Buffet Incluido", "Sin Gluten"],
+    allergens: ["Pescado"],
+    isPopular: false
+  },
+  {
+    id: "nig-4",
+    name: "Nigiri de Pez Mantequilla con Trufa Negra",
+    description: "Corte suave y sedoso de pez mantequilla pincelado con aceite de trufa y ralladura sutil de lima fresca.",
+    category: "nigiri-sashimi",
+    tags: ["Buffet Incluido", "Textura Melosa"],
+    allergens: ["Pescado"]
+  },
+
+  // Special Rolls
+  {
+    id: "roll-1",
+    name: "Volcano Coral Roll (8 uds)",
+    description: "Uramaki relleno de aguacate y queso crema, cubierto de salmón fundente y una corona crujiente de tempura bañada en mayonesa japonesa picante y salsa No-Taré.",
+    category: "special-rolls",
+    tags: ["Buffet Incluido", "Picante Suave", "Top Selección"],
+    allergens: ["Gluten", "Lácteos", "Pescado", "Huevo", "Soja"],
+    isPopular: true
+  },
+  {
+    id: "roll-2",
+    name: "Neon Blue Dragon Roll (8 uds)",
+    description: "Homenaje a nuestro neón eléctrico. Relleno de langostino en tempura crujiente, espárrago triguero, coronado con una fina lámina de aguacate de la huerta, anguila ahumada y salsa Unagi ahumada.",
+    category: "special-rolls",
+    tags: ["Buffet Incluido", "Especialidad de la Casa"],
+    allergens: ["Gluten", "Crustáceos", "Pescado", "Soja"],
+    isPopular: true
+  },
+  {
+    id: "roll-3",
+    name: "Uramaki Cartagena Imperial (8 uds)",
+    description: "Inspirado en nuestra bahía. Relleno de atún picante picado a cuchillo, coronado con lubina marinada, cebolla roja caramelizada y un sutil toque de alioli de ajo asado.",
+    category: "special-rolls",
+    tags: ["Buffet Incluido", "Sabor Intenso"],
+    allergens: ["Pescado", "Huevo", "Soja"],
+    isPopular: false
+  },
+  {
+    id: "roll-4",
+    name: "Tori Panko Golden Roll (8 uds)",
+    description: "Roll totalmente crujiente rebozado en panko japonés, relleno de pollo marinado al teriyaki, queso philadelphia fundido y sutil cebollino fresco.",
+    category: "special-rolls",
+    tags: ["Buffet Incluido", "Crujiente"],
+    allergens: ["Gluten", "Lácteos", "Soja"],
+    isPopular: false
+  },
+
+  // Drinks & Cocktails
+  {
+    id: "drink-1",
+    name: "Cerveza Japonesa Kirin Ichiban",
+    description: "Cerveza premium japonesa elaborada mediante un exclusivo proceso de primer prensado para un sabor limpio y refrescante.",
+    price: 3.50,
+    category: "drinks-cocktails",
+    tags: ["Bebida", "Importación"],
+    allergens: ["Gluten"],
+    isPopular: true
+  },
+  {
+    id: "drink-2",
+    name: "Agua Mineral de Sierra Nevada (500ml)",
+    description: "Premium agua pura de manantial para refrescar el paladar.",
+    price: 3.00,
+    category: "drinks-cocktails",
+    tags: ["Bebida", "Esencial"],
+    allergens: [],
+  },
+  {
+    id: "drink-3",
+    name: "Sake Caliente Gekkeikan (Tradicional)",
+    description: "Sake japonés artesanal servido caliente en jarra Tokkuri tradicional. Ideal para maridar con nigiri de salmón.",
+    price: 5.00,
+    category: "drinks-cocktails",
+    tags: ["Bebida", "Tradición Japonesa"],
+    allergens: [],
+    isPopular: false
+  },
+  {
+    id: "drink-4",
+    name: "Cóctel Neon Zen (Especial Casa)",
+    description: "Inspirado en el neón azul de nuestro local. Una cautivadora mezcla de sake filtrado, gin premium, curaçao azul para un resplandor eléctrico, sirope de jazmín y tónica de yuzu.",
+    price: 7.50,
+    category: "drinks-cocktails",
+    tags: ["Bebida", "Combinado Premium"],
+    allergens: [],
+    isPopular: true
+  }
+];
+
+export const REVIEWS: Review[] = [
+  {
+    id: "rev-1",
+    author: "Elena Martínez G.",
+    rating: 5,
+    text: "¡El buffet libre de 17.80€ es insuperable en Cartagena! Todo se pide al momento y la calidad del salmón trufado es espectacular. El local es precioso, esos neones azules combinados con las banquetas de color coral le dan un rollo súper vanguardista.",
+    date: "Hace 2 días",
+    avatarSeed: "elena"
+  },
+  {
+    id: "rev-2",
+    author: "Francisco J. Solano",
+    rating: 5,
+    text: "Fui con unos amigos tras pasear por la Plaza del Rey. De entrada te impacta el diseño interior: el mármol negro con vetas doradas y las lámparas hexagonales son una pasada. El servicio de buffet libre fue rapidísimo y las gyozas estaban súper crujientes. ¡Repetiré seguro!",
+    date: "Hace una semana",
+    avatarSeed: "fran"
+  },
+  {
+    id: "rev-3",
+    author: "Carmen Belmonte",
+    rating: 5,
+    text: "Un rincón de lujo pero súper accesible. El jardín vertical con el neón azul es perfecto para hacerse fotos. El sushi es de verdad artesanal y gourmet, no el típico arroz apelmazado de los buffets normales. Las bebidas por 3€ están geniales.",
+    date: "Hace 2 semanas",
+    avatarSeed: "carmen"
+  }
+];

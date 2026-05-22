@@ -1,0 +1,6 @@
+{
+  "name": "Casa del Sushi Cartagena",
+  "description": "Sitio web oficial de Casa del Sushi en Plaza del Rey, Cartagena. Disfruta de nuestro buffet libre premium por 17,80€, sushi artesanal de alta calidad y un ambiente de lujo con iluminación de neón azul, banquetas de coral y jardín vertical.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
