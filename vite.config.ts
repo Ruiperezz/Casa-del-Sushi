@@ -5,7 +5,6 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: '/Casa-del-Sushi/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
