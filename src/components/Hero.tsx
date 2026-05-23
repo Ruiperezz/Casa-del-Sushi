@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck, ChevronDown } from "lucide-react";
 import interiorHeroImage from "../assets/images/interior_hero_1779464146821.png";
 import { scrollToSection } from "../lib/scroll";
 
@@ -7,131 +7,134 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-[calc(100vh-var(--scroll-offset))] bg-sushi-dark flex items-center overflow-hidden"
+      className="relative overflow-hidden bg-sushi-marble"
       style={{ paddingTop: "var(--scroll-offset)" }}
     >
-      {/* Atmospheric glows */}
-      <div className="absolute top-1/4 left-0 w-[32rem] h-[32rem] rounded-full bg-sushi-neon/[0.05] blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[28rem] h-[28rem] rounded-full bg-sushi-coral/[0.07] blur-[120px] pointer-events-none" />
-      <div className="absolute inset-0 gold-veins pointer-events-none" />
+      {/* ── Imagen full-bleed ── */}
+      <div className="relative h-[100svh] min-h-[600px] max-h-[960px]">
+        <img
+          src={interiorHeroImage}
+          alt="Salón principal de Casa del Sushi — banquetas coral, neón azul y barra de mármol en Plaza del Rey, Cartagena"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          fetchPriority="high"
+        />
 
-      <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10 w-full">
+        {/* Gradientes superpuestos: oscurece esquina inferior-izquierda donde va el texto */}
+        <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark via-sushi-dark/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-sushi-dark/70 via-sushi-dark/20 to-transparent" />
 
-        {/* Left: Copy */}
-        <div className="lg:col-span-7 flex flex-col items-start text-left">
+        {/* ── Contenido: anclado abajo-izquierda ── */}
+        <div className="absolute inset-0 flex flex-col justify-end px-6 sm:px-10 md:px-16 lg:px-20 pb-14 md:pb-20">
+
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="font-accent text-[11px] font-semibold uppercase tracking-[0.25em] text-sushi-gold mb-6"
+            className="font-accent text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.28em] text-sushi-gold mb-5"
           >
             Sushi artesanal · Plaza del Rey · Cartagena
           </motion.p>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-7 leading-none"
+            transition={{ duration: 0.7, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-8"
           >
-            <span className="block font-display text-[3.25rem] sm:text-6xl md:text-7xl font-bold text-white leading-[0.95] tracking-tight">
+            <span className="block font-display font-bold text-white leading-[0.92] tracking-tight
+                             text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7rem]">
               Buffet libre
             </span>
-            <span className="block font-display text-[3.25rem] sm:text-6xl md:text-7xl italic font-normal text-sushi-gold leading-[1.05] tracking-tight">
+            <span className="block font-display font-normal italic text-sushi-coral leading-[1.05] tracking-tight
+                             text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7rem]">
               de autor
             </span>
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.12 }}
-            className="font-sans text-gray-300 text-base md:text-[17px] leading-relaxed max-w-lg mb-10"
-          >
-            Sushi elaborado al momento desde la barra. Cada ronda, recién cortada
-            por nuestros sushimen. Sin bandejas en exposición, sin atajos.
-          </motion.p>
-
-          {/* Price display */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.18 }}
-            className="flex flex-wrap gap-8 sm:gap-12 mb-10 pb-9 border-b border-white/[0.07] w-full max-w-md"
+            className="flex flex-wrap items-center gap-6 sm:gap-10 mb-8"
           >
-            <div>
-              <p className="font-accent text-[10px] uppercase tracking-[0.2em] text-sushi-muted mb-1.5">
-                Buffet libre
-              </p>
-              <p className="font-display text-[2.25rem] font-bold text-white tabular-nums leading-none">
-                17,80<span className="text-xl text-sushi-gold ml-0.5">€</span>
-              </p>
-              <p className="font-sans text-xs text-sushi-muted mt-1.5">por persona · IVA incluido</p>
+            {/* Precio */}
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-display text-[2.25rem] font-bold text-white tabular-nums leading-none">
+                17,80
+              </span>
+              <span className="font-display text-xl text-sushi-gold leading-none">€</span>
+              <span className="font-accent text-[11px] uppercase tracking-[0.15em] text-white/50 ml-2">
+                / persona
+              </span>
             </div>
-            <div>
-              <p className="font-accent text-[10px] uppercase tracking-[0.2em] text-sushi-muted mb-1.5">
-                Bebidas
-              </p>
-              <p className="font-display text-[2.25rem] font-bold text-white leading-none">desde 3€</p>
-              <p className="font-sans text-xs text-sushi-muted mt-1.5">sake, cerveza y cócteles</p>
-            </div>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.24 }}
-            className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
-          >
-            <button type="button" onClick={() => scrollToSection("reserva")} className="btn-primary">
-              Reservar mesa
-              <ArrowRight className="w-4 h-4" aria-hidden />
-            </button>
-            <button type="button" onClick={() => scrollToSection("carta")} className="btn-secondary">
-              Ver la carta
-            </button>
+            <div className="h-8 w-px bg-white/20 hidden sm:block" aria-hidden />
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                type="button"
+                onClick={() => scrollToSection("reserva")}
+                className="btn-primary"
+              >
+                Reservar mesa
+                <ArrowRight className="w-4 h-4" aria-hidden />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollToSection("carta")}
+                className="btn-secondary"
+              >
+                Ver la carta
+              </button>
+            </div>
           </motion.div>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="mt-8 flex items-center gap-2 font-sans text-xs text-sushi-muted"
+            className="flex items-center gap-2 font-sans text-xs text-white/40"
           >
-            <ShieldCheck className="w-4 h-4 text-sushi-gold shrink-0" aria-hidden />
+            <ShieldCheck className="w-3.5 h-3.5 text-sushi-gold/60 shrink-0" aria-hidden />
             Pescado crudo con tratamiento antiparasitario según normativa vigente
           </motion.p>
         </div>
 
-        {/* Right: Image */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="lg:col-span-5 relative"
+        {/* ── Indicador de scroll ── */}
+        <motion.button
+          type="button"
+          onClick={() => scrollToSection("experiencia")}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          aria-label="Desplazarse hacia abajo"
+          className="absolute bottom-10 right-8 md:right-14 flex flex-col items-center gap-2 cursor-pointer group"
         >
-          {/* Neon ambient glow behind image */}
-          <div className="absolute -inset-4 bg-sushi-neon/[0.06] blur-3xl rounded-3xl pointer-events-none" />
+          <span className="font-accent text-[9px] uppercase tracking-[0.3em] text-white/30 group-hover:text-white/60 transition-colors">
+            Descubrir
+          </span>
+          <ChevronDown
+            className="w-5 h-5 text-white/30 group-hover:text-sushi-gold transition-colors"
+            style={{ animation: "scroll-hint 2s ease-in-out infinite" }}
+          />
+        </motion.button>
 
-          <figure className="relative rounded-2xl overflow-hidden border border-sushi-gold/20 shadow-2xl shadow-black/60">
-            <div className="relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5] bg-sushi-surface">
-              <img
-                src={interiorHeroImage}
-                alt="Salón principal de Casa del Sushi en Plaza del Rey, Cartagena"
-                className="object-cover w-full h-full"
-                fetchPriority="high"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/80 via-sushi-dark/10 to-transparent" />
-              <figcaption className="absolute bottom-0 inset-x-0 p-5 sm:p-6">
-                <p className="font-accent text-[10px] uppercase tracking-[0.2em] text-sushi-gold font-semibold mb-1">
-                  Nuestro salón
-                </p>
-                <p className="font-sans text-sm text-white/85 leading-snug">
-                  Ambiente íntimo con jardín vertical, neón de autor y barra en mármol negro.
-                </p>
-              </figcaption>
-            </div>
-          </figure>
+        {/* ── Rating badge esquina superior derecha ── */}
+        <motion.div
+          initial={{ opacity: 0, x: 12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.6 }}
+          className="absolute top-8 right-6 md:right-12 flex items-center gap-2.5 bg-black/40 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2"
+        >
+          <div className="flex gap-0.5">
+            {[1,2,3,4,5].map(i => (
+              <svg key={i} className="w-3 h-3 fill-sushi-gold text-sushi-gold" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+          <span className="font-accent text-[11px] font-semibold text-white/80 tracking-wide">4,9 Google</span>
         </motion.div>
       </div>
     </section>

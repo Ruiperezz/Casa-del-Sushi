@@ -2,92 +2,112 @@
 @import "tailwindcss";
 
 @theme {
+  /* Tipografía */
   --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Bodoni Moda", Georgia, serif;
   --font-accent: "Barlow Condensed", sans-serif;
   --font-wide: "Syncopate", sans-serif;
 
-  --color-sushi-dark: #070B0A;
-  --color-sushi-green: #0F251E;
-  --color-sushi-coral: #FF5F49;
-  --color-sushi-neon: #00F0FF;
-  --color-sushi-gold: #C5A059;
-  --color-sushi-gold-hover: #E8C98B;
-  --color-sushi-marble: #0B0C0E;
-  --color-sushi-muted: #8A9390;
-  --color-sushi-surface: #111816;
+  /*
+   * Paleta revisada — misma identidad del local, ejecución más sofisticada.
+   * El neón pasa de cyan cyber (#00F0FF) a teal real (#1BBDCE).
+   * El coral se profundiza (#E04B36). El oro se calienta (#C4933A).
+   */
+  --color-sushi-dark:       #060A09;   /* Negro cálido — como las paredes del local */
+  --color-sushi-green:      #0C1F18;   /* Verde bosque profundo */
+  --color-sushi-coral:      #E04B36;   /* Coral más profundo, como las banquetas reales */
+  --color-sushi-neon:       #1BBDCE;   /* Teal real de neón — no cyan de gaming */
+  --color-sushi-gold:       #C4933A;   /* Ámbar dorado — como las lámparas hexagonales */
+  --color-sushi-gold-light: #E2B96A;   /* Dorado luminoso para highlights */
+  --color-sushi-marble:     #07090C;   /* Mármol negro frío */
+  --color-sushi-muted:      #7D8E8A;   /* Texto secundario */
+  --color-sushi-surface:    #0E1815;   /* Superficies elevadas */
 
-  --animate-neon-pulse: neon-pulse 2.5s infinite alternate;
+  --animate-neon-pulse: neon-pulse 3s ease-in-out infinite alternate;
+  --animate-scroll-hint: scroll-hint 2s ease-in-out infinite;
 }
 
+/* ─── Variables de layout ─────────────────────────────── */
 :root {
   --announcement-height: 2.25rem;
   --header-height: 4.5rem;
   --scroll-offset: calc(var(--announcement-height) + var(--header-height));
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* ─── Base ────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: var(--scroll-offset); }
 
-[id] {
-  scroll-margin-top: var(--scroll-offset);
-}
+h1, h2, h3 { text-wrap: balance; }
 
+/* ─── Animaciones ─────────────────────────────────────── */
 @keyframes neon-pulse {
-  0% {
-    box-shadow: 0 0 4px rgba(0, 240, 255, 0.15);
-  }
-  100% {
-    box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
-  }
+  0%   { box-shadow: 0 0 4px rgba(27, 189, 206, 0.12); }
+  100% { box-shadow: 0 0 16px rgba(27, 189, 206, 0.35), 0 0 32px rgba(27, 189, 206, 0.1); }
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #070B0A;
-}
-::-webkit-scrollbar-thumb {
-  background: #1C2724;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #C5A059;
+@keyframes scroll-hint {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%       { transform: translateY(6px); opacity: 1; }
 }
 
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar        { width: 5px; height: 5px; }
+::-webkit-scrollbar-track  { background: #060A09; }
+::-webkit-scrollbar-thumb  { background: #1A2E26; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #C4933A; }
+
+/* ─── Efectos de fondo ────────────────────────────────── */
 .gold-veins {
   background-image:
-    radial-gradient(ellipse at 15% 25%, rgba(197, 160, 89, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 85% 75%, rgba(197, 160, 89, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(15, 37, 30, 0.3) 0%, transparent 80%);
-}
-
-.gold-border-glow-hover {
-  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
-}
-.gold-border-glow-hover:hover {
-  border-color: rgba(197, 160, 89, 0.4);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(197, 160, 89, 0.1);
-  transform: translateY(-1px);
+    radial-gradient(ellipse at 12% 20%, rgba(196, 147, 58, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 88% 80%, rgba(196, 147, 58, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(12, 31, 24, 0.4)    0%, transparent 70%);
 }
 
 .neon-glow {
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.25);
+  text-shadow:
+    0 0 8px  rgba(27, 189, 206, 0.7),
+    0 0 20px rgba(27, 189, 206, 0.3);
 }
 
-.section-pad {
-  @apply py-20 md:py-28;
-}
+/* ─── Componentes reutilizables ───────────────────────── */
+.section-pad { @apply py-20 md:py-28; }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-sushi-coral text-white font-accent font-semibold text-[13px] uppercase tracking-[0.12em] rounded-lg transition-all duration-300 cursor-pointer hover:bg-[#ff4a32] hover:shadow-[0_0_20px_rgba(255,95,73,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sushi-coral;
+  @apply inline-flex items-center justify-center gap-2
+         px-7 py-3.5
+         bg-sushi-coral text-white
+         font-accent font-semibold text-[13px] uppercase tracking-[0.13em]
+         rounded-lg transition-all duration-300 cursor-pointer
+         hover:bg-[#C43E2A] hover:shadow-[0_0_24px_rgba(224,75,54,0.4)]
+         focus-visible:outline focus-visible:outline-2
+         focus-visible:outline-offset-2 focus-visible:outline-sushi-coral;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-sushi-gold/40 text-sushi-gold font-accent font-semibold text-[13px] uppercase tracking-[0.12em] rounded-lg transition-all duration-300 cursor-pointer hover:border-sushi-gold hover:bg-sushi-gold/8 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sushi-gold;
+  @apply inline-flex items-center justify-center gap-2
+         px-7 py-3.5
+         border border-sushi-gold/40 text-sushi-gold
+         font-accent font-semibold text-[13px] uppercase tracking-[0.13em]
+         rounded-lg transition-all duration-300 cursor-pointer
+         hover:border-sushi-gold hover:bg-sushi-gold/10 hover:text-sushi-gold-light
+         focus-visible:outline focus-visible:outline-2
+         focus-visible:outline-offset-2 focus-visible:outline-sushi-gold;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2
+         px-5 py-2.5
+         border border-white/10 text-white/70
+         font-accent font-medium text-[12px] uppercase tracking-[0.1em]
+         rounded-lg transition-all duration-200 cursor-pointer
+         hover:border-white/25 hover:text-white;
 }
 
 .card-surface {
@@ -95,10 +115,17 @@ html {
 }
 
 .form-label {
-  @apply flex items-center gap-2 font-accent text-[11px] font-bold uppercase tracking-[0.15em] text-sushi-gold;
+  @apply flex items-center gap-2
+         font-accent text-[11px] font-bold uppercase tracking-[0.15em]
+         text-sushi-gold;
 }
 
-/* Headline text-wrap balance for modern browsers */
-h1, h2, h3 {
-  text-wrap: balance;
+/* Borde dorado con glow al hacer hover */
+.gold-border-glow-hover {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.gold-border-glow-hover:hover {
+  border-color: rgba(196, 147, 58, 0.45);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(196,147,58,0.1);
+  transform: translateY(-1px);
 }
