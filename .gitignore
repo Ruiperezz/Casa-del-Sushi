@@ -10,3 +10,5 @@ coverage/
 # Claude Code local config and skills (local tooling, not project code)
 .claude/
 .agents/
+
+.vercel

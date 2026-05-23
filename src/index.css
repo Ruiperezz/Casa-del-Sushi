@@ -1,35 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Figtree:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Playfair Display", serif;
-  --font-accent: "Outfit", sans-serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bodoni Moda", Georgia, serif;
+  --font-accent: "Barlow Condensed", sans-serif;
   --font-wide: "Syncopate", sans-serif;
 
-  --color-sushi-dark: #070B0A;       /* Deepest shade of black-green */
-  --color-sushi-green: #0F251E;      /* Dark green ceiling style */
-  --color-sushi-coral: #FF5F49;      /* Vibrant orange/coral banquets */
-  --color-sushi-neon: #00F0FF;       /* Electric blue neon */
-  --color-sushi-gold: #C5A059;       /* Hexagonal golden lamps */
-  --color-sushi-gold-hover: #E8C98B; /* Golden highlight */
-  --color-sushi-marble: #0B0C0E;     /* Core black marble slate */
-  
+  --color-sushi-dark: #070B0A;
+  --color-sushi-green: #0F251E;
+  --color-sushi-coral: #FF5F49;
+  --color-sushi-neon: #00F0FF;
+  --color-sushi-gold: #C5A059;
+  --color-sushi-gold-hover: #E8C98B;
+  --color-sushi-marble: #0B0C0E;
+  --color-sushi-muted: #8A9390;
+  --color-sushi-surface: #111816;
+
   --animate-neon-pulse: neon-pulse 2.5s infinite alternate;
+}
+
+:root {
+  --announcement-height: 2.25rem;
+  --header-height: 4.5rem;
+  --scroll-offset: calc(var(--announcement-height) + var(--header-height));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: var(--scroll-offset);
 }
 
 @keyframes neon-pulse {
   0% {
-    text-shadow: 0 0 4px rgba(0, 240, 255, 0.4), 0 0 10px rgba(0, 240, 255, 0.2);
-    box-shadow: 0 0 4px rgba(0, 240, 255, 0.2), inset 0 0 4px rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 4px rgba(0, 240, 255, 0.15);
   }
   100% {
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.9), 0 0 20px rgba(0, 240, 255, 0.4);
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5), inset 0 0 8px rgba(0, 240, 255, 0.3);
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
   }
 }
 
-/* Custom premium scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -45,17 +58,47 @@
   background: #C5A059;
 }
 
-/* Gold marble veining effect background */
 .gold-veins {
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(197, 160, 89, 0.05) 1px, transparent 90px),
-    radial-gradient(circle at 80% 70%, rgba(197, 160, 89, 0.04) 2px, transparent 120px);
+  background-image:
+    radial-gradient(ellipse at 15% 25%, rgba(197, 160, 89, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 75%, rgba(197, 160, 89, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(15, 37, 30, 0.3) 0%, transparent 80%);
 }
 
 .gold-border-glow-hover {
-  transition: all 0.3s ease;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
 }
 .gold-border-glow-hover:hover {
-  border-color: #C5A059;
-  box-shadow: 0 0 12px rgba(197, 160, 89, 0.25);
+  border-color: rgba(197, 160, 89, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(197, 160, 89, 0.1);
+  transform: translateY(-1px);
+}
+
+.neon-glow {
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.25);
+}
+
+.section-pad {
+  @apply py-20 md:py-28;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-sushi-coral text-white font-accent font-semibold text-[13px] uppercase tracking-[0.12em] rounded-lg transition-all duration-300 cursor-pointer hover:bg-[#ff4a32] hover:shadow-[0_0_20px_rgba(255,95,73,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sushi-coral;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-sushi-gold/40 text-sushi-gold font-accent font-semibold text-[13px] uppercase tracking-[0.12em] rounded-lg transition-all duration-300 cursor-pointer hover:border-sushi-gold hover:bg-sushi-gold/8 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sushi-gold;
+}
+
+.card-surface {
+  @apply bg-sushi-surface border border-white/[0.06] rounded-2xl;
+}
+
+.form-label {
+  @apply flex items-center gap-2 font-accent text-[11px] font-bold uppercase tracking-[0.15em] text-sushi-gold;
+}
+
+/* Headline text-wrap balance for modern browsers */
+h1, h2, h3 {
+  text-wrap: balance;
 }

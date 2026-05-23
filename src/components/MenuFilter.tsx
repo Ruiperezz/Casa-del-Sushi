@@ -1,195 +1,160 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MENU_ITEMS } from "../data/menu";
-import { Sparkles, HelpCircle, Trophy, ShoppingBag, Beer, Flame, Leaf } from "lucide-react";
+import { Leaf, Trophy } from "lucide-react";
+import SectionHeading from "./ui/SectionHeading";
+import { scrollToSection } from "../lib/scroll";
+
+const categories = [
+  { id: "all", label: "Todos" },
+  { id: "buffet-starters", label: "Entrantes" },
+  { id: "nigiri-sashimi", label: "Nigiri y sashimi" },
+  { id: "special-rolls", label: "Rolls de autor" },
+  { id: "drinks-cocktails", label: "Bebidas" },
+];
+
+function tagStyles(tag: string) {
+  if (tag === "Buffet Incluido") {
+    return "bg-sushi-green/80 text-sushi-gold border-sushi-gold/25";
+  }
+  if (["Favorito del Chef", "Premium", "Especialidad de la Casa"].includes(tag)) {
+    return "bg-sushi-gold/10 text-sushi-gold border-sushi-gold/20";
+  }
+  return "bg-white/[0.04] text-gray-400 border-white/[0.08]";
+}
 
 export default function MenuFilter() {
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  const categories = [
-    { id: "all", label: "Todos" },
-    { id: "buffet-starters", label: "Entrantes" },
-    { id: "nigiri-sashimi", label: "Nigiri & Sashimi" },
-    { id: "special-rolls", label: "Rolls de Autor" },
-    { id: "drinks-cocktails", label: "Bebidas y Cócteles" }
-  ];
-
-  const filteredItems = activeCategory === "all"
-    ? MENU_ITEMS
-    : MENU_ITEMS.filter(item => item.category === activeCategory);
+  const filteredItems =
+    activeCategory === "all"
+      ? MENU_ITEMS
+      : MENU_ITEMS.filter((item) => item.category === activeCategory);
 
   return (
-    <section id="carta" className="py-24 bg-sushi-dark relative gold-veins">
-      {/* Visual background highlights */}
-      <div className="absolute top-1/3 left-10 w-80 h-80 rounded-full bg-sushi-neon/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/3 right-10 w-80 h-80 rounded-full bg-sushi-coral/5 blur-[120px] pointer-events-none" />
-
+    <section id="carta" className="section-pad bg-sushi-dark relative gold-veins">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <SectionHeading
+          eyebrow="La carta"
+          title="Platos elaborados bajo demanda"
+          description="Selección de lo que preparan nuestros sushimen en cada servicio. El buffet incluye todas las categorías salvo bebidas, con precio individual."
+        />
 
-        {/* Section Title */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="font-accent text-xs font-bold uppercase tracking-[0.25em] text-sushi-gold">
-            CORTES Y TRADICIÓN DE AUTOR
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mt-3 mb-6">
-            Nuestra Carta Digital
-          </h2>
-          <div className="h-0.5 w-24 bg-gradient-to-r from-sushi-neon via-sushi-gold to-sushi-coral mx-auto my-4" />
-          <p className="font-sans text-gray-400 text-sm sm:text-base leading-relaxed">
-            Consulte la selección de platos que se elaboran bajo demanda por nuestros maestros silleros. El buffet libre incluye todas las categorías excepto bebidas que disponen de precios individuales.
-          </p>
+        <div
+          className="flex flex-wrap items-center justify-center gap-2 mb-12"
+          role="tablist"
+          aria-label="Filtrar por categoría"
+        >
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`px-4 py-2 rounded-full font-accent text-xs font-medium transition-all duration-300 border cursor-pointer ${
+                  isActive
+                    ? "bg-white text-sushi-dark border-white"
+                    : "bg-transparent text-sushi-muted border-white/[0.1] hover:border-sushi-gold/40 hover:text-white"
+                }`}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12 max-w-4xl mx-auto">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-5 py-2.5 rounded-full font-accent text-xs uppercase tracking-wider font-semibold transition-all duration-300 border cursor-pointer ${
-                activeCategory === cat.id
-                  ? "bg-white text-sushi-dark border-white shadow-[0_0_15px_rgba(255,255,255,0.25)]"
-                  : "bg-sushi-green/40 text-gray-400 border-white/[0.08] hover:border-sushi-gold/40 hover:text-sushi-gold"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Products Grid */}
-        <motion.div
+        <motion.ul
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 list-none p-0 m-0"
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => (
-              <motion.div
+              <motion.li
                 layout
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.92 }}
-                transition={{ duration: 0.4 }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.3 }}
                 key={item.id}
-                className="bg-sushi-green/30 border border-white/[0.06] hover:border-sushi-gold/30 rounded-2xl p-5 flex flex-col justify-between transition-all duration-300 shadow-lg hover:shadow-black/70 group"
+                className="card-surface p-5 flex flex-col gold-border-glow-hover"
               >
-                <div>
-                  {/* Card Header Tags */}
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="flex flex-wrap gap-1">
-                      {item.tags.slice(0, 2).map((tag, i) => (
-                        <span
-                          key={i}
-                          className={`text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-md ${
-                            tag === "Buffet Incluido"
-                              ? "bg-sushi-neon/10 text-sushi-neon border border-sushi-neon/20 shadow-[0_0_8px_rgba(0,F,F,0.15)] animate-pulse"
-                              : tag === "Favorito del Chef" || tag === "Premium" || tag === "Especialidad de la Casa"
-                              ? "bg-sushi-gold/10 text-sushi-gold border border-sushi-gold/20"
-                              : "bg-sushi-coral/10 text-sushi-coral border border-sushi-coral/20"
-                          }`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Popular/Featured Crown Icon */}
-                    {item.isPopular && (
-                      <div className="p-1 rounded-full bg-sushi-gold/15 text-sushi-gold border border-sushi-gold/20 shadow-[0_0_6px_rgba(197,160,89,0.3)]">
-                        <Trophy className="w-3.5 h-3.5" />
-                      </div>
-                    )}
+                <div className="flex items-start justify-between gap-2 mb-3">
+                  <div className="flex flex-wrap gap-1">
+                    {item.tags.slice(0, 2).map((tag) => (
+                      <span
+                        key={tag}
+                        className={`text-[9px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded border ${tagStyles(tag)}`}
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-
-                  {/* Pricing / Category Header */}
-                  <div className="flex items-baseline justify-between gap-2 mb-2">
-                    <h3 className="font-display text-base font-bold text-white group-hover:text-sushi-gold transition-colors duration-300">
-                      {item.name}
-                    </h3>
-                  </div>
-
-                  {/* Description */}
-                  <p className="font-sans text-xs text-gray-400 mb-6 leading-relaxed">
-                    {item.description}
-                  </p>
+                  {item.isPopular && (
+                    <Trophy className="w-4 h-4 text-sushi-gold shrink-0" aria-label="Popular" />
+                  )}
                 </div>
 
-                {/* Footer and Price/Allergens */}
-                <div className="border-t border-white/[0.05] pt-4 mt-auto">
-                  <div className="flex items-center justify-between gap-2">
-                    {/* Allergens Details */}
-                    {item.allergens.length > 0 ? (
-                      <div className="flex items-center gap-1">
-                        <span className="text-[10px] text-gray-500 font-accent uppercase tracking-wider font-medium">Alérgenos:</span>
-                        <div className="flex gap-1">
-                          {item.allergens.map((alg, k) => (
-                            <span
-                              key={k}
-                              title={`Contiene ${alg}`}
-                              className="text-[9px] text-gray-300 bg-white/[0.04] px-1 rounded border border-white/[0.04]"
-                            >
-                              {alg}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-1 text-emerald-500/80">
-                        <Leaf className="w-3 h-3" />
-                        <span className="text-[9px] uppercase tracking-wider font-bold">Sin Alérgenos</span>
-                      </div>
-                    )}
+                <h3 className="font-display text-lg font-semibold text-white mb-2">{item.name}</h3>
+                <p className="font-sans text-sm text-sushi-muted mb-5 leading-relaxed flex-grow">
+                  {item.description}
+                </p>
 
-                    {/* Price or Buffet Indicator */}
-                    <div>
-                      {item.price ? (
-                        <span className="font-display text-sm font-bold text-sushi-coral">
-                          {item.price.toFixed(2)}€
-                        </span>
-                      ) : (
-                        <div className="flex flex-col items-end">
-                          <span className="font-accent text-[9px] font-bold text-sushi-gold leading-none uppercase tracking-wide">
-                            Incluido en
+                <footer className="border-t border-white/[0.06] pt-4 flex items-end justify-between gap-2">
+                  {item.allergens.length > 0 ? (
+                    <div className="min-w-0">
+                      <span className="text-[10px] text-gray-500 font-medium block mb-1">Alérgenos</span>
+                      <div className="flex flex-wrap gap-1">
+                        {item.allergens.map((alg) => (
+                          <span
+                            key={alg}
+                            title={`Contiene ${alg}`}
+                            className="text-[10px] text-gray-400 bg-white/[0.04] px-1.5 py-0.5 rounded border border-white/[0.06]"
+                          >
+                            {alg}
                           </span>
-                          <span className="font-display text-xs font-semibold text-white leading-none mt-1">
-                            Buffet 17.80€
-                          </span>
-                        </div>
-                      )}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </motion.div>
+                  ) : (
+                    <span className="flex items-center gap-1 text-[10px] text-emerald-600/90 font-medium">
+                      <Leaf className="w-3 h-3" aria-hidden />
+                      Sin alérgenos declarados
+                    </span>
+                  )}
+
+                  {item.price ? (
+                    <span className="font-display text-base font-bold text-sushi-coral tabular-nums shrink-0">
+                      {item.price.toFixed(2)}€
+                    </span>
+                  ) : (
+                    <span className="text-right shrink-0">
+                      <span className="font-accent text-[9px] text-sushi-gold uppercase block">Incluido</span>
+                      <span className="font-sans text-xs text-white">Buffet</span>
+                    </span>
+                  )}
+                </footer>
+              </motion.li>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </motion.ul>
 
-        {/* Dynamic Highlight Banner under menu */}
-        <div className="mt-16 bg-gradient-to-r from-sushi-neon/10 via-sushi-green to-sushi-coral/10 border border-sushi-gold/25 p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="flex items-start gap-4 text-left max-w-xl">
-            <div className="p-3 bg-sushi-gold/15 text-sushi-gold rounded-xl shrink-0 mt-1 border border-sushi-gold/20">
-              <Sparkles className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="font-display text-lg font-bold text-white mb-1">
-                ¿Alergias o requisitos dietéticos especiales?
-              </h4>
-              <p className="font-sans text-xs text-gray-400 leading-normal">
-                Indíquelo con total tranquilidad a nuestros camareros al llegar o al rellenar el formulario de reserva rápida. Ofrecemos alternativas adaptadas con salsa de soja sin gluten y cortes sin pescados crudos para embarazadas.
-              </p>
-            </div>
+        <aside className="mt-14 card-surface p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <h4 className="font-display text-lg font-semibold text-white mb-2">
+              Alergias o dietas especiales
+            </h4>
+            <p className="font-sans text-sm text-sushi-muted max-w-xl leading-relaxed">
+              Coméntalo al reservar o al llegar. Disponemos de alternativas sin gluten y opciones sin
+              pescado crudo cuando lo necesites.
+            </p>
           </div>
-          <button
-            onClick={() => {
-              const element = document.getElementById("reserva");
-              if (element) element.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="px-6 py-3 bg-white text-sushi-dark rounded-lg font-accent font-semibold text-xs tracking-wider uppercase transition-all duration-300 hover:bg-sushi-gold hover:text-white cursor-pointer hover:shadow-lg shadow-white/10 shrink-0"
-          >
-            Reservar mesa ahora
+          <button type="button" onClick={() => scrollToSection("reserva")} className="btn-primary shrink-0">
+            Indicarlo al reservar
           </button>
-        </div>
-
+        </aside>
       </div>
     </section>
   );
