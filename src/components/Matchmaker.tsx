@@ -99,8 +99,8 @@ const DRINK_BY_CHOICE: Record<string, { drinkName: string; drinkDesc: string }> 
     drinkDesc: "Primer prensado, burbuja fina. Limpia el paladar entre ronda y ronda sin saturar el gusto.",
   },
   cocktail: {
-    drinkName: "Cóctel Neon Zen — Especial de la Casa",
-    drinkDesc: "Sake filtrado, ginebra premium, curaçao azul y tónica de yuzu. El signature bajo la luz de neón.",
+    drinkName: "Cóctel de autor",
+    drinkDesc: "Combinado con sake, ginebra, curaçao azul y tónica de yuzu. Una propuesta equilibrada para acompañar tu sushi.",
   },
   sake: {
     drinkName: "Sake Caliente Gekkeikan Tradicional",
@@ -118,8 +118,8 @@ function calculateResult(answers: Record<number, string>): MatchResult {
   let match: MatchResult = {
     title: "Explorador de autor",
     tag: "Recomendación equilibrada",
-    sushiName: "Neon Blue Dragon + Volcano Coral",
-    sushiDesc: "Rolls con tempura de langostino, aguacate, anguila ahumada y toques picantes en salseo cremoso.",
+    sushiName: "Rolls de tempura y anguila ahumada",
+    sushiDesc: "Combinación de rolls con tempura de langostino, aguacate, anguila ahumada y toques picantes con salsa cremosa.",
     ...drink,
     why: "Combinas creatividad y textura. Esta selección refleja lo mejor de nuestra carta de autor dentro del buffet.",
     seatingTip: "Te sugerimos una mesa con banqueta coral cerca del jardín vertical.",
@@ -129,8 +129,8 @@ function calculateResult(answers: Record<number, string>): MatchResult {
     match = {
       title: "Purista del producto",
       tag: "Máxima tradición",
-      sushiName: "Trilogía sashimi + nigiri premium",
-      sushiDesc: "Atún, salmón y pez mantequilla cortados al momento, con wasabi fresco.",
+      sushiName: "Sashimi y nigiri de atún, salmón y pez mantequilla",
+      sushiDesc: "Cortes frescos de atún, salmón y pez mantequilla cortados al momento, con wasabi fresco.",
       ...drink,
       why: "Priorizas el sabor limpio del pescado. Es la expresión más fiel de la cocina japonesa de autor.",
       seatingTip: "La barra de mármol te permite ver el corte en directo.",
@@ -139,8 +139,8 @@ function calculateResult(answers: Record<number, string>): MatchResult {
     match = {
       title: "Intensidad y contraste",
       tag: "Sabores vibrantes",
-      sushiName: "Volcano Coral + Tori Panko Golden",
-      sushiDesc: "Picante equilibrado, crujiente de panko y pollo teriyaki en la misma ronda.",
+      sushiName: "Rolls picantes y pollo teriyaki crujiente",
+      sushiDesc: "Combinación de rolls picantes equilibrados con panko crujiente y pollo teriyaki en la misma ronda.",
       ...drink,
       why: "Buscas dinamismo en textura y temperatura. Esta combinación exprime el buffet sin saturar.",
       seatingTip: "El rincón del jardín vertical aporta el ambiente más envolvente para esta experiencia.",
@@ -173,12 +173,16 @@ export default function Matchmaker() {
   };
 
   return (
-    <section id="matchmaker" className="section-pad bg-sushi-dark relative border-t border-white/[0.06]">
+    <section id="matchmaker" className="section-pad bg-gradient-to-b from-sushi-dark via-sushi-green/8 to-sushi-dark relative border-t border-sushi-neon/15 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 right-0 w-96 h-96 bg-sushi-neon/6 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-sushi-coral/4 rounded-full blur-3xl" />
+      </div>
       <div className="max-w-3xl mx-auto px-6">
         <SectionHeading
-          eyebrow="Guía de maridaje"
+          eyebrow="Explora nuestro menú"
           title="Tu combinación ideal en 3 pasos"
-          description="Un asistente basado en las preferencias de nuestro equipo. Sin IA externa: lógica pensada para orientarte antes de pedir."
+          description="Contigo, descubre qué pedir según lo que busques hoy. Perfiles de sabor, texturas y bebidas para cada experiencia."
         />
 
         <div className="card-surface p-6 sm:p-9 min-h-[360px] flex flex-col">
@@ -219,7 +223,7 @@ export default function Matchmaker() {
                       key={option.id}
                       type="button"
                       onClick={() => handleSelect(option.id)}
-                      className="w-full text-left card-surface !rounded-xl p-4 hover:border-sushi-gold/35 transition-colors cursor-pointer group"
+                      className="w-full text-left card-surface !rounded-xl p-4 hover:border-sushi-gold/35 hover:border-sushi-neon/40 hover:shadow-[0_0_16px_rgba(15,232,255,0.1)] transition-all duration-300 cursor-pointer group"
                     >
                       <span className="font-sans text-sm font-semibold text-white group-hover:text-sushi-gold transition-colors block">
                         {option.label}

@@ -128,11 +128,13 @@ export default function Gallery() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="group relative overflow-hidden md:col-span-8 md:row-span-2 bg-sushi-surface cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-sushi-gold"
+            className="group relative overflow-hidden md:col-span-8 md:row-span-2 bg-sushi-surface cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-sushi-coral
+                       border-2 border-transparent hover:border-sushi-coral/40 transition-all duration-300 hover:shadow-[0_0_24px_rgba(242,88,71,0.3)]"
             aria-label={`Ver ${images[0].title}`}
           >
-            <img src={images[0].src} alt={images[0].alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/80 via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
+            <img src={images[0].src} alt={images[0].alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/85 via-sushi-dark/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-br from-sushi-coral/0 to-sushi-coral/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="absolute bottom-0 inset-x-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
               <p className="font-accent text-[10px] uppercase tracking-[0.25em] text-sushi-gold mb-1">{images[0].caption}</p>
               <p className="font-display text-2xl font-bold text-white">{images[0].title}</p>
@@ -152,18 +154,19 @@ export default function Gallery() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="group relative overflow-hidden md:col-span-4 md:row-span-1 bg-sushi-surface cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-sushi-gold"
+            className="group relative overflow-hidden md:col-span-4 md:row-span-1 bg-sushi-surface cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-sushi-gold
+                       border-2 border-transparent hover:border-sushi-neon-dim/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(27,189,206,0.25)]"
             aria-label={`Ver ${images[1].title}`}
           >
-            <img src={images[1].src} alt={images[1].alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/70 via-transparent to-transparent" />
+            <img src={images[1].src} alt={images[1].alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/75 via-transparent to-transparent" />
             <div className="absolute bottom-0 inset-x-0 p-5">
               <p className="font-accent text-[9px] uppercase tracking-widest text-sushi-gold mb-0.5">{images[1].caption}</p>
               <p className="font-display text-lg font-bold text-white">{images[1].title}</p>
             </div>
           </motion.button>
 
-          {/* Jardín — 4 cols, fila 2 */}
+          {/* Jardín — 4 cols, fila 2 — neon prominente */}
           <motion.button
             ref={tilt2.ref}
             type="button"
@@ -175,13 +178,15 @@ export default function Gallery() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="group relative overflow-hidden md:col-span-4 md:row-span-1 bg-sushi-surface cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-sushi-gold"
+            className="group relative overflow-hidden md:col-span-4 md:row-span-1 bg-sushi-surface cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-sushi-neon
+                       border-2 border-transparent hover:border-sushi-neon/60 transition-all duration-300 hover:shadow-[0_0_28px_rgba(15,232,255,0.4)]"
             aria-label={`Ver ${images[2].title}`}
           >
-            <img src={images[2].src} alt={images[2].alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/70 via-transparent to-transparent" />
+            <img src={images[2].src} alt={images[2].alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/75 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-sushi-neon/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="absolute bottom-0 inset-x-0 p-5">
-              <p className="font-accent text-[9px] uppercase tracking-widest text-sushi-neon mb-0.5">{images[2].caption}</p>
+              <p className="font-accent text-[9px] uppercase tracking-widest text-sushi-neon mb-0.5 drop-shadow-[0_0_8px_rgba(15,232,255,0.5)] animate-pulse">{images[2].caption}</p>
               <p className="font-display text-lg font-bold text-white">{images[2].title}</p>
             </div>
           </motion.button>

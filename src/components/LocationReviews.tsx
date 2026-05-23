@@ -60,7 +60,7 @@ const REVIEW_LINK =
   "https://www.google.com/maps/search/?api=1&query=Casa+del+Sushi+Calle+San+Agust%C3%ADn+6+Cartagena";
 
 const EXTRAS = [
-  { icon: GlassWater,   label: "Catas de sake",      detail: "Maridaje guiado sake + sushi" },
+  { icon: GlassWater,   label: "Bebidas desde 3€",    detail: "Sake, cerveza, cócteles de autor" },
   { icon: CalendarDays, label: "Specials semanales",  detail: "Nuevas piezas cada semana" },
   { icon: Baby,         label: "Menú infantil",       detail: "Opciones para los más pequeños" },
 ];
@@ -71,7 +71,8 @@ export default function LocationReviews() {
   useEffect(() => { setStatus(getOpenStatus()); }, []);
 
   return (
-    <section id="ubicacion" className="section-pad bg-sushi-dark relative border-t border-white/[0.05]">
+    <section id="ubicacion" className="section-pad bg-gradient-to-b from-sushi-dark via-sushi-marble to-sushi-dark relative border-t border-white/[0.05]
+                                      before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-sushi-neon/[0.01] before:to-transparent before:pointer-events-none">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeading
           eyebrow="Visítanos"
@@ -90,7 +91,8 @@ export default function LocationReviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="card-surface p-6 sm:p-8"
+              whileHover={{ boxShadow: "0 0 24px rgba(15, 232, 255, 0.15)" }}
+              className="card-surface p-6 sm:p-8 transition-shadow duration-300"
             >
               {/* Cabecera */}
               <div className="flex items-start justify-between gap-4 border-b border-white/[0.08] pb-5 mb-6">
@@ -168,7 +170,8 @@ export default function LocationReviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="overflow-hidden border border-white/[0.07] aspect-[4/3] bg-sushi-surface relative group"
+              whileHover={{ boxShadow: "0 0 32px rgba(242, 88, 71, 0.2), 0 0 64px rgba(15, 232, 255, 0.08)" }}
+              className="overflow-hidden border border-white/[0.07] aspect-[4/3] bg-sushi-surface relative group transition-shadow duration-300 rounded-lg"
             >
               <iframe
                 title="Mapa: Casa del Sushi — C. San Agustín, 6, Cartagena"
@@ -210,13 +213,13 @@ export default function LocationReviews() {
                     Lo que dicen nuestros clientes
                   </h3>
                   <div className="flex items-center gap-2.5 mt-2">
-                    <span className="font-display text-2xl font-bold text-sushi-gold leading-none">4,9</span>
+                    <span className="font-display text-2xl font-bold text-sushi-gold-light leading-none drop-shadow-[0_0_12px_rgba(212,166,83,0.4)]">4,9</span>
                     <div className="flex gap-0.5" aria-label="4.9 de 5 estrellas en Google">
                       {[1,2,3,4,5].map(s => (
-                        <Star key={s} className="w-4 h-4 text-sushi-gold fill-sushi-gold" />
+                        <Star key={s} className="w-4 h-4 text-sushi-gold fill-sushi-gold drop-shadow-[0_0_6px_rgba(212,166,83,0.5)] transition-all hover:scale-110" />
                       ))}
                     </div>
-                    <span className="font-sans text-xs text-sushi-muted">en Google</span>
+                    <span className="font-sans text-xs text-sushi-gold/70">en Google</span>
                   </div>
                 </div>
 
@@ -234,15 +237,20 @@ export default function LocationReviews() {
 
               {/* Lista de reseñas */}
               <ul className="space-y-4 flex-grow">
-                {REVIEWS.map(review => (
-                  <li
+                {REVIEWS.map((review, idx) => (
+                  <motion.li
                     key={review.id}
-                    className="p-5 rounded-xl bg-sushi-dark/60 border border-white/[0.05]"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: idx * 0.1 }}
+                    whileHover={{ y: -2, backgroundColor: "rgba(27, 189, 206, 0.05)" }}
+                    className="p-5 rounded-xl bg-sushi-dark/60 border border-white/[0.05] hover:border-sushi-neon/30 transition-all duration-300 cursor-default"
                   >
                     <div className="flex gap-3">
                       <img
                         src={reviewAvatar(review.avatarSeed)}
-                        alt=""
+                        alt={`Avatar de ${review.author}`}
                         className="w-9 h-9 rounded-full object-cover border border-sushi-gold/20 shrink-0"
                         loading="lazy"
                       />
@@ -261,7 +269,7 @@ export default function LocationReviews() {
                         </blockquote>
                       </div>
                     </div>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 

@@ -9,29 +9,44 @@
   --font-wide: "Syncopate", sans-serif;
 
   /*
-   * Paleta revisada — misma identidad del local, ejecución más sofisticada.
-   * El neón pasa de cyan cyber (#00F0FF) a teal real (#1BBDCE).
-   * El coral se profundiza (#E04B36). El oro se calienta (#C4933A).
+   * PALETA DRENCHED V5 — ALEGRE, VIBRANTE & SOFISTICADA
+   * Estrategia: Coral + Neón son PROTAGONISTAS (50-60%), oro cálido, fondos con energía
+   * Objetivo: Capturar la ALEGRÍA y energía del local — como estar dentro con neón brillante
    */
-  --color-sushi-dark:       #060A09;   /* Negro cálido — como las paredes del local */
-  --color-sushi-green:      #0C1F18;   /* Verde bosque profundo */
-  --color-sushi-coral:      #E04B36;   /* Coral más profundo, como las banquetas reales */
-  --color-sushi-neon:       #1BBDCE;   /* Teal real de neón — no cyan de gaming */
-  --color-sushi-gold:       #C4933A;   /* Ámbar dorado — como las lámparas hexagonales */
-  --color-sushi-gold-light: #E2B96A;   /* Dorado luminoso para highlights */
-  --color-sushi-marble:     #07090C;   /* Mármol negro frío */
-  --color-sushi-muted:      #7D8E8A;   /* Texto secundario */
-  --color-sushi-surface:    #0E1815;   /* Superficies elevadas */
+  --color-sushi-dark:       #030405;   /* Negro ultra profundo - lienzo de elegancia */
+  --color-sushi-green:      #0A1E14;   /* Verde más visible - presencia energética */
+  --color-sushi-coral:      #FF6B56;   /* Coral vibrante y energético */
+  --color-sushi-coral-light:#FFA08A;   /* Coral claro - brillante en borders y glows */
+  --color-sushi-coral-dark: #E54A37;   /* Coral oscuro para hover states */
+  --color-sushi-coral-glow: #FF8566;   /* Coral especial para glows dramáticos */
+  --color-sushi-neon:       #00F5FF;   /* Neón azul MÁXIMO BRILLO - protagonista absoluto */
+  --color-sushi-neon-dim:   #1EDFF0;   /* Neón para backgrounds con presencia máxima */
+  --color-sushi-neon-glow:  #00E8FF;   /* Neón para efectos de luz dramatizados */
+  --color-sushi-gold:       #FFD966;   /* Dorado más luminoso y cálido */
+  --color-sushi-gold-light: #FFEBA0;   /* Dorado muy brillante para accents */
+  --color-sushi-gold-dim:   #D4A538;   /* Dorado oscuro mantenido */
+  --color-sushi-marble:     #080909;   /* Mármol negro con calidez */
+  --color-sushi-muted:      #9FB0B0;   /* Texto secundario con contraste mejorado */
+  --color-sushi-surface:    #0D251D;   /* Superficies elevadas - verde más visible */
+  --color-sushi-surface-coral:#160D07; /* Superficies con warmth coral */
 
-  --animate-neon-pulse: neon-pulse 3s ease-in-out infinite alternate;
+  --animate-neon-pulse: neon-pulse 2.5s ease-in-out infinite;
+  --animate-neon-strong: neon-pulse-strong 3s ease-in-out infinite;
   --animate-scroll-hint: scroll-hint 2s ease-in-out infinite;
+  --animate-float: float-gentle 3.5s ease-in-out infinite;
 }
 
-/* ─── Variables de layout ─────────────────────────────── */
+/* ─── Variables de layout & easing ──────────────────────────────── */
 :root {
   --announcement-height: 2.25rem;
   --header-height: 4.5rem;
   --scroll-offset: calc(var(--announcement-height) + var(--header-height));
+
+  /* Easing curves — motion-design premium */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-quart: cubic-bezier(0.75, 0, 0.5, 0);
 }
 
 /* ─── Base ────────────────────────────────────────────── */
@@ -42,8 +57,32 @@ h1, h2, h3 { text-wrap: balance; }
 
 /* ─── Animaciones ─────────────────────────────────────── */
 @keyframes neon-pulse {
-  0%   { box-shadow: 0 0 4px rgba(27, 189, 206, 0.12); }
-  100% { box-shadow: 0 0 16px rgba(27, 189, 206, 0.35), 0 0 32px rgba(27, 189, 206, 0.1); }
+  0%   { box-shadow: 0 0 16px rgba(0, 245, 255, 0.45), inset 0 0 10px rgba(0, 245, 255, 0.2); }
+  50%  { box-shadow: 0 0 32px rgba(0, 245, 255, 0.75), 0 0 64px rgba(0, 245, 255, 0.4), inset 0 0 16px rgba(0, 245, 255, 0.25); }
+  100% { box-shadow: 0 0 48px rgba(0, 245, 255, 0.9), 0 0 96px rgba(0, 245, 255, 0.5), inset 0 0 20px rgba(0, 245, 255, 0.3); }
+}
+
+@keyframes neon-pulse-strong {
+  0%   { box-shadow: 0 0 20px rgba(0, 245, 255, 0.55), 0 0 40px rgba(0, 245, 255, 0.25); }
+  50%  { box-shadow: 0 0 40px rgba(0, 245, 255, 0.85), 0 0 80px rgba(0, 245, 255, 0.55); }
+  100% { box-shadow: 0 0 60px rgba(0, 245, 255, 1), 0 0 120px rgba(0, 245, 255, 0.65); }
+}
+
+@keyframes coral-glow {
+  0%   { box-shadow: 0 0 16px rgba(255, 107, 86, 0.35); }
+  50%  { box-shadow: 0 0 32px rgba(255, 107, 86, 0.55), 0 0 64px rgba(255, 107, 86, 0.3); }
+  100% { box-shadow: 0 0 48px rgba(255, 107, 86, 0.7), 0 0 96px rgba(255, 107, 86, 0.4); }
+}
+
+@keyframes neon-coral-pulse {
+  0%   { box-shadow: 0 0 12px rgba(0, 245, 255, 0.4), 0 0 16px rgba(255, 107, 86, 0.3); }
+  50%  { box-shadow: 0 0 28px rgba(0, 245, 255, 0.75), 0 0 40px rgba(255, 107, 86, 0.55); }
+  100% { box-shadow: 0 0 48px rgba(0, 245, 255, 1), 0 0 64px rgba(255, 107, 86, 0.7); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-8px); }
 }
 
 @keyframes scroll-hint {
@@ -54,6 +93,11 @@ h1, h2, h3 { text-wrap: balance; }
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-scale {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.05); opacity: 0.95; }
 }
 
 /* ─── Scrollbar ───────────────────────────────────────── */
@@ -72,8 +116,32 @@ h1, h2, h3 { text-wrap: balance; }
 
 .neon-glow {
   text-shadow:
-    0 0 8px  rgba(27, 189, 206, 0.7),
-    0 0 20px rgba(27, 189, 206, 0.3);
+    0 0 14px rgba(0, 245, 255, 1),
+    0 0 32px rgba(0, 245, 255, 0.8),
+    0 0 64px rgba(0, 245, 255, 0.4);
+}
+
+.neon-box-glow {
+  box-shadow:
+    0 0 24px rgba(0, 245, 255, 0.7),
+    0 0 48px rgba(0, 245, 255, 0.4),
+    inset 0 0 16px rgba(0, 245, 255, 0.2);
+}
+
+.coral-glow-box {
+  box-shadow:
+    0 0 24px rgba(255, 107, 86, 0.55),
+    0 0 48px rgba(255, 107, 86, 0.3);
+}
+
+.coral-border {
+  border-color: rgba(255, 107, 86, 0.4);
+}
+
+.coral-border:hover {
+  border-color: rgba(255, 107, 86, 0.7);
+  box-shadow: 0 0 20px rgba(255, 107, 86, 0.4);
+  transition: all 0.3s ease;
 }
 
 /* ─── Componentes reutilizables ───────────────────────── */
@@ -81,13 +149,14 @@ h1, h2, h3 { text-wrap: balance; }
 
 .btn-primary {
   @apply inline-flex items-center justify-center gap-2
-         px-7 py-3.5
+         px-8 py-4
          bg-sushi-coral text-white
-         font-accent font-semibold text-[13px] uppercase tracking-[0.13em]
+         font-accent font-semibold text-[13px] uppercase tracking-[0.15em]
          rounded-lg transition-all duration-300 cursor-pointer
-         hover:bg-[#C43E2A] hover:shadow-[0_0_24px_rgba(224,75,54,0.4)]
+         hover:bg-sushi-coral-dark hover:shadow-[0_0_60px_rgba(255,107,86,0.85),0_0_30px_rgba(0,245,255,0.4)]
          focus-visible:outline focus-visible:outline-2
-         focus-visible:outline-offset-2 focus-visible:outline-sushi-coral;
+         focus-visible:outline-offset-2 focus-visible:outline-sushi-coral
+         active:scale-95 active:shadow-[0_0_40px_rgba(255,107,86,0.7)];
 }
 
 .btn-secondary {
@@ -97,8 +166,26 @@ h1, h2, h3 { text-wrap: balance; }
          font-accent font-semibold text-[13px] uppercase tracking-[0.13em]
          rounded-lg transition-all duration-300 cursor-pointer
          hover:border-sushi-gold hover:bg-sushi-gold/10 hover:text-sushi-gold-light
+         hover:shadow-[0_0_24px_rgba(212,166,83,0.3)] hover:scale-[1.02]
          focus-visible:outline focus-visible:outline-2
-         focus-visible:outline-offset-2 focus-visible:outline-sushi-gold;
+         focus-visible:outline-offset-2 focus-visible:outline-sushi-gold
+         active:scale-95;
+}
+
+/* Animación para elementos que aparecen en scroll */
+.animate-in-scale {
+  animation: scale-in 0.5s var(--ease-out-quint) forwards;
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .btn-ghost {

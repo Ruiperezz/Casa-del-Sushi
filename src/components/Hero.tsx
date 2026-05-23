@@ -12,9 +12,9 @@ export default function Hero() {
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const imageY    = useTransform(scrollYProgress, [0, 1], ["0%", "22%"]);
-  const contentY  = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
-  const overlayO  = useTransform(scrollYProgress, [0, 0.6], [0.0, 0.35]);
+  const imageY    = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
+  const contentY  = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
+  const overlayO  = useTransform(scrollYProgress, [0, 0.6], [0.0, 0.45]);
 
   return (
     <section
@@ -40,9 +40,10 @@ export default function Hero() {
           className="absolute inset-0 bg-sushi-dark pointer-events-none"
         />
 
-        {/* Gradientes fijos */}
+        {/* Gradientes fijos — ahora con coral y neón vibrante */}
         <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark via-sushi-dark/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-sushi-dark/70 via-sushi-dark/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-sushi-dark/85 via-sushi-dark/30 to-sushi-coral/10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-sushi-coral/5 pointer-events-none" />
 
         {/* ── Contenido con contra-parallax leve ── */}
         <motion.div
@@ -65,11 +66,13 @@ export default function Hero() {
             className="mb-8"
           >
             <span className="block font-display font-bold text-white leading-[0.92] tracking-tight
-                             text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7rem]">
+                             text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7rem]
+                             drop-shadow-[0_0_30px_rgba(242,88,71,0.15)]">
               Buffet libre
             </span>
             <span className="block font-display font-normal italic text-sushi-coral leading-[1.05] tracking-tight
-                             text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7rem]">
+                             text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7rem]
+                             drop-shadow-[0_0_60px_rgba(255,107,86,0.5)] animate-pulse">
               de autor
             </span>
           </motion.h1>
@@ -77,22 +80,40 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.18 }}
+            transition={{ duration: 0.55, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-wrap items-center gap-6 sm:gap-10 mb-8"
           >
             <div className="flex items-baseline gap-1.5">
-              <span className="font-display text-[2.25rem] font-bold text-white tabular-nums leading-none">17,80</span>
-              <span className="font-display text-xl text-sushi-gold leading-none">€</span>
+              <span className="font-display text-[2.25rem] font-bold text-white tabular-nums leading-none drop-shadow-[0_0_16px_rgba(242,88,71,0.2)]">17,80</span>
+              <span className="font-display text-xl text-sushi-coral leading-none drop-shadow-[0_0_12px_rgba(242,88,71,0.3)]">€</span>
               <span className="font-accent text-[11px] uppercase tracking-[0.15em] text-white/50 ml-2">/ persona</span>
             </div>
-            <div className="h-8 w-px bg-white/20 hidden sm:block" aria-hidden />
+            <div className="h-8 w-px bg-gradient-to-b from-transparent via-sushi-gold/40 to-transparent hidden sm:block" aria-hidden />
             <div className="flex flex-col sm:flex-row gap-3">
-              <button type="button" onClick={() => scrollToSection("reserva")} className="btn-primary">
-                Reservar mesa <ArrowRight className="w-4 h-4" aria-hidden />
-              </button>
-              <button type="button" onClick={() => scrollToSection("carta")} className="btn-secondary">
+              <motion.button
+                type="button"
+                onClick={() => scrollToSection("reserva")}
+                className="btn-primary group"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <span>Reservar mesa</span>
+                <motion.div
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-4 h-4" aria-hidden />
+                </motion.div>
+              </motion.button>
+              <motion.button
+                type="button"
+                onClick={() => scrollToSection("carta")}
+                className="btn-secondary"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 Ver la carta
-              </button>
+              </motion.button>
             </div>
           </motion.div>
 
@@ -126,21 +147,22 @@ export default function Hero() {
           />
         </motion.button>
 
-        {/* Rating badge */}
+        {/* Rating badge — neon glow */}
         <motion.div
           initial={{ opacity: 0, x: 12 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.65 }}
-          className="absolute top-8 right-6 md:right-12 flex items-center gap-2.5 bg-black/40 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2"
+          className="absolute top-8 right-6 md:right-12 flex items-center gap-2.5 bg-black/60 backdrop-blur-md border border-sushi-gold/30 rounded-full px-4 py-2
+                     shadow-[0_0_24px_rgba(212,166,83,0.3)] hover:shadow-[0_0_32px_rgba(212,166,83,0.5)] hover:border-sushi-gold/60 transition-all duration-300"
         >
           <div className="flex gap-0.5">
             {[1,2,3,4,5].map(i => (
-              <svg key={i} className="w-3 h-3 fill-sushi-gold text-sushi-gold" viewBox="0 0 20 20" aria-hidden>
+              <svg key={i} className="w-3 h-3 fill-sushi-gold text-sushi-gold drop-shadow-[0_0_4px_rgba(212,166,83,0.4)]" viewBox="0 0 20 20" aria-hidden>
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
             ))}
           </div>
-          <span className="font-accent text-[11px] font-semibold text-white/80 tracking-wide">4,9 Google</span>
+          <span className="font-accent text-[11px] font-semibold text-sushi-gold-light tracking-wide">4,9 Google</span>
         </motion.div>
 
       </div>

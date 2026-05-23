@@ -4,10 +4,13 @@ import TrustStrip    from "./components/TrustStrip";
 import Philosophy    from "./components/Philosophy";
 import BuffetPromo   from "./components/BuffetPromo";
 import MenuFilter    from "./components/MenuFilter";
-import Gallery       from "./components/Gallery";
+import WhyChooseUs   from "./components/WhyChooseUs";
 import Matchmaker    from "./components/Matchmaker";
+import RecentPhotos  from "./components/RecentPhotos";
+import LiveStatus    from "./components/LiveStatus";
 import BookingForm   from "./components/BookingForm";
 import LocationReviews from "./components/LocationReviews";
+import ToastNotification from "./components/ToastNotification";
 import Footer        from "./components/Footer";
 
 export default function App() {
@@ -45,6 +48,9 @@ export default function App() {
 
       <Header />
 
+      {/* Toast notifications para urgencia y FOMO */}
+      <ToastNotification />
+
       <main>
         {/* 1. Hero — primera impresión, full-bleed */}
         <Hero />
@@ -52,7 +58,7 @@ export default function App() {
         {/* 2. TrustStrip — señales de confianza rápidas */}
         <TrustStrip />
 
-        {/* 3. Filosofía — historia de la marca (sección nueva) */}
+        {/* 3. Filosofía — historia de la marca */}
         <Philosophy />
 
         {/* 4. BuffetPromo — propuesta de valor detallada */}
@@ -61,16 +67,22 @@ export default function App() {
         {/* 5. MenuFilter — carta completa estilo restaurante */}
         <MenuFilter />
 
-        {/* 6. Gallery — el espacio */}
-        <Gallery />
+        {/* 6. WhyChooseUs — diferenciadores clave */}
+        <WhyChooseUs />
 
-        {/* 7. Matchmaker — sommelier virtual interactivo */}
+        {/* 7. Matchmaker — sommelier virtual interactivo (educación antes del espacio) */}
         <Matchmaker />
 
-        {/* 8. BookingForm — formulario de reserva */}
+        {/* 8. RecentPhotos — fotos reales del local */}
+        <RecentPhotos />
+
+        {/* 9. LiveStatus — indicadores en tiempo real de urgencia */}
+        <LiveStatus />
+
+        {/* 10. BookingForm — formulario de reserva */}
         <BookingForm />
 
-        {/* 9. LocationReviews — dónde estamos + opiniones */}
+        {/* 11. LocationReviews — dónde estamos + opiniones */}
         <LocationReviews />
       </main>
 

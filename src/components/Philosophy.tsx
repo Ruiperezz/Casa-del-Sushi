@@ -36,29 +36,29 @@ function useCountUp(end: number, duration = 1200) {
 
 // ─── Stats con contadores animados ───────────────────────────────────
 function AnimatedStats() {
-  const year  = useCountUp(2024, 1000);
+  const year  = useCountUp(2026, 1000);
   const price = useCountUp(1780, 1200); // 1780 → "17,80€"
   const score = useCountUp(49,   900);  // 49   → "4,9★"
 
   return (
-    <div ref={year.ref} className="border-t border-white/[0.08] pt-8 grid grid-cols-3 gap-6">
-      <div>
-        <p className="font-display text-2xl sm:text-3xl font-bold text-sushi-gold tabular-nums">
+    <div ref={year.ref} className="border-t border-sushi-coral/20 pt-8 grid grid-cols-3 gap-6">
+      <div className="p-4 rounded-lg bg-gradient-to-br from-sushi-coral/5 to-transparent border border-sushi-coral/10 hover:border-sushi-coral/30 hover:bg-sushi-coral/10 transition-all duration-300">
+        <p className="font-display text-2xl sm:text-3xl font-bold text-sushi-gold-light tabular-nums drop-shadow-[0_0_8px_rgba(212,166,83,0.3)]">
           {year.count}
         </p>
-        <p className="font-sans text-xs text-gray-500 mt-1">Año de apertura</p>
+        <p className="font-sans text-xs text-gray-400 mt-1">Año de apertura</p>
       </div>
-      <div>
-        <p className="font-display text-2xl sm:text-3xl font-bold text-sushi-gold tabular-nums">
+      <div className="p-4 rounded-lg bg-gradient-to-br from-sushi-coral/5 to-transparent border border-sushi-coral/10 hover:border-sushi-coral/30 hover:bg-sushi-coral/10 transition-all duration-300">
+        <p className="font-display text-2xl sm:text-3xl font-bold text-sushi-coral tabular-nums drop-shadow-[0_0_8px_rgba(242,88,71,0.3)]">
           {(price.count / 100).toFixed(2).replace(".", ",")}€
         </p>
-        <p className="font-sans text-xs text-gray-500 mt-1">Buffet completo</p>
+        <p className="font-sans text-xs text-gray-400 mt-1">Buffet completo</p>
       </div>
-      <div>
-        <p className="font-display text-2xl sm:text-3xl font-bold text-sushi-gold tabular-nums">
+      <div className="p-4 rounded-lg bg-gradient-to-br from-sushi-neon/5 to-transparent border border-sushi-neon/10 hover:border-sushi-neon/40 hover:bg-sushi-neon/10 transition-all duration-300">
+        <p className="font-display text-2xl sm:text-3xl font-bold text-sushi-neon tabular-nums drop-shadow-[0_0_8px_rgba(15,232,255,0.3)]">
           {(score.count / 10).toFixed(1).replace(".", ",")}★
         </p>
-        <p className="font-sans text-xs text-gray-500 mt-1">Valoración Google</p>
+        <p className="font-sans text-xs text-gray-400 mt-1">Valoración Google</p>
       </div>
     </div>
   );
@@ -66,7 +66,8 @@ function AnimatedStats() {
 
 export default function Philosophy() {
   return (
-    <section id="historia" className="py-24 md:py-36 bg-sushi-dark border-t border-white/[0.05] overflow-hidden">
+    <section id="historia" className="py-24 md:py-36 bg-gradient-to-b from-sushi-dark to-sushi-dark/95 border-t border-white/[0.05] overflow-hidden
+                                      relative before:absolute before:inset-0 before:bg-gradient-to-r before:from-sushi-coral/[0.02] before:to-transparent before:pointer-events-none">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 

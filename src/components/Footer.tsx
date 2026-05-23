@@ -19,7 +19,7 @@ const HOURS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-sushi-marble border-t border-white/[0.07] text-sushi-muted">
+    <footer className="bg-gradient-to-b from-sushi-dark to-sushi-marble border-t border-sushi-gold/10 text-sushi-muted relative overflow-hidden">
 
       {/* Banda superior — CTA de reserva */}
       <div className="border-b border-white/[0.06] py-10">
@@ -150,8 +150,7 @@ export default function Footer() {
             Registro sanitario · Alérgenos en carta
           </p>
           <p className="font-sans text-xs text-gray-600 leading-relaxed pt-2">
-            Máximo 4 piezas por ronda para garantizar frescura y temperatura.
-            Política anti-desperdicio activa.
+            Política anti-desperdicio activa. Aprecia cada plato que solicitas.
           </p>
         </div>
       </div>

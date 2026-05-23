@@ -158,26 +158,10 @@ export const MENU_ITEMS: MenuItem[] = [
 export const REVIEWS: Review[] = [
   {
     id: "rev-1",
-    author: "Elena Martínez G.",
+    author: "Google Reviews",
     rating: 5,
-    text: "¡El buffet libre de 17.80€ es insuperable en Cartagena! Todo se pide al momento y la calidad del salmón trufado es espectacular. El local es precioso, esos neones azules combinados con las banquetas de color coral le dan un rollo súper vanguardista.",
-    date: "Hace 2 días",
-    avatarSeed: "elena"
-  },
-  {
-    id: "rev-2",
-    author: "Francisco J. Solano",
-    rating: 5,
-    text: "Fui con unos amigos tras pasear por la Plaza del Rey. De entrada te impacta el diseño interior: el mármol negro con vetas doradas y las lámparas hexagonales son una pasada. El servicio de buffet libre fue rapidísimo y las gyozas estaban súper crujientes. ¡Repetiré seguro!",
-    date: "Hace una semana",
-    avatarSeed: "fran"
-  },
-  {
-    id: "rev-3",
-    author: "Carmen Belmonte",
-    rating: 5,
-    text: "Un rincón de lujo pero súper accesible. El jardín vertical con el neón azul es perfecto para hacerse fotos. El sushi es de verdad artesanal y gourmet, no el típico arroz apelmazado de los buffets normales. Las bebidas por 3€ están geniales.",
-    date: "Hace 2 semanas",
-    avatarSeed: "carmen"
+    text: "Visita nuestro perfil en Google Maps para ver las valoraciones de nuestros clientes. Nos encantaría leer tu experiencia tras visitarnos.",
+    date: "Ver en Google",
+    avatarSeed: "default"
   }
 ];

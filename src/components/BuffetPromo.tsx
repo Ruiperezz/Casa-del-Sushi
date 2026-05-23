@@ -1,4 +1,5 @@
 import { Check, Info, Flame, Wine, Award } from "lucide-react";
+import { motion } from "motion/react";
 import SectionHeading from "./ui/SectionHeading";
 import { scrollToSection } from "../lib/scroll";
 
@@ -19,21 +20,22 @@ const features = [
     icon: Wine,
     title: "Bebidas desde 3 €",
     description:
-      "Sake, cervezas japonesas, refrescos y cócteles de la casa, con maridaje recomendado por nuestro equipo.",
+      "Sake, cervezas japonesas, refrescos y cócteles de la casa. Acompañamientos ideales para tu experiencia.",
   },
 ];
 
 const rules = [
   "Buffet libre de lunes a domingo: 17,80 € por persona (IVA incluido).",
   "Las bebidas no están incluidas en el precio del buffet.",
-  "Máximo 4 piezas por persona y ronda para garantizar temperatura y calidad.",
-  "Política anti-desperdicio: platos sin consumir pueden generar un suplemento.",
+  "Política anti-desperdicio: aprecia cada plato que pidas.",
 ];
 
 export default function BuffetPromo() {
   return (
-    <section id="experiencia" className="section-pad relative bg-sushi-marble border-t border-white/[0.06] overflow-hidden">
-      <div className="absolute inset-0 gold-veins opacity-40 pointer-events-none" />
+    <section id="experiencia" className="section-pad relative bg-gradient-to-b from-sushi-marble via-sushi-dark/50 to-sushi-dark border-t border-sushi-gold/15 overflow-hidden">
+      <div className="absolute inset-0 gold-veins opacity-60 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-sushi-coral/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-sushi-neon/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeading
@@ -90,9 +92,14 @@ export default function BuffetPromo() {
           <div className="xl:col-span-7 flex flex-col gap-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {features.map(({ icon: Icon, title, description }, i) => (
-                <article
+                <motion.article
                   key={title}
-                  className="card-surface p-6 gold-border-glow-hover flex flex-col"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  whileHover={{ scale: 1.04, y: -4 }}
+                  className="card-surface p-6 gold-border-glow-hover flex flex-col transition-all duration-300"
                 >
                   <span className="font-display text-4xl font-bold text-sushi-gold/20 leading-none mb-4 select-none" aria-hidden>
                     0{i + 1}
@@ -101,7 +108,7 @@ export default function BuffetPromo() {
                     {title}
                   </h4>
                   <p className="font-sans text-sm text-sushi-muted leading-relaxed">{description}</p>
-                </article>
+                </motion.article>
               ))}
             </div>
 
@@ -125,8 +132,8 @@ export default function BuffetPromo() {
               <div className="mt-6 pt-5 border-t border-white/[0.06] grid grid-cols-3 gap-4">
                 {[
                   { label: "Specials semanales", detail: "Nuevas piezas cada semana" },
-                  { label: "Catas de sake",      detail: "Maridaje sake + sushi guiado" },
-                  { label: "Menú infantil",       detail: "Opciones para los más pequeños" },
+                  { label: "Sin gluten",         detail: "Alternativas disponibles" },
+                  { label: "Menú infantil",      detail: "Opciones para los más pequeños" },
                 ].map(({ label, detail }) => (
                   <div key={label} className="text-center">
                     <p className="font-accent text-[10px] uppercase tracking-wide text-sushi-gold font-semibold leading-tight">

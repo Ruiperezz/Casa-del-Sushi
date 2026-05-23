@@ -40,8 +40,9 @@ export default function MenuFilter() {
   }, {});
 
   return (
-    <section id="carta" className="section-pad bg-sushi-marble relative border-t border-white/[0.05]">
-      <div className="absolute inset-0 gold-veins pointer-events-none opacity-60" />
+    <section id="carta" className="section-pad bg-gradient-to-t from-sushi-dark to-sushi-marble relative border-t border-sushi-gold/10 overflow-hidden">
+      <div className="absolute inset-0 gold-veins pointer-events-none opacity-70" />
+      <div className="absolute top-0 left-1/4 w-80 h-80 bg-sushi-neon/3 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <SectionHeading
@@ -69,7 +70,7 @@ export default function MenuFilter() {
                   px-5 py-2 font-accent text-[12px] uppercase tracking-[0.12em] font-semibold
                   border-b-2 transition-all duration-200 cursor-pointer
                   ${isActive
-                    ? "border-sushi-coral text-sushi-coral"
+                    ? "border-sushi-coral text-sushi-coral drop-shadow-[0_0_8px_rgba(242,88,71,0.4)]"
                     : "border-transparent text-sushi-muted hover:text-white hover:border-white/20"
                   }
                 `}
