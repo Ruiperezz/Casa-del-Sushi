@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { X, ArrowRight } from "lucide-react";
+import { X, ArrowRight, Instagram } from "lucide-react";
 import SectionHeading from "./ui/SectionHeading";
 import { VENUE_PHOTOS, type VenuePhoto } from "../data/venue";
 import { SITE } from "../data/site";
@@ -38,7 +38,7 @@ export default function SpaceGallery() {
           description={`Imágenes reales de ${SITE.name} en ${SITE.location}: el salón, la barra, el neón y los detalles que nos diferencian.`}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10">
           {VENUE_PHOTOS.map((photo) => (
             <button
               key={photo.id}
@@ -60,6 +60,32 @@ export default function SpaceGallery() {
             </button>
           ))}
         </div>
+        {/* Instagram CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex justify-center"
+        >
+          <a
+            href={SITE.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-2xl border border-white/10 hover:border-sushi-coral/40 hover:bg-sushi-coral/5 transition-all duration-300"
+          >
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] flex items-center justify-center shrink-0">
+              <Instagram className="w-4 h-4 text-white" />
+            </div>
+            <div className="text-left">
+              <p className="font-sans text-sm font-semibold text-white group-hover:text-sushi-coral transition-colors leading-tight">
+                Más fotos del local en Instagram
+              </p>
+              <p className="font-sans text-xs text-sushi-muted mt-0.5">{SITE.instagramHandle}</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-sushi-muted group-hover:text-sushi-coral group-hover:translate-x-1 transition-all duration-200 ml-2" />
+          </a>
+        </motion.div>
       </div>
 
       <AnimatePresence>

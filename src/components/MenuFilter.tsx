@@ -51,9 +51,9 @@ export default function MenuFilter() {
           description="Todo el menú incluido en el buffet libre, excepto bebidas. Cada pieza preparada al momento por nuestros sushimen."
         />
 
-        {/* Filtros tipo tab — minimal, elegantes */}
+        {/* Filtros tipo tab — indicador animado deslizante */}
         <div
-          className="flex flex-wrap gap-2 mb-12 justify-center"
+          className="flex flex-wrap gap-1 mb-12 justify-center p-1 rounded-xl bg-white/[0.03] border border-white/[0.06] w-fit mx-auto"
           role="tablist"
           aria-label="Filtrar carta por categoría"
         >
@@ -66,16 +66,20 @@ export default function MenuFilter() {
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setActive(cat.id)}
-                className={`
-                  px-5 py-2 font-accent text-[12px] uppercase tracking-[0.12em] font-semibold
-                  border-b-2 transition-all duration-200 cursor-pointer
-                  ${isActive
-                    ? "border-sushi-coral text-sushi-coral drop-shadow-[0_0_8px_rgba(255,92,23,0.45)]"
-                    : "border-transparent text-sushi-muted hover:text-white hover:border-white/20"
-                  }
-                `}
+                className="relative px-5 py-2 font-accent text-[11px] uppercase tracking-[0.12em] font-semibold transition-colors duration-200 cursor-pointer rounded-lg"
+                style={{ color: isActive ? "#fff" : "var(--color-sushi-muted)" }}
               >
-                {cat.label}
+                {isActive && (
+                  <motion.span
+                    layoutId="tab-pill"
+                    className="absolute inset-0 rounded-lg bg-sushi-coral/20 border border-sushi-coral/35"
+                    style={{ boxShadow: "0 0 16px rgba(255,92,23,0.25)" }}
+                    transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                  />
+                )}
+                <span className="relative z-10" style={{ color: isActive ? "var(--color-sushi-coral)" : undefined }}>
+                  {cat.label}
+                </span>
               </button>
             );
           })}

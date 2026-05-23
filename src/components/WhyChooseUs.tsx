@@ -58,8 +58,9 @@ const fadeUp = {
 
 export default function WhyChooseUs() {
   return (
-    <section className="section-pad bg-sushi-surface-warm/60 border-t border-white/[0.06]">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="section-pad bg-sushi-surface-warm/60 border-t border-white/[0.06] relative overflow-hidden">
+      <div className="absolute inset-0 gold-veins opacity-50 pointer-events-none" />
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <SectionHeading
           eyebrow="Por qué venir"
           title="Calidad, ambiente y trato cercano"

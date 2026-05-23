@@ -122,21 +122,46 @@ export default function Hero() {
             style={{ background: "radial-gradient(circle, rgba(255,92,23,0.08) 0%, transparent 70%)" }}
           />
 
-          <div className="relative z-10 max-w-lg">
-            <p className="font-sans text-sm text-sushi-gold mb-4 tracking-wide">{SITE.location}</p>
+          <motion.div
+            className="relative z-10 max-w-lg"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+            }}
+          >
+            {/* Location eyebrow */}
+            <motion.p
+              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+              className="inline-flex items-center gap-2 font-sans text-xs text-sushi-gold mb-5 tracking-widest uppercase"
+            >
+              <span className="w-5 h-px bg-sushi-gold/50" />
+              {SITE.location}
+              <span className="w-5 h-px bg-sushi-gold/50" />
+            </motion.p>
 
-            <h1 className="font-display text-[2.15rem] sm:text-[2.8rem] lg:text-[3.1rem] font-semibold text-white leading-[1.06] mb-6">
-              Buffet libre de sushi artesanal en el centro de Cartagena
-            </h1>
+            <motion.h1
+              variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+              className="font-display text-[2.15rem] sm:text-[2.8rem] lg:text-[3.1rem] font-semibold text-white leading-[1.06] mb-6"
+            >
+              Buffet libre de sushi artesanal en el centro de{" "}
+              <em className="not-italic text-sushi-coral-light">Cartagena</em>
+            </motion.h1>
 
-            <p className="font-sans text-[15px] text-white/70 leading-relaxed mb-8">
+            <motion.p
+              variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+              className="font-sans text-[15px] text-white/70 leading-relaxed mb-8"
+            >
               Un restaurante con carácter propio: neón azul eléctrico, banquetas naranja,
-              mármol negro y latón dorado. Todo el menú por {SITE.buffetPrice} por persona,
+              mármol negro y latón dorado. Todo el menú por{" "}
+              <span className="text-white font-medium">{SITE.buffetPrice}</span> por persona,
               servido en tu mesa.
-            </p>
+            </motion.p>
 
             {/* Precio — el gran diferencial */}
-            <div
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
               className="flex flex-wrap items-baseline gap-x-6 gap-y-2 mb-8 pb-8"
               style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
             >
@@ -158,10 +183,13 @@ export default function Hero() {
                 </span>
                 {" "}en Google
               </p>
-            </div>
+            </motion.div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+              className="flex flex-col sm:flex-row gap-3 mb-6"
+            >
               <button
                 type="button"
                 onClick={() => scrollToSection("reserva")}
@@ -177,13 +205,16 @@ export default function Hero() {
               >
                 Ver fotos del local
               </button>
-            </div>
+            </motion.div>
 
-            <p className="flex items-start gap-2 font-sans text-xs text-sushi-muted leading-relaxed">
+            <motion.p
+              variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.5 } } }}
+              className="flex items-start gap-2 font-sans text-xs text-sushi-muted leading-relaxed"
+            >
               <ShieldCheck className="w-4 h-4 text-sushi-gold shrink-0 mt-0.5" aria-hidden />
               Pescado crudo tratado según normativa de consumo seguro.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           {/* Scroll indicator */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-1.5 animate-scroll-hint pointer-events-none">

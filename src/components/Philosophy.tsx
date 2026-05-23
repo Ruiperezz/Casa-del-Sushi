@@ -114,13 +114,16 @@ export default function Philosophy() {
               </p>
             </div>
 
-            <ul className="grid grid-cols-3 gap-4 pt-8 border-t border-white/[0.08]">
+            <ul className="grid grid-cols-3 gap-3 pt-8 border-t border-white/[0.08]">
               {highlights.map((item) => (
-                <li key={item.label}>
-                  <p className={`font-display text-xl sm:text-2xl font-semibold tabular-nums ${item.tone} ${item.glow}`}>
+                <li
+                  key={item.label}
+                  className="rounded-xl px-4 py-3 bg-white/[0.025] border border-white/[0.06] text-center"
+                >
+                  <p className={`font-display text-xl sm:text-2xl font-bold tabular-nums leading-none ${item.tone} ${item.glow}`}>
                     {item.value}
                   </p>
-                  <p className="font-sans text-xs text-sushi-muted mt-1 leading-snug">{item.label}</p>
+                  <p className="font-sans text-[10px] text-sushi-muted mt-1.5 leading-snug uppercase tracking-wide">{item.label}</p>
                 </li>
               ))}
             </ul>

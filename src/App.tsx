@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import { Instagram } from "lucide-react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import TrustStrip from "./components/TrustStrip";
@@ -56,6 +57,18 @@ export default function App() {
             Reservar mesa →
           </a>
         </p>
+
+        {/* Instagram — esquina derecha del banner */}
+        <a
+          href={SITE.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute right-4 inset-y-0 flex items-center gap-1.5 text-white/40 hover:text-sushi-coral transition-colors duration-200 group"
+          aria-label={`Instagram ${SITE.instagramHandle}`}
+        >
+          <Instagram className="w-3.5 h-3.5 group-hover:scale-110 transition-transform duration-200" />
+          <span className="hidden lg:inline font-sans text-[10px] tracking-wide">{SITE.instagramHandle}</span>
+        </a>
       </div>
 
       <Header />

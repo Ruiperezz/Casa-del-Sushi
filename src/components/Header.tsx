@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Menu, X, CalendarDays } from "lucide-react";
+import { Menu, X, CalendarDays, Instagram } from "lucide-react";
 import { scrollToSection } from "../lib/scroll";
 import { SITE } from "../data/site";
 
@@ -71,7 +71,16 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-3">
+            <a
+              href={SITE.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Instagram ${SITE.instagramHandle}`}
+              className="p-2 rounded-lg text-gray-400 hover:text-sushi-coral hover:bg-sushi-coral/8 border border-transparent hover:border-sushi-coral/20 transition-all duration-200"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
             <button type="button" onClick={() => goTo("reserva")} className="btn-primary !py-2.5 !px-5 !text-xs">
               <CalendarDays className="w-4 h-4" aria-hidden />
               Reservar

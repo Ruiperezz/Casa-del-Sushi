@@ -94,14 +94,14 @@ export default function Footer() {
           </div>
 
           <a
-            href="https://www.instagram.com/casadelsushi88/?hl=es"
+            href={SITE.instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-lg border border-white/10 text-gray-400 hover:text-sushi-coral hover:border-sushi-coral/30 hover:bg-sushi-coral/5 transition-all duration-200"
             aria-label="Síguenos en Instagram"
           >
             <Instagram className="w-4 h-4" />
-            <span className="font-sans text-xs">@casadelsushi88</span>
+            <span className="font-sans text-xs">{SITE.instagramHandle}</span>
           </a>
         </div>
 
