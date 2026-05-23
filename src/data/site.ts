@@ -12,4 +12,6 @@ export const SITE = {
   mapsLinkQuery: "Plaza+del+Rey+Cartagena+Casa+del+Sushi",
   instagram: "https://www.instagram.com/casadelsushi88/",
   instagramHandle: "@casadelsushi88",
+  reviewLink: "https://www.google.com/search?q=CASA+DEL+SUSHI+Rese%C3%B1as&tbm=lcl&hl=es-ES#lkt=LocalPoiReviews&lrd=0xd634397daad8f37:0x4b6443b6dbe56f6f,3,,,,",
+  mapsDirectLink: "https://www.google.com/maps?cid=5432541503168016239",
 } as const;

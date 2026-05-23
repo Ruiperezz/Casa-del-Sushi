@@ -53,9 +53,9 @@ const HOURS_TABLE = [
   { days: "Domingo",         lunch: "12:00–16:30", dinner: "19:00–23:30" },
 ];
 
-const MAPS_EMBED = `https://maps.google.com/maps?q=${SITE.mapsEmbedQuery}&output=embed&hl=es&z=17`;
-const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${SITE.mapsLinkQuery}`;
-const REVIEW_LINK = MAPS_LINK;
+const MAPS_EMBED = `https://maps.google.com/maps?cid=5432541503168016239&output=embed&hl=es`;
+const MAPS_LINK = SITE.mapsDirectLink;
+const REVIEW_LINK = SITE.reviewLink;
 
 const EXTRAS = [
   { icon: GlassWater,   label: "Bebidas desde 3€",    detail: "Sake, cerveza, cócteles de autor" },

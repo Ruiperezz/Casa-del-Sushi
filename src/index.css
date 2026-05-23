@@ -110,6 +110,17 @@ h1, h2, h3 { text-wrap: balance; }
   100% { transform: translateX(400%); }
 }
 
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes wa-ring {
+  0%   { box-shadow: 0 4px 24px rgba(37,211,102,0.45), 0 0 0 0 rgba(37,211,102,0.4); }
+  70%  { box-shadow: 0 4px 24px rgba(37,211,102,0.45), 0 0 0 16px rgba(37,211,102,0); }
+  100% { box-shadow: 0 4px 24px rgba(37,211,102,0.45), 0 0 0 0 rgba(37,211,102,0); }
+}
+
 @keyframes coral-breathe {
   0%, 100% { opacity: 0.4; transform: scale(1); }
   50%      { opacity: 0.7; transform: scale(1.1); }
