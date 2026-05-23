@@ -10,6 +10,6 @@ export const SITE = {
   phoneDisplay: "641 11 47 78",
   mapsEmbedQuery: "Plaza+del+Rey+Cartagena+Casa+del+Sushi",
   mapsLinkQuery: "Plaza+del+Rey+Cartagena+Casa+del+Sushi",
-  instagram: "https://www.instagram.com/casadelsushi88/?hl=es",
+  instagram: "https://www.instagram.com/casadelsushi88/",
   instagramHandle: "@casadelsushi88",
 } as const;
