@@ -20,16 +20,27 @@ function GoogleG({ size = 20 }: { size?: number }) {
   );
 }
 
-// ─── Avatar ──────────────────────────────────────────────────
-function reviewAvatar(seed: string) {
-  const map: Record<string, string> = {
-    maria:  "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150",
-    javier: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&q=80&w=150&h=150",
-    ana:    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150",
-    carlos: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150",
-    laura:  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150",
-  };
-  return map[seed] ?? "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150&h=150";
+// ─── Initials avatar (Google-style) ──────────────────────────
+const AVATAR_COLORS = ["#4285F4","#34A853","#EA4335","#FBBC05","#9C27B0","#F57C00","#00796B","#C2185B"];
+
+function InitialsAvatar({ name }: { name: string }) {
+  const initials = name
+    .split(" ")
+    .slice(0, 2)
+    .map((p) => [...p][0] ?? "")  // spread handles multi-byte chars (CJK)
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+  const colorIdx = [...name].reduce((acc, c) => acc + c.charCodeAt(0), 0) % AVATAR_COLORS.length;
+  return (
+    <div
+      className="w-9 h-9 rounded-full flex items-center justify-center font-sans font-semibold text-sm text-white shrink-0 select-none"
+      style={{ backgroundColor: AVATAR_COLORS[colorIdx] }}
+      aria-hidden
+    >
+      {initials}
+    </div>
+  );
 }
 
 // ─── Horarios reales ──────────────────────────────────────────
@@ -285,14 +296,19 @@ export default function LocationReviews() {
                   >
                     <div className="flex items-start justify-between mb-2.5">
                       <div className="flex items-center gap-3">
-                        <img
-                          src={reviewAvatar(review.avatarSeed)}
-                          alt={`Foto de perfil de ${review.author}`}
-                          className="w-9 h-9 rounded-full object-cover border border-white/[0.08] shrink-0"
-                          loading="lazy"
-                        />
+                        <InitialsAvatar name={review.author} />
                         <div>
-                          <p className="font-sans text-sm font-semibold text-white leading-tight">{review.author}</p>
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <p className="font-sans text-sm font-semibold text-white leading-tight">{review.author}</p>
+                            {review.badge && (
+                              <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px] font-accent font-semibold uppercase tracking-wide bg-[#4285F4]/15 text-[#4285F4] border border-[#4285F4]/25">
+                                {review.badge}
+                              </span>
+                            )}
+                          </div>
+                          {review.reviewCount && (
+                            <p className="font-sans text-[10px] text-gray-600 mt-0.5">{review.reviewCount}</p>
+                          )}
                           <p className="font-sans text-[11px] text-gray-500 mt-0.5">{review.date}</p>
                         </div>
                       </div>

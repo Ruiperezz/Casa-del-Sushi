@@ -27,6 +27,8 @@ export interface Review {
   text: string;
   date: string;
   avatarSeed: string;
+  badge?: string;
+  reviewCount?: string;
 }
 
 export interface QuizQuestion {
