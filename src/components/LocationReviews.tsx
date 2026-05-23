@@ -5,6 +5,7 @@ import {
   Clock, Baby, GlassWater, CalendarDays, PenLine,
 } from "lucide-react";
 import SectionHeading from "./ui/SectionHeading";
+import { SITE } from "../data/site";
 import { motion } from "motion/react";
 
 // ─── Avatar ──────────────────────────────────────────────────────────
@@ -50,14 +51,9 @@ const HOURS_TABLE = [
   { days: "Domingo",         lunch: "12:00–16:30", dinner: "19:00–23:30" },
 ];
 
-// ─── Mapa — dirección real ────────────────────────────────────────────
-const MAPS_EMBED =
-  "https://maps.google.com/maps?q=Calle+San+Agust%C3%ADn+6%2C+30201+Cartagena%2C+Murcia%2C+Espa%C3%B1a&output=embed&hl=es&z=17";
-const MAPS_LINK =
-  "https://www.google.com/maps/search/?api=1&query=Calle+San+Agust%C3%ADn+6%2C+30201+Cartagena%2C+Murcia";
-// Enlace de reseña — reemplaza YOUR_PLACE_ID con el Place ID real de Google My Business
-const REVIEW_LINK =
-  "https://www.google.com/maps/search/?api=1&query=Casa+del+Sushi+Calle+San+Agust%C3%ADn+6+Cartagena";
+const MAPS_EMBED = `https://maps.google.com/maps?q=${SITE.mapsEmbedQuery}&output=embed&hl=es&z=17`;
+const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${SITE.mapsLinkQuery}`;
+const REVIEW_LINK = MAPS_LINK;
 
 const EXTRAS = [
   { icon: GlassWater,   label: "Bebidas desde 3€",    detail: "Sake, cerveza, cócteles de autor" },
@@ -77,7 +73,7 @@ export default function LocationReviews() {
         <SectionHeading
           eyebrow="Visítanos"
           title="Dónde encontrarnos"
-          description="C. San Agustín, 6 — en el centro histórico de Cartagena, a pocos pasos del Teatro Romano y el puerto."
+          description={`${SITE.location}. En el centro histórico, a pocos pasos del Teatro Romano y el puerto.`}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
@@ -103,7 +99,7 @@ export default function LocationReviews() {
                       Casa del Sushi
                     </h3>
                     <p className="font-sans text-sm text-sushi-gold mt-0.5">
-                      C. San Agustín, 6 · 30201 Cartagena, Murcia
+                      {SITE.location} · {SITE.locationDetail}
                     </p>
                   </div>
                 </div>
@@ -141,10 +137,10 @@ export default function LocationReviews() {
                     Contacto
                   </p>
                   <a
-                    href="tel:+34641114778"
+                    href={`tel:${SITE.phone}`}
                     className="text-white font-semibold text-base hover:text-sushi-gold transition-colors tracking-wide"
                   >
-                    641 11 47 78
+                    {SITE.phoneDisplay}
                   </a>
                   <p className="text-sushi-muted text-xs mt-1.5">
                     Reservas y consultas en horario de servicio
@@ -174,7 +170,7 @@ export default function LocationReviews() {
               className="overflow-hidden border border-white/[0.07] aspect-[4/3] bg-sushi-surface relative group transition-shadow duration-300 rounded-lg"
             >
               <iframe
-                title="Mapa: Casa del Sushi — C. San Agustín, 6, Cartagena"
+                title={`Mapa: ${SITE.name} — ${SITE.location}`}
                 src={MAPS_EMBED}
                 className="w-full h-full border-0 grayscale-[0.3] contrast-[1.1] brightness-[0.85] group-hover:grayscale-0 transition-all duration-500"
                 loading="lazy"

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { Menu, X, CalendarDays } from "lucide-react";
 import { scrollToSection } from "../lib/scroll";
+import { SITE } from "../data/site";
 
 const NAV_ITEMS = [
+  { id: "historia", label: "El local" },
   { id: "experiencia", label: "Buffet" },
   { id: "carta", label: "Carta" },
-  { id: "galeria", label: "Espacios" },
-  { id: "matchmaker", label: "Maridaje" },
+  { id: "galeria", label: "Fotos" },
   { id: "ubicacion", label: "Contacto" },
 ] as const;
 
@@ -16,7 +17,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    const handleScroll = () => setIsScrolled(window.scrollY > 32);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -38,46 +39,40 @@ export default function Header() {
       <header
         id="main-header"
         style={{ top: "var(--announcement-height)" }}
-        className={`fixed left-0 w-full z-50 transition-all duration-500 border-b ${
+        className={`fixed left-0 w-full z-50 transition-colors duration-300 border-b ${
           isScrolled
-            ? "bg-sushi-dark/95 backdrop-blur-md py-3 border-white/[0.08] shadow-lg shadow-black/40"
-            : "bg-sushi-dark/40 backdrop-blur-sm py-4 border-transparent"
+            ? "bg-sushi-dark/95 backdrop-blur-md py-3 border-white/[0.08]"
+            : "bg-transparent py-4 border-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="group flex flex-col items-start cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sushi-gold rounded-sm"
+            className="text-left group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sushi-gold rounded-sm"
             aria-label="Ir al inicio"
           >
-            <span className="font-wide text-base sm:text-lg font-bold tracking-[0.15em] text-white group-hover:text-sushi-gold transition-colors duration-300">
-              CASA DEL SUSHI
+            <span className="font-display text-lg font-semibold text-white group-hover:text-sushi-gold transition-colors">
+              {SITE.name}
             </span>
-            <span className="font-accent text-[9px] tracking-[0.25em] text-sushi-muted font-medium uppercase leading-none mt-1">
-              Plaza del Rey · Cartagena
-            </span>
+            <span className="font-sans text-xs text-sushi-muted block">{SITE.location}</span>
           </button>
 
-          <nav className="hidden md:flex items-center gap-7" aria-label="Principal">
+          <nav className="hidden md:flex items-center gap-6" aria-label="Principal">
             {NAV_ITEMS.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => goTo(item.id)}
-                className="font-sans text-xs tracking-wide text-gray-300 hover:text-white font-medium transition-colors cursor-pointer"
+                className="font-sans text-sm text-gray-300 hover:text-white transition-colors cursor-pointer"
               >
                 {item.label}
               </button>
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center">
-            <button
-              type="button"
-              onClick={() => goTo("reserva")}
-              className="btn-primary !py-2.5 !px-5 !text-[11px] rounded-full"
-            >
+          <div className="hidden lg:block">
+            <button type="button" onClick={() => goTo("reserva")} className="btn-primary !py-2.5 !px-5 !text-xs">
               <CalendarDays className="w-4 h-4" aria-hidden />
               Reservar
             </button>
@@ -86,9 +81,8 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-sushi-gold"
+            className="md:hidden p-2 text-gray-300 hover:text-white"
             aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-nav"
             aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -100,29 +94,23 @@ export default function Header() {
         {mobileMenuOpen && (
           <motion.nav
             id="mobile-nav"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            style={{ top: "calc(var(--announcement-height) + 4.25rem)" }}
-            className="fixed inset-x-0 bg-sushi-dark/98 backdrop-blur-lg border-b border-white/[0.08] z-40 md:hidden flex flex-col py-5 px-6 gap-1 shadow-2xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{ top: "calc(var(--announcement-height) + 4rem)" }}
+            className="fixed inset-x-0 bg-sushi-dark border-b border-white/[0.08] z-40 md:hidden py-4 px-6"
           >
             {NAV_ITEMS.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => goTo(item.id)}
-                className="text-left font-sans text-sm text-gray-300 hover:text-white py-3 border-b border-white/[0.05] last:border-0"
+                className="block w-full text-left font-sans text-base text-gray-300 py-3 border-b border-white/[0.05] last:border-0"
               >
                 {item.label}
               </button>
             ))}
-            <button
-              type="button"
-              onClick={() => goTo("reserva")}
-              className="btn-primary w-full mt-4 rounded-full"
-            >
-              <CalendarDays className="w-4 h-4" aria-hidden />
+            <button type="button" onClick={() => goTo("reserva")} className="btn-primary w-full mt-4">
               Reservar mesa
             </button>
           </motion.nav>

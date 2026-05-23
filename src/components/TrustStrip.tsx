@@ -1,36 +1,26 @@
-import { motion } from "motion/react";
+import { SITE } from "../data/site";
 
 const items = [
-  { value: "4,9★",    label: "Google Maps",    detail: "Más de 200 valoraciones" },
-  { value: "17,80€",  label: "Buffet libre",    detail: "IVA incluido · Todos los días" },
-  { value: "12–16:30", label: "Turno de comida", detail: "Lunes a domingo" },
-  { value: "19–00:00", label: "Turno de cena",   detail: "Vie–Sáb hasta las 24:00" },
+  { value: `${SITE.googleRating} ★`, label: "Google Maps", detail: "Opiniones de clientes" },
+  { value: SITE.buffetPrice, label: "Buffet libre", detail: "IVA incluido" },
+  { value: "Plaza del Rey", label: "Cartagena", detail: "Centro histórico" },
+  { value: "12:00–00:00", label: "Comida y cena", detail: "Consulta horario completo" },
 ];
 
 export default function TrustStrip() {
   return (
-    <section aria-label="Indicadores de confianza" className="relative z-20 border-y border-white/[0.06] bg-sushi-marble/95">
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="max-w-7xl mx-auto px-6 py-5"
-      >
-        <ul className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[0.06]">
+    <section aria-label="Datos del restaurante" className="border-y border-white/[0.06] bg-sushi-surface/60">
+      <div className="max-w-7xl mx-auto px-6 py-5">
+        <ul className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {items.map(({ value, label, detail }) => (
-            <li key={label} className="flex flex-col px-5 first:pl-0 last:pr-0 py-1">
-              <span className="font-display text-xl font-bold text-white tabular-nums leading-tight">
-                {value}
-              </span>
-              <span className="font-accent text-[11px] font-semibold uppercase tracking-[0.15em] text-sushi-gold mt-0.5">
-                {label}
-              </span>
-              <span className="font-sans text-[11px] text-gray-500 mt-0.5">{detail}</span>
+            <li key={label}>
+              <p className="font-display text-lg font-semibold text-white tabular-nums">{value}</p>
+              <p className="font-sans text-sm text-sushi-coral mt-0.5">{label}</p>
+              <p className="font-sans text-xs text-sushi-muted">{detail}</p>
             </li>
           ))}
         </ul>
-      </motion.div>
+      </div>
     </section>
   );
 }

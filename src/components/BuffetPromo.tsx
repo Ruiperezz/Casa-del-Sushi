@@ -1,6 +1,7 @@
 import { Check, Info, Flame, Wine, Award } from "lucide-react";
 import { motion } from "motion/react";
 import SectionHeading from "./ui/SectionHeading";
+import { SITE } from "../data/site";
 import { scrollToSection } from "../lib/scroll";
 
 const features = [
@@ -46,7 +47,7 @@ export default function BuffetPromo() {
               <span className="italic font-normal text-sushi-gold">servicio ilimitado</span>
             </>
           }
-          description="Redefinimos el buffet en Cartagena: sushi de nivel gastronómico, servido en rondas a tu mesa como en un restaurante a la carta."
+          description="Sushi de nivel gastronómico en rondas a tu mesa, en un salón con banquetas naranja, neón azul y mármol negro con oro. Todo por 17,80 €."
         />
 
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-stretch">
@@ -76,8 +77,8 @@ export default function BuffetPromo() {
             </div>
 
             <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-2">
-              <span className="font-accent text-[10px] uppercase tracking-widest text-sushi-gold font-semibold">
-                C. San Agustín, 6 · Cartagena
+              <span className="font-sans text-sm text-sushi-muted">
+                {SITE.location}
               </span>
               <button
                 type="button"
