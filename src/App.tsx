@@ -14,7 +14,6 @@ import BookingForm from "./components/BookingForm";
 import LocationReviews from "./components/LocationReviews";
 import Footer from "./components/Footer";
 import PromoTicker from "./components/PromoTicker";
-import WhatsAppButton from "./components/ui/WhatsAppButton";
 import { SITE } from "./data/site";
 
 export default function App() {
@@ -91,7 +90,6 @@ export default function App() {
       </main>
 
       <Footer />
-      <WhatsAppButton />
       <Analytics />
     </div>
   );
