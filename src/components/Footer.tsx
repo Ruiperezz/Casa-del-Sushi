@@ -55,7 +55,7 @@ export default function Footer() {
               CASA DEL SUSHI
             </span>
             <span className="font-accent text-[10px] tracking-[0.2em] text-sushi-muted uppercase block mt-1">
-              Plaza del Rey · Cartagena
+              C. San Agustín, 6 · Cartagena
             </span>
           </button>
 
@@ -67,13 +67,13 @@ export default function Footer() {
           {/* Contacto */}
           <div className="space-y-2.5 pt-1">
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Plaza+del+Rey+Cartagena"
+              href="https://www.google.com/maps/search/?api=1&query=Calle+San+Agust%C3%ADn+6%2C+30201+Cartagena%2C+Murcia"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-2.5 font-sans text-sm hover:text-white transition-colors group"
             >
               <MapPin className="w-4 h-4 text-sushi-gold shrink-0 mt-0.5" aria-hidden />
-              <span>Plaza del Rey, Cartagena, Murcia</span>
+              <span>C. San Agustín, 6 · 30201 Cartagena, Murcia</span>
             </a>
             <a
               href="tel:+34968501234"

@@ -75,7 +75,7 @@ export default function BuffetPromo() {
 
             <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-2">
               <span className="font-accent text-[10px] uppercase tracking-widest text-sushi-gold font-semibold">
-                Plaza del Rey, Cartagena
+                C. San Agustín, 6 · Cartagena
               </span>
               <button
                 type="button"
@@ -120,6 +120,22 @@ export default function BuffetPromo() {
                   </li>
                 ))}
               </ul>
+
+              {/* Servicios adicionales — fuente: sushify.es */}
+              <div className="mt-6 pt-5 border-t border-white/[0.06] grid grid-cols-3 gap-4">
+                {[
+                  { label: "Specials semanales", detail: "Nuevas piezas cada semana" },
+                  { label: "Catas de sake",      detail: "Maridaje sake + sushi guiado" },
+                  { label: "Menú infantil",       detail: "Opciones para los más pequeños" },
+                ].map(({ label, detail }) => (
+                  <div key={label} className="text-center">
+                    <p className="font-accent text-[10px] uppercase tracking-wide text-sushi-gold font-semibold leading-tight">
+                      {label}
+                    </p>
+                    <p className="font-sans text-[10px] text-gray-500 mt-0.5 leading-snug">{detail}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

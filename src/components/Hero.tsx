@@ -14,7 +14,7 @@ export default function Hero() {
       <div className="relative h-[100svh] min-h-[600px] max-h-[960px]">
         <img
           src={interiorHeroImage}
-          alt="Salón principal de Casa del Sushi — banquetas coral, neón azul y barra de mármol en Plaza del Rey, Cartagena"
+          alt="Salón principal de Casa del Sushi — banquetas coral, neón azul y barra de mármol. C. San Agustín 6, Cartagena"
           className="absolute inset-0 w-full h-full object-cover object-center"
           fetchPriority="high"
         />
@@ -32,7 +32,7 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="font-accent text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.28em] text-sushi-gold mb-5"
           >
-            Sushi artesanal · Plaza del Rey · Cartagena
+            C. San Agustín, 6 · Cartagena, Murcia
           </motion.p>
 
           <motion.h1

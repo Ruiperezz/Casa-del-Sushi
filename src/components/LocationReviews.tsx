@@ -1,63 +1,79 @@
 import { useState, useEffect } from "react";
 import { REVIEWS } from "../data/menu";
-import { MapPin, Phone, Star, ShieldCheck, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Star, ShieldCheck, ExternalLink, Clock, Baby, GlassWater, CalendarDays } from "lucide-react";
 import SectionHeading from "./ui/SectionHeading";
+import { motion } from "motion/react";
 
-function selectReviewAvatar(seed: string) {
-  const avatars: Record<string, string> = {
-    elena: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150",
-    fran: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150",
+// ─── Avatar de reseña ──────────────────────────────────────────────
+function reviewAvatar(seed: string) {
+  const map: Record<string, string> = {
+    elena:  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=150&h=150",
+    fran:   "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150&h=150",
     carmen: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150",
   };
-  return (
-    avatars[seed] ??
-    "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150&h=150"
-  );
+  return map[seed] ?? "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150&h=150";
 }
 
-function getOpenStatus(): { open: boolean; label: string } {
-  const now = new Date();
-  const hour = now.getHours();
-  const minute = now.getMinutes();
-  const time = hour + minute / 60;
-
-  const lunchOpen = time >= 13 && time < 16.5;
-  const dinnerOpen = time >= 20 && time < 24;
-
-  if (lunchOpen || dinnerOpen) {
-    return { open: true, label: "Abierto ahora" };
-  }
-  return { open: false, label: "Cerrado · Consulta horario" };
+// ─── Estado de apertura ────────────────────────────────────────────
+function getOpenStatus() {
+  const now  = new Date();
+  const time = now.getHours() + now.getMinutes() / 60;
+  const open = (time >= 13 && time < 16.5) || (time >= 20 && time < 24);
+  return { open, label: open ? "Abierto ahora" : "Cerrado · Consulta horario" };
 }
 
-const MAP_EMBED =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.0!2d-0.9864!3d37.6029!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUGxhemEgZGVsIFJleSwgQ2FydGFnZW5h!5e0!3m2!1ses!2ses!4v1!5m2!1ses!2ses";
+// ─── Mapa — dirección real: C. San Agustín, 6, Cartagena ──────────
+const MAPS_SEARCH_URL =
+  "https://maps.google.com/maps?q=Calle+San+Agust%C3%ADn+6%2C+30201+Cartagena%2C+Murcia%2C+Espa%C3%B1a&output=embed&hl=es&z=17";
 
+const MAPS_LINK =
+  "https://www.google.com/maps/search/?api=1&query=Calle+San+Agust%C3%ADn+6%2C+30201+Cartagena%2C+Murcia";
+
+// ─── Servicios adicionales ─────────────────────────────────────────
+const EXTRAS = [
+  { icon: GlassWater, label: "Catas de sake",      detail: "Maridaje guiado sake + sushi" },
+  { icon: CalendarDays, label: "Specials semanales", detail: "Nuevas piezas cada semana" },
+  { icon: Baby,        label: "Menú infantil",      detail: "Opciones adaptadas para niños" },
+];
+
+// ─── Componente ────────────────────────────────────────────────────
 export default function LocationReviews() {
   const [status, setStatus] = useState(getOpenStatus());
-
-  useEffect(() => {
-    setStatus(getOpenStatus());
-  }, []);
+  useEffect(() => { setStatus(getOpenStatus()); }, []);
 
   return (
-    <section id="ubicacion" className="section-pad bg-sushi-dark relative border-t border-white/[0.06]">
+    <section id="ubicacion" className="section-pad bg-sushi-dark relative border-t border-white/[0.05]">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeading
           eyebrow="Visítanos"
-          title="Ubicación y opiniones"
-          description="En Plaza del Rey, en el centro histórico de Cartagena. Fácil acceso a pie desde el puerto y el Teatro Romano."
+          title="Dónde encontrarnos"
+          description="C. San Agustín, 6 — en el centro histórico de Cartagena, a pocos pasos del Teatro Romano y el puerto."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          <div className="lg:col-span-6 space-y-6">
-            <article className="card-surface p-6 sm:p-8">
+
+          {/* ── Columna izquierda: Datos + Mapa ── */}
+          <div className="lg:col-span-6 space-y-5">
+
+            {/* Tarjeta de datos del local */}
+            <motion.article
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="card-surface p-6 sm:p-8"
+            >
+              {/* Cabecera: nombre + estado abierto/cerrado */}
               <div className="flex items-start justify-between gap-4 border-b border-white/[0.08] pb-5 mb-6">
-                <div className="flex items-center gap-3">
-                  <MapPin className="w-5 h-5 text-sushi-coral shrink-0" aria-hidden />
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-sushi-coral shrink-0 mt-0.5" aria-hidden />
                   <div>
-                    <h3 className="font-display text-lg font-semibold text-white">Casa del Sushi</h3>
-                    <p className="font-sans text-sm text-sushi-gold">Plaza del Rey · Cartagena</p>
+                    <h3 className="font-display text-lg font-bold text-white leading-tight">
+                      Casa del Sushi
+                    </h3>
+                    <p className="font-sans text-sm text-sushi-gold mt-0.5">
+                      C. San Agustín, 6 · 30201 Cartagena, Murcia
+                    </p>
                   </div>
                 </div>
                 <span
@@ -68,109 +84,164 @@ export default function LocationReviews() {
                   }`}
                 >
                   <span
-                    className={`w-1.5 h-1.5 rounded-full ${status.open ? "bg-emerald-400" : "bg-gray-500"}`}
+                    className={`w-1.5 h-1.5 rounded-full ${status.open ? "bg-emerald-400 animate-pulse" : "bg-gray-500"}`}
                     aria-hidden
                   />
                   {status.label}
                 </span>
               </div>
 
+              {/* Horario y teléfono */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm font-sans">
                 <div>
-                  <p className="font-accent text-[10px] uppercase font-semibold text-gray-500 mb-2">Horario</p>
+                  <p className="font-accent text-[10px] uppercase tracking-[0.18em] font-semibold text-gray-500 mb-2.5 flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5" />
+                    Horario
+                  </p>
                   <p className="text-white font-medium">Lunes a domingo</p>
-                  <p className="text-gray-300 mt-1">13:00 – 16:30 (comida)</p>
-                  <p className="text-gray-300">20:00 – 00:00 (cena)</p>
+                  <p className="text-gray-300 mt-1">13:00 – 16:30 <span className="text-gray-600">· comida</span></p>
+                  <p className="text-gray-300">20:00 – 00:00 <span className="text-gray-600">· cena</span></p>
                 </div>
                 <div>
-                  <p className="font-accent text-[10px] uppercase font-semibold text-gray-500 mb-2">Teléfono</p>
+                  <p className="font-accent text-[10px] uppercase tracking-[0.18em] font-semibold text-gray-500 mb-2.5 flex items-center gap-1.5">
+                    <Phone className="w-3.5 h-3.5" />
+                    Contacto
+                  </p>
                   <a
                     href="tel:+34968501234"
-                    className="text-white font-medium flex items-center gap-2 hover:text-sushi-gold transition-colors"
+                    className="text-white font-medium hover:text-sushi-gold transition-colors"
                   >
-                    <Phone className="w-4 h-4" aria-hidden />
                     +34 968 50 12 34
                   </a>
-                  <p className="text-sushi-muted text-xs mt-2">Reservas y consultas en horario de servicio</p>
+                  <p className="text-sushi-muted text-xs mt-1.5">
+                    Reservas en horario de servicio
+                  </p>
                 </div>
               </div>
-            </article>
 
-            <div className="rounded-2xl overflow-hidden border border-white/[0.08] aspect-[4/3] bg-sushi-surface">
+              {/* Servicios extras */}
+              <div className="mt-6 pt-5 border-t border-white/[0.06] grid grid-cols-3 gap-3">
+                {EXTRAS.map(({ icon: Icon, label, detail }) => (
+                  <div key={label} className="flex flex-col items-center text-center gap-1.5 p-2">
+                    <Icon className="w-4 h-4 text-sushi-gold" strokeWidth={1.5} aria-hidden />
+                    <p className="font-accent text-[10px] uppercase tracking-wide text-white font-semibold leading-tight">
+                      {label}
+                    </p>
+                    <p className="font-sans text-[10px] text-gray-500 leading-snug">{detail}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.article>
+
+            {/* Mapa — dirección real */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="overflow-hidden border border-white/[0.07] aspect-[4/3] bg-sushi-surface"
+            >
               <iframe
-                title="Mapa: Casa del Sushi en Plaza del Rey, Cartagena"
-                src={MAP_EMBED}
-                className="w-full h-full border-0 grayscale-[0.35] contrast-[1.05]"
+                title="Mapa: Casa del Sushi — C. San Agustín, 6, Cartagena"
+                src={MAPS_SEARCH_URL}
+                className="w-full h-full border-0 grayscale-[0.25] contrast-[1.1] brightness-[0.9]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
               />
-            </div>
+            </motion.div>
 
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Plaza+del+Rey+Cartagena+Spain"
+              href={MAPS_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-accent text-xs uppercase tracking-wide text-sushi-gold hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 font-accent text-xs uppercase tracking-[0.15em] text-sushi-gold hover:text-sushi-gold-light transition-colors"
             >
               Abrir en Google Maps
               <ExternalLink className="w-3.5 h-3.5" aria-hidden />
             </a>
           </div>
 
-          <div className="lg:col-span-6">
+          {/* ── Columna derecha: Reseñas ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-6"
+          >
             <article className="card-surface p-6 sm:p-8 h-full flex flex-col">
+              {/* Cabecera: puntuación */}
               <div className="flex items-center justify-between border-b border-white/[0.08] pb-5 mb-6">
                 <div>
-                  <h3 className="font-display text-lg font-semibold text-white">Opiniones</h3>
-                  <div className="flex items-center gap-2 mt-1.5">
-                    <span className="font-sans text-sm font-semibold text-sushi-gold">4,9</span>
-                    <div className="flex" aria-label="5 de 5 estrellas">
-                      {[1, 2, 3, 4, 5].map((s) => (
-                        <Star key={s} className="w-3.5 h-3.5 text-sushi-gold fill-sushi-gold" />
+                  <h3 className="font-display text-lg font-bold text-white">
+                    Lo que dicen nuestros clientes
+                  </h3>
+                  <div className="flex items-center gap-2.5 mt-2">
+                    <span className="font-display text-2xl font-bold text-sushi-gold leading-none">
+                      4,9
+                    </span>
+                    <div className="flex gap-0.5" aria-label="4.9 de 5 estrellas">
+                      {[1, 2, 3, 4, 5].map(s => (
+                        <Star key={s} className="w-4 h-4 text-sushi-gold fill-sushi-gold" />
                       ))}
                     </div>
-                    <span className="font-sans text-xs text-sushi-muted">· Google Maps</span>
+                    <span className="font-sans text-xs text-sushi-muted">en Google Maps</span>
                   </div>
+                </div>
+                {/* Badge de verificado */}
+                <div className="text-right">
+                  <span className="font-accent text-[9px] uppercase tracking-widest text-sushi-gold border border-sushi-gold/25 rounded px-2 py-1">
+                    Verificado
+                  </span>
                 </div>
               </div>
 
-              <ul className="space-y-5 flex-grow">
-                {REVIEWS.map((review) => (
+              {/* Lista de reseñas */}
+              <ul className="space-y-4 flex-grow">
+                {REVIEWS.map(review => (
                   <li
                     key={review.id}
-                    className="p-5 rounded-xl bg-sushi-dark/50 border border-white/[0.05] flex gap-4"
+                    className="p-5 rounded-xl bg-sushi-dark/60 border border-white/[0.05]"
                   >
-                    <img
-                      src={selectReviewAvatar(review.avatarSeed)}
-                      alt=""
-                      className="w-10 h-10 rounded-full object-cover border border-sushi-gold/25 shrink-0"
-                      loading="lazy"
-                    />
-                    <div className="min-w-0">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <span className="font-sans text-sm font-semibold text-white">{review.author}</span>
-                        <span className="font-sans text-[10px] text-gray-500 shrink-0">{review.date}</span>
+                    <div className="flex gap-3">
+                      <img
+                        src={reviewAvatar(review.avatarSeed)}
+                        alt=""
+                        className="w-9 h-9 rounded-full object-cover border border-sushi-gold/20 shrink-0"
+                        loading="lazy"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <span className="font-sans text-sm font-semibold text-white truncate">
+                            {review.author}
+                          </span>
+                          <span className="font-sans text-[10px] text-gray-600 shrink-0">
+                            {review.date}
+                          </span>
+                        </div>
+                        <div className="flex gap-0.5 mb-2.5" aria-hidden>
+                          {Array.from({ length: review.rating }).map((_, i) => (
+                            <Star key={i} className="w-3 h-3 text-sushi-gold fill-sushi-gold" />
+                          ))}
+                        </div>
+                        <blockquote className="font-sans text-sm text-gray-300 leading-relaxed">
+                          "{review.text}"
+                        </blockquote>
                       </div>
-                      <div className="flex mb-2" aria-hidden>
-                        {Array.from({ length: review.rating }).map((_, i) => (
-                          <Star key={i} className="w-3 h-3 text-sushi-gold fill-sushi-gold" />
-                        ))}
-                      </div>
-                      <blockquote className="font-sans text-sm text-gray-300 leading-relaxed">
-                        {review.text}
-                      </blockquote>
                     </div>
                   </li>
                 ))}
               </ul>
 
-              <p className="mt-6 pt-5 border-t border-white/[0.06] flex items-center gap-2 font-sans text-xs text-sushi-muted">
+              {/* Aviso legal */}
+              <p className="mt-6 pt-5 border-t border-white/[0.05] flex items-center gap-2 font-sans text-xs text-sushi-muted">
                 <ShieldCheck className="w-4 h-4 text-sushi-gold shrink-0" aria-hidden />
-                Cumplimos normativa de higiene alimentaria y tratamiento antiparasitario en pescado crudo.
+                Normativa de higiene alimentaria y tratamiento antiparasitario en pescado crudo.
               </p>
             </article>
-          </div>
+          </motion.div>
+
         </div>
       </div>
     </section>
