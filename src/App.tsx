@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import Header        from "./components/Header";
 import Hero          from "./components/Hero";
 import TrustStrip    from "./components/TrustStrip";
@@ -75,6 +76,8 @@ export default function App() {
       </main>
 
       <Footer />
+      
+      <Analytics />
     </div>
   );
 }
