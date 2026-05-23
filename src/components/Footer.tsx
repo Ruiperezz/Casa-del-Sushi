@@ -12,8 +12,9 @@ const NAV = [
 ];
 
 const HOURS = [
-  { shift: "Comida",  time: "13:00 – 16:30" },
-  { shift: "Cena",    time: "20:00 – 00:00" },
+  { shift: "Comida",        time: "12:00 – 16:30" },
+  { shift: "Cena (lun–jue, dom)", time: "19:00 – 23:30" },
+  { shift: "Cena (vie–sáb)", time: "19:00 – 00:00" },
 ];
 
 export default function Footer() {
@@ -76,11 +77,11 @@ export default function Footer() {
               <span>C. San Agustín, 6 · 30201 Cartagena, Murcia</span>
             </a>
             <a
-              href="tel:+34968501234"
+              href="tel:+34641114778"
               className="flex items-center gap-2.5 font-sans text-sm hover:text-white transition-colors"
             >
               <Phone className="w-4 h-4 text-sushi-gold shrink-0" aria-hidden />
-              +34 968 50 12 34
+              641 11 47 78
             </a>
             <div className="flex items-start gap-2.5 font-sans text-sm">
               <Clock className="w-4 h-4 text-sushi-gold shrink-0 mt-0.5" aria-hidden />

@@ -1,10 +1,10 @@
 import { motion } from "motion/react";
 
 const items = [
-  { value: "4,9", label: "Google Maps", detail: "Más de 200 valoraciones" },
-  { value: "17,80€", label: "Buffet libre", detail: "IVA incluido · Todos los días" },
-  { value: "13–16:30", label: "Turno de comida", detail: "Lunes a domingo" },
-  { value: "20–00:00", label: "Turno de cena", detail: "Lunes a domingo" },
+  { value: "4,9★",    label: "Google Maps",    detail: "Más de 200 valoraciones" },
+  { value: "17,80€",  label: "Buffet libre",    detail: "IVA incluido · Todos los días" },
+  { value: "12–16:30", label: "Turno de comida", detail: "Lunes a domingo" },
+  { value: "19–00:00", label: "Turno de cena",   detail: "Vie–Sáb hasta las 24:00" },
 ];
 
 export default function TrustStrip() {

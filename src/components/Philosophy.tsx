@@ -1,5 +1,68 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import sushiPlate from "../assets/images/sushi_plate_1779464165142.png";
+
+// ─── Hook contador animado ────────────────────────────────────────────
+function useCountUp(end: number, duration = 1200) {
+  const [count, setCount] = useState(0);
+  const [triggered, setTriggered] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setTriggered(true); },
+      { threshold: 0.5 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!triggered) return;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      setCount(Math.round(ease * end));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [triggered, end, duration]);
+
+  return { count, ref };
+}
+
+// ─── Stats con contadores animados ───────────────────────────────────
+function AnimatedStats() {
+  const year  = useCountUp(2024, 1000);
+  const price = useCountUp(1780, 1200); // 1780 → "17,80€"
+  const score = useCountUp(49,   900);  // 49   → "4,9★"
+
+  return (
+    <div ref={year.ref} className="border-t border-white/[0.08] pt-8 grid grid-cols-3 gap-6">
+      <div>
+        <p className="font-display text-2xl sm:text-3xl font-bold text-sushi-gold tabular-nums">
+          {year.count}
+        </p>
+        <p className="font-sans text-xs text-gray-500 mt-1">Año de apertura</p>
+      </div>
+      <div>
+        <p className="font-display text-2xl sm:text-3xl font-bold text-sushi-gold tabular-nums">
+          {(price.count / 100).toFixed(2).replace(".", ",")}€
+        </p>
+        <p className="font-sans text-xs text-gray-500 mt-1">Buffet completo</p>
+      </div>
+      <div>
+        <p className="font-display text-2xl sm:text-3xl font-bold text-sushi-gold tabular-nums">
+          {(score.count / 10).toFixed(1).replace(".", ",")}★
+        </p>
+        <p className="font-sans text-xs text-gray-500 mt-1">Valoración Google</p>
+      </div>
+    </div>
+  );
+}
 
 export default function Philosophy() {
   return (
@@ -78,19 +141,8 @@ export default function Philosophy() {
               </p>
             </div>
 
-            {/* Separador con datos clave */}
-            <div className="border-t border-white/[0.08] pt-8 grid grid-cols-3 gap-6">
-              {[
-                { value: "2024",    label: "Año de apertura" },
-                { value: "17,80€", label: "Buffet completo" },
-                { value: "4,9★",   label: "Valoración media" },
-              ].map(({ value, label }) => (
-                <div key={label}>
-                  <p className="font-display text-2xl font-bold text-sushi-gold">{value}</p>
-                  <p className="font-sans text-xs text-gray-500 mt-1">{label}</p>
-                </div>
-              ))}
-            </div>
+            {/* Stats con contador animado */}
+            <AnimatedStats />
           </motion.div>
 
         </div>

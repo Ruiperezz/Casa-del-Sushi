@@ -1,7 +1,34 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, type CSSProperties } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ArrowRight } from "lucide-react";
 import { scrollToSection } from "../lib/scroll";
+
+// ─── Hook 3D tilt ────────────────────────────────────────────────────
+function useTilt(intensity = 10) {
+  const ref = useRef<HTMLButtonElement>(null);
+  const [style, setStyle] = useState<CSSProperties>({});
+
+  const onMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width  - 0.5) * intensity;
+    const y = ((e.clientY - r.top)  / r.height - 0.5) * -intensity;
+    setStyle({
+      transform: `perspective(900px) rotateX(${y}deg) rotateY(${x}deg) scale3d(1.02,1.02,1.02)`,
+      transition: "transform 0.08s ease-out",
+    });
+  };
+
+  const onLeave = () => {
+    setStyle({
+      transform: "perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)",
+      transition: "transform 0.55s cubic-bezier(0.22,1,0.36,1)",
+    });
+  };
+
+  return { ref, style, onMove, onLeave };
+}
 
 import interiorHero from "../assets/images/interior_hero_1779464146821.png";
 import sushiPlate   from "../assets/images/sushi_plate_1779464165142.png";
@@ -42,6 +69,11 @@ const images: GalleryImage[] = [
 export default function Gallery() {
   const [active, setActive] = useState<GalleryImage | null>(null);
 
+  // 3D tilt — un hook por card (reglas de React: hooks en nivel superior)
+  const tilt0 = useTilt(6);
+  const tilt1 = useTilt(8);
+  const tilt2 = useTilt(8);
+
   useEffect(() => {
     if (!active) return;
     const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") setActive(null); };
@@ -81,13 +113,17 @@ export default function Gallery() {
           </p>
         </motion.div>
 
-        {/* Grid asimétrico editorial */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 auto-rows-[220px]">
+        {/* Grid asimétrico con 3D tilt en cada card */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 auto-rows-[220px]" style={{ perspective: "1200px" }}>
 
-          {/* Interior — protagonista, ocupa 8 columnas y 2 filas */}
+          {/* Interior — protagonista, 8 cols × 2 filas */}
           <motion.button
+            ref={tilt0.ref}
             type="button"
             onClick={() => setActive(images[0])}
+            onMouseMove={tilt0.onMove}
+            onMouseLeave={tilt0.onLeave}
+            style={{ ...tilt0.style, transformStyle: "preserve-3d" }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -95,25 +131,23 @@ export default function Gallery() {
             className="group relative overflow-hidden md:col-span-8 md:row-span-2 bg-sushi-surface cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-sushi-gold"
             aria-label={`Ver ${images[0].title}`}
           >
-            <img
-              src={images[0].src}
-              alt={images[0].alt}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+            <img src={images[0].src} alt={images[0].alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/80 via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
             <div className="absolute bottom-0 inset-x-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
               <p className="font-accent text-[10px] uppercase tracking-[0.25em] text-sushi-gold mb-1">{images[0].caption}</p>
               <p className="font-display text-2xl font-bold text-white">{images[0].title}</p>
-              <p className="font-sans text-sm text-gray-300 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-w-sm">
-                {images[0].description}
-              </p>
+              <p className="font-sans text-sm text-gray-300 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-w-sm">{images[0].description}</p>
             </div>
           </motion.button>
 
-          {/* Sushi — columna derecha, fila 1 */}
+          {/* Sushi — 4 cols, fila 1 */}
           <motion.button
+            ref={tilt1.ref}
             type="button"
             onClick={() => setActive(images[1])}
+            onMouseMove={tilt1.onMove}
+            onMouseLeave={tilt1.onLeave}
+            style={{ ...tilt1.style, transformStyle: "preserve-3d" }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -121,11 +155,7 @@ export default function Gallery() {
             className="group relative overflow-hidden md:col-span-4 md:row-span-1 bg-sushi-surface cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-sushi-gold"
             aria-label={`Ver ${images[1].title}`}
           >
-            <img
-              src={images[1].src}
-              alt={images[1].alt}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-            />
+            <img src={images[1].src} alt={images[1].alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
             <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/70 via-transparent to-transparent" />
             <div className="absolute bottom-0 inset-x-0 p-5">
               <p className="font-accent text-[9px] uppercase tracking-widest text-sushi-gold mb-0.5">{images[1].caption}</p>
@@ -133,10 +163,14 @@ export default function Gallery() {
             </div>
           </motion.button>
 
-          {/* Jardín — columna derecha, fila 2 */}
+          {/* Jardín — 4 cols, fila 2 */}
           <motion.button
+            ref={tilt2.ref}
             type="button"
             onClick={() => setActive(images[2])}
+            onMouseMove={tilt2.onMove}
+            onMouseLeave={tilt2.onLeave}
+            style={{ ...tilt2.style, transformStyle: "preserve-3d" }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -144,11 +178,7 @@ export default function Gallery() {
             className="group relative overflow-hidden md:col-span-4 md:row-span-1 bg-sushi-surface cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-sushi-gold"
             aria-label={`Ver ${images[2].title}`}
           >
-            <img
-              src={images[2].src}
-              alt={images[2].alt}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-            />
+            <img src={images[2].src} alt={images[2].alt} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
             <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/70 via-transparent to-transparent" />
             <div className="absolute bottom-0 inset-x-0 p-5">
               <p className="font-accent text-[9px] uppercase tracking-widest text-sushi-neon mb-0.5">{images[2].caption}</p>

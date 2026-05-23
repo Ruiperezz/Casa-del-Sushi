@@ -13,8 +13,8 @@ import {
 } from "lucide-react";
 
 const timeslots = {
-  lunch: ["13:00", "13:30", "14:00", "14:30", "15:00"],
-  dinner: ["20:30", "21:00", "21:30", "22:00", "22:30", "23:00"],
+  lunch:  ["12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00"],
+  dinner: ["19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"],
 };
 
 const seatingOptions = [
@@ -31,7 +31,7 @@ export default function BookingForm() {
   const todayISO = new Date().toISOString().split("T")[0];
   const [guests, setGuests] = useState(2);
   const [date, setDate] = useState(todayISO);
-  const [selectedTime, setSelectedTime] = useState("21:30");
+  const [selectedTime, setSelectedTime] = useState("21:00");
   const [seating, setSeating] = useState("indifferent");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
