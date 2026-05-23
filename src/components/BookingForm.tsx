@@ -87,7 +87,7 @@ export default function BookingForm() {
               Reserva premium
             </span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-3 drop-shadow-[0_0_20px_rgba(242,88,71,0.15)]">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-3 drop-shadow-[0_0_20px_rgba(255,92,23,0.18)]">
             Asegura tu experiencia
           </h2>
           <p className="font-sans text-base text-sushi-muted max-w-lg mx-auto">
@@ -178,7 +178,7 @@ export default function BookingForm() {
                                 whileTap={{ scale: 0.95 }}
                                 className={`py-2.5 px-3 rounded-lg font-sans text-sm font-semibold border transition-all ${
                                   selectedTime === t
-                                    ? "bg-sushi-coral border-sushi-coral text-white shadow-[0_0_12px_rgba(242,88,71,0.3)]"
+                                    ? "bg-sushi-coral border-sushi-coral text-white shadow-[0_0_14px_rgba(255,92,23,0.35)]"
                                     : "bg-sushi-dark/50 border-white/10 text-gray-300 hover:border-white/20"
                                 }`}
                               >
@@ -263,7 +263,7 @@ export default function BookingForm() {
                     disabled={isSubmitting}
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
-                    className="w-full bg-gradient-to-r from-sushi-coral to-sushi-coral-light hover:from-sushi-coral-dark hover:to-sushi-coral disabled:from-gray-600 disabled:to-gray-600 text-white font-accent font-bold uppercase tracking-[0.1em] py-4 px-6 rounded-lg transition-all disabled:opacity-60 shadow-[0_0_20px_rgba(242,88,71,0.2)] hover:shadow-[0_0_30px_rgba(242,88,71,0.4)]"
+                    className="w-full bg-gradient-to-r from-sushi-coral to-sushi-coral-light hover:from-sushi-coral-dark hover:to-sushi-coral disabled:from-gray-600 disabled:to-gray-600 text-white font-accent font-bold uppercase tracking-[0.1em] py-4 px-6 rounded-lg transition-all disabled:opacity-60 shadow-[0_0_20px_rgba(255,92,23,0.22)] hover:shadow-[0_0_30px_rgba(255,92,23,0.42)]"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center justify-center gap-2">
@@ -312,7 +312,7 @@ export default function BookingForm() {
 
                   {/* Success icon */}
                   <motion.div
-                    className="w-20 h-20 rounded-full bg-gradient-to-br from-sushi-coral/20 to-sushi-neon/10 border-2 border-sushi-coral/40 flex items-center justify-center mx-auto mb-6 shadow-[0_0_40px_rgba(242,88,71,0.3)]"
+                    className="w-20 h-20 rounded-full bg-gradient-to-br from-sushi-coral/20 to-sushi-neon/10 border-2 border-sushi-coral/40 flex items-center justify-center mx-auto mb-6 shadow-[0_0_40px_rgba(255,92,23,0.32)]"
                     animate={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
@@ -324,7 +324,7 @@ export default function BookingForm() {
                     </motion.div>
                   </motion.div>
 
-                  <h3 className="font-display text-4xl font-bold text-white mb-2 drop-shadow-[0_0_20px_rgba(242,88,71,0.2)]">
+                  <h3 className="font-display text-4xl font-bold text-white mb-2 drop-shadow-[0_0_20px_rgba(255,92,23,0.22)]">
                     ¡Perfecto!
                   </h3>
                   <p className="font-sans text-sushi-muted text-sm mb-8">
@@ -341,7 +341,7 @@ export default function BookingForm() {
                     <p className="font-accent text-[10px] uppercase tracking-[0.15em] text-sushi-coral font-semibold mb-3">
                       Tu localizador
                     </p>
-                    <p className="font-display text-3xl font-bold text-white mb-4 font-mono drop-shadow-[0_0_12px_rgba(242,88,71,0.3)]">
+                    <p className="font-display text-3xl font-bold text-white mb-4 font-mono drop-shadow-[0_0_14px_rgba(255,92,23,0.35)]">
                       {bookingRef}
                     </p>
                     <div className="grid grid-cols-2 gap-4 text-left">

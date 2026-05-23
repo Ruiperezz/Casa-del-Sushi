@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
 interface SectionHeadingProps {
@@ -7,6 +8,11 @@ interface SectionHeadingProps {
   align?: "center" | "left";
   className?: string;
 }
+
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 export default function SectionHeading({
   eyebrow,
@@ -18,18 +24,29 @@ export default function SectionHeading({
   const alignClass = align === "center" ? "text-center mx-auto" : "text-left";
 
   return (
-    <header className={`max-w-2xl mb-12 md:mb-14 ${alignClass} ${className}`}>
+    <motion.header
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-16px" }}
+      transition={{ staggerChildren: 0.1 }}
+      className={`max-w-2xl mb-12 md:mb-14 ${alignClass} ${className}`}
+    >
       {eyebrow && (
-        <p className="font-sans text-sm text-sushi-gold mb-3">{eyebrow}</p>
+        <motion.p variants={item} className="font-sans text-sm text-sushi-gold mb-3">
+          {eyebrow}
+        </motion.p>
       )}
-      <h2 className="font-display text-3xl sm:text-4xl font-semibold text-white tracking-tight leading-snug">
+      <motion.h2
+        variants={item}
+        className="font-display text-3xl sm:text-4xl font-semibold text-white tracking-tight leading-snug"
+      >
         {title}
-      </h2>
+      </motion.h2>
       {description && (
-        <p className="font-sans text-sushi-muted text-base leading-relaxed mt-4">
+        <motion.p variants={item} className="font-sans text-sushi-muted text-base leading-relaxed mt-4">
           {description}
-        </p>
+        </motion.p>
       )}
-    </header>
+    </motion.header>
   );
 }

@@ -22,20 +22,30 @@ export default function Footer() {
 
   return (
     <footer className="bg-sushi-dark border-t border-white/[0.08] text-sushi-muted">
-      <div className="border-b border-white/[0.06] py-10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+      {/* ── CTA Band ── */}
+      <div className="border-b border-white/[0.06] py-10 relative overflow-hidden">
+        {/* Gradient background for the CTA band */}
+        <div className="absolute inset-0 bg-gradient-to-r from-sushi-burgundy/25 via-sushi-surface-green/40 to-sushi-surface-alt/30 pointer-events-none" />
+        <div className="absolute inset-0 gold-veins opacity-40 pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
           <div>
             <p className="font-display text-2xl font-semibold text-white">¿Reservamos tu mesa?</p>
             <p className="font-sans text-sm text-sushi-muted mt-1">
               Sin pago por adelantado. Te confirmamos por teléfono o correo.
             </p>
           </div>
-          <button type="button" onClick={() => scrollToSection("reserva")} className="btn-primary shrink-0">
+          <button
+            type="button"
+            onClick={() => scrollToSection("reserva")}
+            className="btn-primary shrink-0 animate-pulse-ring"
+          >
             Reservar
           </button>
         </div>
       </div>
 
+      {/* ── Main footer columns ── */}
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
         <div className="lg:col-span-5 space-y-4">
           <button
@@ -64,7 +74,10 @@ export default function Footer() {
               <MapPin className="w-4 h-4 text-sushi-gold shrink-0 mt-0.5" aria-hidden />
               {SITE.location} · {SITE.locationDetail}
             </a>
-            <a href={`tel:${SITE.phone}`} className="flex items-center gap-2 font-sans text-sm hover:text-white transition-colors">
+            <a
+              href={`tel:${SITE.phone}`}
+              className="flex items-center gap-2 font-sans text-sm hover:text-white transition-colors"
+            >
               <Phone className="w-4 h-4 text-sushi-gold shrink-0" aria-hidden />
               {SITE.phoneDisplay}
             </a>
@@ -84,7 +97,7 @@ export default function Footer() {
             href="https://instagram.com/casadelsushi.cartagena"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex p-2.5 rounded-lg border border-white/10 text-gray-400 hover:text-sushi-coral transition-colors"
+            className="inline-flex p-2.5 rounded-lg border border-white/10 text-gray-400 hover:text-sushi-coral hover:border-sushi-coral/30 transition-colors"
             aria-label="Instagram"
           >
             <Instagram className="w-4 h-4" />
@@ -125,12 +138,13 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* ── Bottom bar ── */}
       <div className="max-w-7xl mx-auto px-6 border-t border-white/[0.05] py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <p>© {new Date().getFullYear()} {SITE.name}. Todos los derechos reservados.</p>
         <button
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="p-2 rounded-full border border-white/10 hover:border-sushi-gold transition-colors"
+          className="p-2 rounded-full border border-white/10 hover:border-sushi-gold hover:text-sushi-gold transition-colors"
           aria-label="Volver arriba"
         >
           <ArrowUp className="w-4 h-4 text-white" />

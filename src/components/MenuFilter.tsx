@@ -70,7 +70,7 @@ export default function MenuFilter() {
                   px-5 py-2 font-accent text-[12px] uppercase tracking-[0.12em] font-semibold
                   border-b-2 transition-all duration-200 cursor-pointer
                   ${isActive
-                    ? "border-sushi-coral text-sushi-coral drop-shadow-[0_0_8px_rgba(242,88,71,0.4)]"
+                    ? "border-sushi-coral text-sushi-coral drop-shadow-[0_0_8px_rgba(255,92,23,0.45)]"
                     : "border-transparent text-sushi-muted hover:text-white hover:border-white/20"
                   }
                 `}

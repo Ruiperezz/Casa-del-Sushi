@@ -87,7 +87,7 @@ export default function LocationReviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              whileHover={{ boxShadow: "0 0 24px rgba(15, 232, 255, 0.15)" }}
+              whileHover={{ boxShadow: "0 0 24px rgba(0, 170, 255, 0.18)" }}
               className="card-surface p-6 sm:p-8 transition-shadow duration-300"
             >
               {/* Cabecera */}
@@ -166,7 +166,7 @@ export default function LocationReviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              whileHover={{ boxShadow: "0 0 32px rgba(242, 88, 71, 0.2), 0 0 64px rgba(15, 232, 255, 0.08)" }}
+              whileHover={{ boxShadow: "0 0 32px rgba(255, 92, 23, 0.22), 0 0 64px rgba(0, 170, 255, 0.08)" }}
               className="overflow-hidden border border-white/[0.07] aspect-[4/3] bg-sushi-surface relative group transition-shadow duration-300 rounded-lg"
             >
               <iframe
@@ -209,10 +209,10 @@ export default function LocationReviews() {
                     Lo que dicen nuestros clientes
                   </h3>
                   <div className="flex items-center gap-2.5 mt-2">
-                    <span className="font-display text-2xl font-bold text-sushi-gold-light leading-none drop-shadow-[0_0_12px_rgba(212,166,83,0.4)]">4,9</span>
+                    <span className="font-display text-2xl font-bold text-sushi-gold-light leading-none drop-shadow-[0_0_12px_rgba(200,149,42,0.45)]">4,9</span>
                     <div className="flex gap-0.5" aria-label="4.9 de 5 estrellas en Google">
                       {[1,2,3,4,5].map(s => (
-                        <Star key={s} className="w-4 h-4 text-sushi-gold fill-sushi-gold drop-shadow-[0_0_6px_rgba(212,166,83,0.5)] transition-all hover:scale-110" />
+                        <Star key={s} className="w-4 h-4 text-sushi-gold fill-sushi-gold drop-shadow-[0_0_6px_rgba(200,149,42,0.5)] transition-all hover:scale-110" />
                       ))}
                     </div>
                     <span className="font-sans text-xs text-sushi-gold/70">en Google</span>
@@ -240,7 +240,7 @@ export default function LocationReviews() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: idx * 0.1 }}
-                    whileHover={{ y: -2, backgroundColor: "rgba(27, 189, 206, 0.05)" }}
+                    whileHover={{ y: -2, backgroundColor: "rgba(0, 170, 255, 0.05)" }}
                     className="p-5 rounded-xl bg-sushi-dark/60 border border-white/[0.05] hover:border-sushi-neon/30 transition-all duration-300 cursor-default"
                   >
                     <div className="flex gap-3">

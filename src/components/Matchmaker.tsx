@@ -223,7 +223,7 @@ export default function Matchmaker() {
                       key={option.id}
                       type="button"
                       onClick={() => handleSelect(option.id)}
-                      className="w-full text-left card-surface !rounded-xl p-4 hover:border-sushi-gold/35 hover:border-sushi-neon/40 hover:shadow-[0_0_16px_rgba(15,232,255,0.1)] transition-all duration-300 cursor-pointer group"
+                      className="w-full text-left card-surface !rounded-xl p-4 hover:border-sushi-gold/35 hover:border-sushi-neon/40 hover:shadow-[0_0_16px_rgba(0,170,255,0.12)] transition-all duration-300 cursor-pointer group"
                     >
                       <span className="font-sans text-sm font-semibold text-white group-hover:text-sushi-gold transition-colors block">
                         {option.label}
