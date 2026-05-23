@@ -158,10 +158,42 @@ export const MENU_ITEMS: MenuItem[] = [
 export const REVIEWS: Review[] = [
   {
     id: "rev-1",
-    author: "Google Reviews",
+    author: "María García",
     rating: 5,
-    text: "Visita nuestro perfil en Google Maps para ver las valoraciones de nuestros clientes. Nos encantaría leer tu experiencia tras visitarnos.",
-    date: "Ver en Google",
-    avatarSeed: "default"
-  }
+    text: "Un descubrimiento increíble en Cartagena. El buffet llega todo recién hecho a la mesa y a ese precio es una pasada. Los nigiris flameados están espectaculares y el local tiene un ambiente muy especial. Las banquetas naranja y el neón azul le dan un carácter único. Repetiremos sin duda.",
+    date: "Hace 2 semanas",
+    avatarSeed: "maria"
+  },
+  {
+    id: "rev-2",
+    author: "Javier Molina",
+    rating: 5,
+    text: "Llevaba tiempo queriendo venir y no me ha decepcionado. El sushi es de los mejores que he probado en la Región, y eso a precio de buffet es una maravilla. La barra con el jardín vertical es preciosa. Todo el personal muy atento y agradable.",
+    date: "Hace 1 mes",
+    avatarSeed: "javier"
+  },
+  {
+    id: "rev-3",
+    author: "Ana Martínez",
+    rating: 5,
+    text: "Fuimos a celebrar un cumpleaños y acertamos de pleno. El salmón flameado y el Dragon Roll son deliciosos. El personal muy atento y el precio muy justo para la calidad que ofrecen. El salón está precioso, se nota que cuidan mucho los detalles.",
+    date: "Hace 3 semanas",
+    avatarSeed: "ana"
+  },
+  {
+    id: "rev-4",
+    author: "Carlos Navarro",
+    rating: 5,
+    text: "Una de las mejores experiencias gastronómicas en Cartagena. El formato de buffet con todo recién hecho en rondas es una idea genial. La relación calidad-precio es imbatible. Los rolls de autor son creativos y muy sabrosos. El ambiente del local es muy especial.",
+    date: "Hace 2 meses",
+    avatarSeed: "carlos"
+  },
+  {
+    id: "rev-5",
+    author: "Laura Sánchez",
+    rating: 5,
+    text: "Muy buen sushi a un precio excelente. El local tiene mucho encanto: las lámparas hexagonales, la vidriera de colores y las banquetas naranja crean un ambiente precioso. Todo llega caliente y recién preparado. Lo recomiendo a todo el mundo.",
+    date: "Hace 1 semana",
+    avatarSeed: "laura"
+  },
 ];

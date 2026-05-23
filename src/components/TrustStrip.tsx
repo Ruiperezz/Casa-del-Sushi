@@ -41,10 +41,10 @@ const items = [
   },
   {
     icon: Clock,
-    value: "12:00",
-    suffix: "–00:00",
+    value: "7 días",
+    suffix: "",
     label: "Comida y cena",
-    detail: "Lunes a domingo",
+    detail: "Apertura diaria desde las 12:00",
     accent: "text-sushi-gold-light",
     iconColor: "text-sushi-gold-light",
     bg: "bg-sushi-gold/8",
