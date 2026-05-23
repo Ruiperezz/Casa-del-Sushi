@@ -3,27 +3,24 @@ import { motion } from "motion/react";
 import SectionHeading from "./ui/SectionHeading";
 import TiltCard from "./ui/TiltCard";
 import { SITE } from "../data/site";
+import { scrollToSection } from "../lib/scroll";
 
 const features = [
   {
     icon: Sparkles,
-    title: "Carta incluida en el buffet",
-    desc: "Uramakis, nigiris flameados y entrantes de autor por 17,80 €. Pides en rondas, llega recién hecho.",
+    title: "Carta de autor incluida en el precio",
+    desc: "Uramakis, nigiris flameados y entrantes de autor por 17,80 €. Pides en rondas, llega recién hecho desde la barra.",
     accent: "text-sushi-coral",
     iconBg: "bg-sushi-coral/12",
     iconBorder: "border-sushi-coral/30",
-    hoverBorder: "hover:border-sushi-coral/30",
-    hoverGlow: "hover:shadow-[0_0_40px_rgba(255,92,23,0.1)]",
   },
   {
     icon: Armchair,
     title: "Un salón con personalidad",
-    desc: "Banquetas naranja, sillas azul, neón, vidriera y mármol negro con detalle dorado. Tal como en las fotos.",
+    desc: "Banquetas naranja, sillas azul, neón, vidriera y mármol negro con detalle dorado.",
     accent: "text-sushi-neon",
     iconBg: "bg-sushi-neon/10",
     iconBorder: "border-sushi-neon/25",
-    hoverBorder: "hover:border-sushi-neon/30",
-    hoverGlow: "hover:shadow-[0_0_40px_rgba(0,170,255,0.09)]",
   },
   {
     icon: Hexagon,
@@ -32,18 +29,14 @@ const features = [
     accent: "text-sushi-gold",
     iconBg: "bg-sushi-gold/12",
     iconBorder: "border-sushi-gold/25",
-    hoverBorder: "hover:border-sushi-gold/30",
-    hoverGlow: "hover:shadow-[0_0_40px_rgba(200,149,42,0.1)]",
   },
   {
     icon: Leaf,
     title: "Te adaptamos la carta",
-    desc: "Opciones sin gluten, menú infantil y bebidas desde 3 €. Pregunta al reservar o al llegar.",
+    desc: "Opciones sin gluten, menú infantil y bebidas desde 3 €. Pregunta al reservar.",
     accent: "text-emerald-400",
     iconBg: "bg-emerald-900/30",
     iconBorder: "border-emerald-700/30",
-    hoverBorder: "hover:border-emerald-700/40",
-    hoverGlow: "hover:shadow-[0_0_40px_rgba(52,211,153,0.06)]",
   },
 ];
 
@@ -57,6 +50,8 @@ const fadeUp = {
 };
 
 export default function WhyChooseUs() {
+  const [featured, ...rest] = features;
+
   return (
     <section className="section-pad bg-sushi-surface-warm/60 border-t border-white/[0.06] relative overflow-hidden">
       <div className="absolute inset-0 gold-veins opacity-50 pointer-events-none" />
@@ -67,24 +62,62 @@ export default function WhyChooseUs() {
           description={`En ${SITE.location} reunimos buen producto, un local cuidado y un equipo que conoce la carta.`}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {features.map(({ icon: Icon, title, desc, accent, iconBg, iconBorder, hoverBorder, hoverGlow }, i) => (
+        {/* ── Featured card — full-width horizontal ── */}
+        <motion.div
+          custom={0}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-20px" }}
+          variants={fadeUp}
+          className="mb-5"
+        >
+          <TiltCard intensity={5}>
+            <article className="card-surface p-7 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 border border-sushi-coral/20 hover:border-sushi-coral/35 hover:shadow-[0_0_48px_rgba(255,92,23,0.1)] transition-all duration-300">
+              <div className={`w-14 h-14 rounded-2xl ${featured.iconBg} border ${featured.iconBorder} flex items-center justify-center shrink-0 transition-transform duration-300 hover:scale-110`}>
+                <featured.icon className={`w-6 h-6 ${featured.accent}`} strokeWidth={1.5} aria-hidden />
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <h3 className="font-display text-xl sm:text-2xl font-semibold text-white mb-2 leading-snug">
+                  {featured.title}
+                </h3>
+                <p className="font-sans text-sm text-sushi-muted leading-relaxed max-w-prose">{featured.desc}</p>
+              </div>
+
+              <div className="shrink-0 flex flex-col items-start sm:items-end gap-3">
+                <div className="text-left sm:text-right">
+                  <p className="font-display text-3xl font-bold text-sushi-coral leading-none">{SITE.buffetPrice}</p>
+                  <p className="font-sans text-xs text-sushi-muted mt-1">por persona · IVA incl.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("reserva")}
+                  className="btn-primary !py-2 !px-4 !text-xs whitespace-nowrap"
+                >
+                  Reservar mesa
+                </button>
+              </div>
+            </article>
+          </TiltCard>
+        </motion.div>
+
+        {/* ── Supporting features — 3-column row ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {rest.map(({ icon: Icon, title, desc, accent, iconBg, iconBorder }, i) => (
             <motion.div
               key={title}
-              custom={i}
+              custom={i + 1}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-20px" }}
               variants={fadeUp}
             >
-              <TiltCard intensity={8}>
-                <article
-                  className={`card-surface p-6 h-full flex flex-col transition-all duration-300 ${hoverBorder} ${hoverGlow} border border-white/[0.07]`}
-                >
-                  <div className={`w-12 h-12 rounded-2xl ${iconBg} border ${iconBorder} flex items-center justify-center mb-5 transition-transform duration-300 hover:scale-110`}>
+              <TiltCard intensity={10}>
+                <article className="card-surface p-6 h-full flex flex-col border border-white/[0.07] hover:border-white/[0.14] transition-all duration-300">
+                  <div className={`w-11 h-11 rounded-xl ${iconBg} border ${iconBorder} flex items-center justify-center mb-5 transition-transform duration-300 hover:scale-110`}>
                     <Icon className={`w-5 h-5 ${accent}`} strokeWidth={1.5} aria-hidden />
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-white mb-2">{title}</h3>
+                  <h3 className="font-display text-lg font-semibold text-white mb-2">{title}</h3>
                   <p className="font-sans text-sm text-sushi-muted leading-relaxed">{desc}</p>
                 </article>
               </TiltCard>

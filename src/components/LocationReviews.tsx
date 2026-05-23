@@ -2,13 +2,25 @@ import { useState, useEffect } from "react";
 import { REVIEWS } from "../data/menu";
 import {
   MapPin, Phone, Star, ShieldCheck, ExternalLink,
-  Clock, Baby, GlassWater, CalendarDays, PenLine, Quote,
+  Clock, Baby, GlassWater, CalendarDays, PenLine,
 } from "lucide-react";
 import SectionHeading from "./ui/SectionHeading";
 import { SITE } from "../data/site";
 import { motion } from "motion/react";
 
-// ─── Avatar ──────────────────────────────────────────────────────────
+// ─── Google G logo (official brand colours) ──────────────────
+function GoogleG({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+    </svg>
+  );
+}
+
+// ─── Avatar ──────────────────────────────────────────────────
 function reviewAvatar(seed: string) {
   const map: Record<string, string> = {
     maria:  "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150",
@@ -20,17 +32,14 @@ function reviewAvatar(seed: string) {
   return map[seed] ?? "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=150&h=150";
 }
 
-// ─── Horarios reales ─────────────────────────────────────────────────
-//  Lunes–Jueves, Domingo:  12:00–16:30 / 19:00–23:30
-//  Viernes–Sábado:         12:00–16:30 / 19:00–24:00
-
+// ─── Horarios reales ──────────────────────────────────────────
 function getOpenStatus() {
   const now    = new Date();
   const h      = now.getHours() + now.getMinutes() / 60;
-  const day    = now.getDay(); // 0=Dom, 5=Vie, 6=Sáb
+  const day    = now.getDay();
   const isFriSat = day === 5 || day === 6;
 
-  const lunchOpen  = h >= 12 && h < 16.5;
+  const lunchOpen   = h >= 12 && h < 16.5;
   const dinnerClose = isFriSat ? 24 : 23.5;
   const dinnerOpen  = h >= 19 && h < dinnerClose;
 
@@ -54,23 +63,34 @@ const HOURS_TABLE = [
 ];
 
 const MAPS_EMBED = `https://maps.google.com/maps?cid=5432541503168016239&output=embed&hl=es`;
-const MAPS_LINK = SITE.mapsDirectLink;
+const MAPS_LINK  = SITE.mapsDirectLink;
 const REVIEW_LINK = SITE.reviewLink;
 
+const RATING_BARS = [
+  { stars: 5, pct: 89 },
+  { stars: 4, pct: 8  },
+  { stars: 3, pct: 2  },
+  { stars: 2, pct: 1  },
+  { stars: 1, pct: 0  },
+];
+
 const EXTRAS = [
-  { icon: GlassWater,   label: "Bebidas desde 3€",    detail: "Sake, cerveza, cócteles de autor" },
+  { icon: GlassWater,   label: "Bebidas desde 3€",   detail: "Sake, cerveza, cócteles de autor" },
   { icon: CalendarDays, label: "Specials semanales",  detail: "Nuevas piezas cada semana" },
   { icon: Baby,         label: "Menú infantil",       detail: "Opciones para los más pequeños" },
 ];
 
-// ─── Componente ───────────────────────────────────────────────────────
+// ─── Componente ───────────────────────────────────────────────
 export default function LocationReviews() {
   const [status, setStatus] = useState(getOpenStatus());
   useEffect(() => { setStatus(getOpenStatus()); }, []);
 
   return (
-    <section id="ubicacion" className="section-pad bg-gradient-to-b from-sushi-dark via-sushi-marble to-sushi-dark relative border-t border-white/[0.05]
-                                      before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-sushi-neon/[0.01] before:to-transparent before:pointer-events-none">
+    <section
+      id="ubicacion"
+      className="section-pad bg-gradient-to-b from-sushi-dark via-sushi-marble to-sushi-dark relative border-t border-white/[0.05]
+                 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-sushi-neon/[0.01] before:to-transparent before:pointer-events-none"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeading
           eyebrow="Visítanos"
@@ -83,7 +103,6 @@ export default function LocationReviews() {
           {/* ── Columna izquierda: info + mapa ── */}
           <div className="lg:col-span-6 space-y-5">
 
-            {/* Tarjeta info */}
             <motion.article
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -92,17 +111,12 @@ export default function LocationReviews() {
               whileHover={{ boxShadow: "0 0 24px rgba(0, 170, 255, 0.18)" }}
               className="card-surface p-6 sm:p-8 transition-shadow duration-300"
             >
-              {/* Cabecera */}
               <div className="flex items-start justify-between gap-4 border-b border-white/[0.08] pb-5 mb-6">
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-sushi-coral shrink-0 mt-0.5" aria-hidden />
                   <div>
-                    <h3 className="font-display text-lg font-bold text-white leading-tight">
-                      Casa del Sushi
-                    </h3>
-                    <p className="font-sans text-sm text-sushi-gold mt-0.5">
-                      {SITE.location} · {SITE.locationDetail}
-                    </p>
+                    <h3 className="font-display text-lg font-bold text-white leading-tight">Casa del Sushi</h3>
+                    <p className="font-sans text-sm text-sushi-gold mt-0.5">{SITE.location} · {SITE.locationDetail}</p>
                   </div>
                 </div>
                 <span
@@ -117,7 +131,6 @@ export default function LocationReviews() {
                 </span>
               </div>
 
-              {/* Horario detallado + teléfono */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm font-sans mb-6">
                 <div>
                   <p className="font-accent text-[10px] uppercase tracking-[0.18em] font-semibold text-gray-500 mb-3 flex items-center gap-1.5">
@@ -144,13 +157,10 @@ export default function LocationReviews() {
                   >
                     {SITE.phoneDisplay}
                   </a>
-                  <p className="text-sushi-muted text-xs mt-1.5">
-                    Reservas y consultas en horario de servicio
-                  </p>
+                  <p className="text-sushi-muted text-xs mt-1.5">Reservas y consultas en horario de servicio</p>
                 </div>
               </div>
 
-              {/* Servicios extra */}
               <div className="border-t border-white/[0.06] pt-5 grid grid-cols-3 gap-3">
                 {EXTRAS.map(({ icon: Icon, label, detail }) => (
                   <div key={label} className="flex flex-col items-center text-center gap-1.5 p-2">
@@ -162,7 +172,6 @@ export default function LocationReviews() {
               </div>
             </motion.article>
 
-            {/* Mapa real */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -194,7 +203,7 @@ export default function LocationReviews() {
             </div>
           </div>
 
-          {/* ── Columna derecha: reseñas ── */}
+          {/* ── Columna derecha: Google Business Profile + reseñas ── */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -202,113 +211,123 @@ export default function LocationReviews() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-6 flex flex-col gap-5"
           >
-            {/* ── Rating header card ── */}
-            <div className="card-surface p-6 sm:p-7">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-                <div>
-                  <h3 className="font-display text-lg font-bold text-white mb-2">
-                    Lo que dicen nuestros clientes
-                  </h3>
-                  <div className="flex items-center gap-3">
-                    <span className="font-display text-3xl font-bold text-sushi-gold-light leading-none drop-shadow-[0_0_14px_rgba(200,149,42,0.5)]">4,9</span>
-                    <div>
-                      <div className="flex gap-0.5 mb-0.5" aria-label="4.9 de 5 estrellas en Google">
-                        {[1,2,3,4,5].map(s => (
-                          <Star key={s} className="w-4 h-4 text-sushi-gold fill-sushi-gold drop-shadow-[0_0_6px_rgba(200,149,42,0.5)]" />
-                        ))}
-                      </div>
-                      <span className="font-sans text-[11px] text-sushi-muted">Basado en reseñas de Google</span>
-                    </div>
-                  </div>
+            {/* ── Google Business Profile card ── */}
+            <div className="card-surface overflow-hidden border border-white/[0.07]">
+
+              {/* Header: logo + rating + bars */}
+              <div className="px-6 pt-6 pb-5 border-b border-white/[0.06]">
+                <div className="flex items-center gap-2 mb-5">
+                  <GoogleG size={18} />
+                  <span className="font-sans text-xs text-gray-400 font-medium tracking-wide">Reseñas de Google</span>
                 </div>
 
-                {/* Google review CTA */}
+                <div className="flex items-center gap-6">
+                  {/* Big rating number */}
+                  <div className="text-center shrink-0">
+                    <p className="font-display text-5xl font-bold text-white leading-none drop-shadow-[0_0_20px_rgba(200,149,42,0.35)]">
+                      {SITE.googleRating}
+                    </p>
+                    <div className="flex gap-0.5 mt-2 justify-center" aria-label="4.9 de 5 estrellas">
+                      {[1,2,3,4,5].map(s => (
+                        <Star key={s} className="w-3.5 h-3.5 text-sushi-gold fill-sushi-gold" />
+                      ))}
+                    </div>
+                    <p className="font-sans text-[10px] text-gray-500 mt-1.5">de 5</p>
+                  </div>
+
+                  {/* Star distribution bars */}
+                  <div className="flex-1 space-y-1.5" aria-label="Distribución de valoraciones">
+                    {RATING_BARS.map(({ stars, pct }) => (
+                      <div key={stars} className="flex items-center gap-2">
+                        <span className="font-sans text-[10px] text-gray-500 w-2.5 text-right tabular-nums">{stars}</span>
+                        <Star className="w-2.5 h-2.5 text-sushi-gold fill-sushi-gold shrink-0" aria-hidden />
+                        <div className="flex-1 h-1.5 bg-white/[0.07] rounded-full overflow-hidden">
+                          <motion.div
+                            className="h-full bg-sushi-gold rounded-full"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${pct}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: (5 - stars) * 0.07, ease: "easeOut" }}
+                          />
+                        </div>
+                        <span className="font-sans text-[10px] text-gray-500 w-6 tabular-nums">{pct}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Write-a-review CTA */}
+              <div className="px-6 py-4 border-b border-white/[0.06] flex items-center justify-between gap-4">
+                <p className="font-sans text-xs text-gray-500">¿Has venido? Cuéntaselo a los demás.</p>
                 <a
                   href={REVIEW_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-sushi-gold/35 text-sushi-gold font-accent text-[11px] font-semibold uppercase tracking-[0.12em] hover:bg-sushi-gold/10 hover:border-sushi-gold transition-all duration-200 shrink-0 group"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white font-sans text-xs font-semibold hover:opacity-90 active:scale-95 transition-all shrink-0"
+                  style={{ backgroundColor: "#4285F4" }}
                 >
-                  <PenLine className="w-3.5 h-3.5 group-hover:rotate-6 transition-transform" aria-hidden />
-                  Dejar reseña
+                  <PenLine className="w-3.5 h-3.5" aria-hidden />
+                  Escribir reseña
                 </a>
               </div>
 
-              {/* Reviews list */}
-              <ul className="space-y-3">
+              {/* Review list */}
+              <ul className="divide-y divide-white/[0.04]">
                 {REVIEWS.map((review, idx) => (
                   <motion.li
                     key={review.id}
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: idx * 0.08 }}
-                    whileHover={{ y: -2 }}
-                    className="p-4 rounded-xl bg-sushi-dark/70 border border-white/[0.05] hover:border-sushi-gold/20 transition-all duration-300 cursor-default"
+                    transition={{ duration: 0.4, delay: idx * 0.07 }}
+                    className="px-5 py-4 hover:bg-white/[0.02] transition-colors duration-200"
                   >
-                    <div className="flex gap-3">
-                      <img
-                        src={reviewAvatar(review.avatarSeed)}
-                        alt={`Foto de ${review.author}`}
-                        className="w-9 h-9 rounded-full object-cover border border-sushi-gold/20 shrink-0"
-                        loading="lazy"
-                      />
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center justify-between gap-2 mb-1">
-                          <span className="font-sans text-sm font-semibold text-white truncate">{review.author}</span>
-                          <span className="font-sans text-[10px] text-gray-600 shrink-0">{review.date}</span>
+                    <div className="flex items-start justify-between mb-2.5">
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={reviewAvatar(review.avatarSeed)}
+                          alt={`Foto de perfil de ${review.author}`}
+                          className="w-9 h-9 rounded-full object-cover border border-white/[0.08] shrink-0"
+                          loading="lazy"
+                        />
+                        <div>
+                          <p className="font-sans text-sm font-semibold text-white leading-tight">{review.author}</p>
+                          <p className="font-sans text-[11px] text-gray-500 mt-0.5">{review.date}</p>
                         </div>
-                        <div className="flex gap-0.5 mb-2" aria-hidden>
-                          {Array.from({ length: review.rating }).map((_, i) => (
-                            <Star key={i} className="w-3 h-3 text-sushi-gold fill-sushi-gold" />
-                          ))}
-                        </div>
-                        <blockquote className="font-sans text-sm text-gray-300 leading-relaxed flex gap-1.5">
-                          <Quote className="w-3.5 h-3.5 text-sushi-gold/30 shrink-0 mt-0.5" aria-hidden />
-                          {review.text}
-                        </blockquote>
+                      </div>
+                      <div className="shrink-0 opacity-50 hover:opacity-80 transition-opacity">
+                        <GoogleG size={14} />
                       </div>
                     </div>
+
+                    <div className="flex gap-0.5 mb-2" aria-label={`${review.rating} de 5 estrellas`}>
+                      {Array.from({ length: review.rating }).map((_, i) => (
+                        <Star key={i} className="w-3.5 h-3.5 text-sushi-gold fill-sushi-gold" aria-hidden />
+                      ))}
+                    </div>
+
+                    <p className="font-sans text-[13px] text-gray-300 leading-relaxed">
+                      {review.text}
+                    </p>
                   </motion.li>
                 ))}
               </ul>
-            </div>
 
-            {/* ── Google Review Banner ── */}
-            <motion.a
-              href={REVIEW_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              whileHover={{ scale: 1.01, boxShadow: "0 0 32px rgba(200,149,42,0.18)" }}
-              className="block rounded-2xl border border-sushi-gold/25 overflow-hidden transition-all duration-300 cursor-pointer"
-              style={{
-                background: "linear-gradient(135deg, rgba(200,149,42,0.08) 0%, rgba(6,16,12,0.95) 50%, rgba(0,170,255,0.06) 100%)",
-              }}
-            >
-              <div className="px-6 py-5 flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
-                    <Star className="w-5 h-5 text-sushi-gold fill-sushi-gold" aria-hidden />
-                  </div>
-                  <div>
-                    <p className="font-display text-base font-semibold text-white leading-snug">
-                      ¿Has visitado Casa del Sushi?
-                    </p>
-                    <p className="font-sans text-xs text-sushi-muted mt-0.5">
-                      Tu opinión en Google ayuda a otros clientes a descubrirnos.
-                    </p>
-                  </div>
-                </div>
-                <div className="shrink-0 flex items-center gap-1.5 font-accent text-[11px] uppercase tracking-[0.1em] font-semibold text-sushi-gold">
-                  Valorar
-                  <ExternalLink className="w-3.5 h-3.5" aria-hidden />
-                </div>
+              {/* See all on Google */}
+              <div className="px-6 py-4 border-t border-white/[0.04]">
+                <a
+                  href={MAPS_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-sans text-xs text-gray-500 hover:text-[#4285F4] transition-colors"
+                >
+                  <GoogleG size={12} />
+                  Ver en Google Maps
+                  <ExternalLink className="w-3 h-3" aria-hidden />
+                </a>
               </div>
-            </motion.a>
+            </div>
 
             {/* ── Safety note ── */}
             <p className="flex items-center gap-2 font-sans text-xs text-sushi-muted px-1">
@@ -316,6 +335,7 @@ export default function LocationReviews() {
               Normativa de higiene alimentaria y antiparasitario en pescado crudo.
             </p>
           </motion.div>
+
         </div>
       </div>
     </section>
