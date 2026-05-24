@@ -18,7 +18,7 @@ const HOURS = [
 ];
 
 export default function Footer() {
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${SITE.mapsLinkQuery}`;
+  const mapsUrl = SITE.mapsDirectLink;
 
   return (
     <footer className="bg-sushi-dark border-t border-white/[0.08] text-sushi-muted">

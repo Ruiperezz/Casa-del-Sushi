@@ -1,4 +1,4 @@
-import { useRef, type MouseEvent, useMemo } from "react";
+import { useRef, type MouseEvent } from "react";
 import { useMotionValue, useTransform, useSpring, motion } from "motion/react";
 import { ArrowRight, ShieldCheck, Star, MapPin, ChevronDown } from "lucide-react";
 import { HERO_IMAGE } from "../data/venue";

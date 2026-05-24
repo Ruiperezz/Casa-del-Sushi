@@ -325,10 +325,10 @@ export default function BookingForm() {
                   </motion.div>
 
                   <h3 className="font-display text-4xl font-bold text-white mb-2 drop-shadow-[0_0_20px_rgba(255,92,23,0.22)]">
-                    ¡Perfecto!
+                    ¡Recibido!
                   </h3>
                   <p className="font-sans text-sushi-muted text-sm mb-8">
-                    Tu solicitud ha sido registrada
+                    Hemos recibido tu solicitud de reserva
                   </p>
 
                   {/* Booking reference box */}
