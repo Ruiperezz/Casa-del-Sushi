@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Menu, X, CalendarDays, Instagram } from "lucide-react";
+import { Menu, X, CalendarDays, Instagram, MessageCircle } from "lucide-react";
 import { scrollToSection } from "../lib/scroll";
 import { SITE } from "../data/site";
 
@@ -81,6 +81,15 @@ export default function Header() {
             >
               <Instagram className="w-4 h-4" />
             </a>
+            <a
+              href={SITE.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Contactar por WhatsApp"
+              className="p-2 rounded-lg text-gray-400 hover:text-emerald-400 hover:bg-emerald-400/8 border border-transparent hover:border-emerald-400/20 transition-all duration-200"
+            >
+              <MessageCircle className="w-4 h-4" />
+            </a>
             <button type="button" onClick={() => goTo("reserva")} className="btn-primary !py-2.5 !px-5 !text-xs">
               <CalendarDays className="w-4 h-4" aria-hidden />
               Reservar
@@ -119,9 +128,20 @@ export default function Header() {
                 {item.label}
               </button>
             ))}
-            <button type="button" onClick={() => goTo("reserva")} className="btn-primary w-full mt-4">
-              Reservar mesa
-            </button>
+            <div className="flex gap-3 mt-4 pt-4 border-t border-white/[0.08]">
+              <a
+                href={SITE.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-emerald-400/30 text-emerald-400 font-sans text-sm font-semibold hover:bg-emerald-400/8 transition-colors"
+              >
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp
+              </a>
+              <button type="button" onClick={() => goTo("reserva")} className="btn-primary flex-1">
+                Reservar
+              </button>
+            </div>
           </motion.nav>
         )}
       </AnimatePresence>

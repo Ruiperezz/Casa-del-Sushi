@@ -1,22 +1,12 @@
 import { motion } from "motion/react";
-import { Armchair, Zap, Gem, Hexagon, Palette, Leaf } from "lucide-react";
 import { SPACE_SIGNATURES } from "../data/venue";
 
-const ICONS = [
-  { Icon: Armchair, color: "text-sushi-coral",      bg: "bg-sushi-coral/10",  border: "border-sushi-coral/25"     },
-  { Icon: Zap,      color: "text-sushi-neon",       bg: "bg-sushi-neon/10",   border: "border-sushi-neon/25"      },
-  { Icon: Gem,      color: "text-sushi-gold",       bg: "bg-sushi-gold/10",   border: "border-sushi-gold/25"      },
-  { Icon: Hexagon,  color: "text-sushi-gold-light", bg: "bg-sushi-gold/8",    border: "border-sushi-gold/20"      },
-  { Icon: Palette,  color: "text-sushi-coral-light",bg: "bg-sushi-coral/8",   border: "border-sushi-coral-light/20"},
-  { Icon: Leaf,     color: "text-emerald-400",      bg: "bg-emerald-900/30",  border: "border-emerald-700/30"     },
-] as const;
-
 const fadeUp = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 14 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, delay: i * 0.07, ease: "easeOut" },
+    transition: { duration: 0.45, delay: i * 0.06, ease: "easeOut" },
   }),
 };
 
@@ -24,39 +14,47 @@ export default function AmbienteSignature() {
   return (
     <section
       aria-label="Detalles del local"
-      className="py-12 md:py-16 bg-sushi-surface-green border-y border-white/[0.05] relative overflow-hidden"
+      className="py-14 md:py-18 bg-sushi-surface-green border-y border-white/[0.05] relative overflow-hidden"
     >
-      {/* Background hex texture */}
-      <div className="absolute inset-0 hex-pattern opacity-30 pointer-events-none" />
+      <div className="absolute inset-0 hex-pattern opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <p className="font-sans text-sm text-sushi-gold text-center mb-10 tracking-wide">
+        <p className="font-sans text-xs text-sushi-gold uppercase tracking-[0.22em] font-semibold text-center mb-10">
           Lo que encontrarás al entrar
         </p>
-        <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-5">
-          {SPACE_SIGNATURES.map(({ title, desc }, i) => {
-            const { Icon, color, bg, border } = ICONS[i];
-            return (
-              <motion.li
-                key={title}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-20px" }}
-                variants={fadeUp}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className={`group flex flex-col items-center text-center p-5 rounded-2xl border ${border} bg-sushi-surface/40 hover:bg-sushi-surface transition-all duration-300 cursor-default`}
-              >
-                <div className={`w-11 h-11 rounded-xl ${bg} border ${border} flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-110`}>
-                  <Icon className={`w-5 h-5 ${color}`} strokeWidth={1.5} aria-hidden />
+
+        <ul className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-8 md:gap-y-10">
+          {SPACE_SIGNATURES.map(({ title, desc }, i) => (
+            <motion.li
+              key={title}
+              custom={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-20px" }}
+              variants={fadeUp}
+              className="group"
+            >
+              <div className="flex items-start gap-4">
+                <span
+                  className="font-display text-[2rem] font-bold leading-none tabular-nums shrink-0 select-none"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: "1px rgba(200,149,42,0.35)",
+                    transition: "all 0.3s",
+                  }}
+                  aria-hidden
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="pt-1 min-w-0">
+                  <h3 className="font-sans text-sm font-semibold text-white leading-tight mb-1.5 group-hover:text-sushi-gold transition-colors duration-300">
+                    {title}
+                  </h3>
+                  <p className="font-sans text-[12px] text-sushi-muted leading-relaxed">{desc}</p>
                 </div>
-                <h3 className="font-sans text-sm font-semibold text-white mb-1.5 leading-tight">
-                  {title}
-                </h3>
-                <p className="font-sans text-[11px] text-sushi-muted leading-relaxed">{desc}</p>
-              </motion.li>
-            );
-          })}
+              </div>
+            </motion.li>
+          ))}
         </ul>
       </div>
     </section>

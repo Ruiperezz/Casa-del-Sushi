@@ -34,8 +34,8 @@ export default function SpaceGallery() {
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeading
           eyebrow="Fotos del local"
-          title="Así es por dentro"
-          description={`Imágenes reales de ${SITE.name} en ${SITE.location}: el salón, la barra, el neón y los detalles que nos diferencian.`}
+          title="Un sitio que no esperabas en Cartagena"
+          description={`Imágenes reales de ${SITE.name}: neón azul, banquetas naranja, mármol negro y jardín vertical. Lo que ves es lo que encontrarás.`}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10">

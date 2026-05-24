@@ -84,14 +84,14 @@ export default function BookingForm() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sushi-coral/10 border border-sushi-coral/30 mb-5">
             <Sparkles className="w-4 h-4 text-sushi-coral" />
             <span className="font-accent text-[11px] font-semibold uppercase tracking-[0.15em] text-sushi-coral">
-              Reserva premium
+              Sin pago por adelantado
             </span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-3 drop-shadow-[0_0_20px_rgba(255,92,23,0.18)]">
-            Asegura tu experiencia
+            Reserva tu mesa
           </h2>
           <p className="font-sans text-base text-sushi-muted max-w-lg mx-auto">
-            Completa el formulario y recibe tu localizador. Confirmamos en 24h por teléfono.
+            Rellena el formulario y te confirmamos personalmente en 24 horas por teléfono o correo.
           </p>
         </motion.div>
 

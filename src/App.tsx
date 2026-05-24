@@ -7,13 +7,15 @@ import Philosophy from "./components/Philosophy";
 import AmbienteSignature from "./components/AmbienteSignature";
 import BuffetPromo from "./components/BuffetPromo";
 import MenuFilter from "./components/MenuFilter";
+import Matchmaker from "./components/Matchmaker";
 import WhyChooseUs from "./components/WhyChooseUs";
 import SpaceGallery from "./components/SpaceGallery";
-import Matchmaker from "./components/Matchmaker";
+import PromoTicker from "./components/PromoTicker";
+import Testimonials from "./components/Testimonials";
 import BookingForm from "./components/BookingForm";
+import FAQ from "./components/FAQ";
 import LocationReviews from "./components/LocationReviews";
 import Footer from "./components/Footer";
-import PromoTicker from "./components/PromoTicker";
 import { SITE } from "./data/site";
 
 export default function App() {
@@ -26,7 +28,7 @@ export default function App() {
         Saltar al contenido
       </a>
 
-      {/* Announcement bar — evoca el panel de neón azul eléctrico del local */}
+      {/* Announcement bar */}
       <div
         className="fixed top-0 left-0 right-0 z-[60] text-center overflow-hidden"
         style={{
@@ -36,7 +38,6 @@ export default function App() {
         }}
         role="status"
       >
-        {/* Neon glow bar */}
         <div
           className="absolute inset-x-0 bottom-0 h-[1px]"
           style={{ background: "linear-gradient(90deg, transparent, rgba(0,170,255,0.4), transparent)" }}
@@ -58,8 +59,6 @@ export default function App() {
             Reservar mesa →
           </a>
         </p>
-
-        {/* Instagram — esquina derecha del banner */}
         <a
           href={SITE.instagram}
           target="_blank"
@@ -81,11 +80,13 @@ export default function App() {
         <AmbienteSignature />
         <BuffetPromo />
         <MenuFilter />
+        <Matchmaker />
         <WhyChooseUs />
         <SpaceGallery />
         <PromoTicker />
-        <Matchmaker />
+        <Testimonials />
         <BookingForm />
+        <FAQ />
         <LocationReviews />
       </main>
 

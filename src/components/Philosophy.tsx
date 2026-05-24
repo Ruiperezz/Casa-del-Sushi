@@ -112,6 +112,16 @@ export default function Philosophy() {
                 El buffet libre a {SITE.buffetPrice} incluye la carta de autor. Pides en rondas, lo
                 recibes recién hecho en mesa, y si quieres maridar, en la barra te orientamos.
               </p>
+
+              {/* Voz del equipo */}
+              <div className="mt-2 rounded-xl bg-white/[0.03] border border-sushi-gold/15 px-6 py-5">
+                <p className="font-display text-base italic text-white/80 leading-relaxed">
+                  "Cartagena merecía un sitio así. Lo hemos construido con cariño, para los de aquí y para quien nos visita."
+                </p>
+                <p className="font-sans text-xs text-sushi-gold font-semibold mt-3">
+                  — El equipo de Casa del Sushi
+                </p>
+              </div>
             </div>
 
             <ul className="grid grid-cols-3 gap-3 pt-8 border-t border-white/[0.08]">

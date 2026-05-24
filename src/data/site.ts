@@ -8,6 +8,8 @@ export const SITE = {
   googleRating: "4,9",
   phone: "+34641114778",
   phoneDisplay: "641 11 47 78",
+  whatsapp: "https://wa.me/34641114778?text=Hola%20Casa%20del%20Sushi%2C%20me%20gustaría%20reservar%20una%20mesa",
+  openingDate: "2026-05-17", // Abierto hace 7 días (desde 17 de mayo)
   mapsEmbedQuery: "Plaza+del+Rey+Cartagena+Casa+del+Sushi",
   mapsLinkQuery: "Plaza+del+Rey+Cartagena+Casa+del+Sushi",
   instagram: "https://www.instagram.com/casadelsushi88/",
