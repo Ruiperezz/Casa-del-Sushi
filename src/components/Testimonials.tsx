@@ -115,7 +115,7 @@ export default function Testimonials() {
             >
               <div
                 className="absolute inset-x-0 top-0 h-[2px]"
-                style={{ background: idx === 0 ? "rgba(0,170,255,0.7)" : "rgba(200,149,42,0.7)" }}
+                style={{ background: idx === 0 ? "rgba(26,140,255,0.7)" : "rgba(201,169,110,0.7)" }}
               />
               <div className="flex gap-0.5 mb-4">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (

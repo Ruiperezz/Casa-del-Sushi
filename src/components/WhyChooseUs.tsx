@@ -11,28 +11,28 @@ const features = [
     title: "Carta de autor incluida en el precio",
     desc: "Uramakis, nigiris flameados y entrantes de autor por 17,80 €. Pides en rondas, llega recién hecho desde la barra.",
     accent: "text-sushi-coral",
-    bar: "rgba(255,92,23,0.85)",
+    bar: "rgba(232,103,60,0.85)",
   },
   {
     icon: Armchair,
     title: "Un salón con personalidad",
     desc: "Banquetas naranja, sillas azul, neón, vidriera y mármol negro con detalle dorado.",
     accent: "text-sushi-neon",
-    bar: "rgba(0,170,255,0.85)",
+    bar: "rgba(26,140,255,0.85)",
   },
   {
     icon: Hexagon,
     title: "Barra y jardín vertical",
     desc: "Zona de barra con vegetación colgante, copas y vinos. Un rincón muy nuestro.",
     accent: "text-sushi-gold",
-    bar: "rgba(200,149,42,0.85)",
+    bar: "rgba(201,169,110,0.85)",
   },
   {
     icon: Leaf,
     title: "Te adaptamos la carta",
     desc: "Opciones sin gluten, menú infantil y bebidas desde 3 €. Pregunta al reservar.",
     accent: "text-sushi-neon",
-    bar: "rgba(0,170,255,0.6)",
+    bar: "rgba(26,140,255,0.6)",
   },
 ];
 
@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
           className="mb-5"
         >
           <TiltCard intensity={5}>
-            <article className="card-surface p-7 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 relative overflow-hidden border border-sushi-coral/20 hover:border-sushi-coral/35 hover:shadow-[0_0_48px_rgba(255,92,23,0.1)] transition-all duration-300">
+            <article className="card-surface p-7 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-6 relative overflow-hidden border border-sushi-coral/20 hover:border-sushi-coral/35 hover:shadow-[0_0_48px_rgba(232,103,60,0.12)] transition-all duration-300">
               <div className="absolute inset-x-0 top-0 h-[2px] rounded-t-2xl" style={{ background: featured.bar }} />
               <featured.icon className={`w-10 h-10 ${featured.accent} shrink-0 mt-1`} strokeWidth={1} aria-hidden />
 

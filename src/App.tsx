@@ -32,14 +32,14 @@ export default function App() {
         className="fixed top-0 left-0 right-0 z-[60] text-center overflow-hidden"
         style={{
           height: "var(--announcement-height)",
-          background: "linear-gradient(90deg, #06100C 0%, #071822 40%, #071822 60%, #06100C 100%)",
-          borderBottom: "1px solid rgba(0,170,255,0.18)",
+          background: "linear-gradient(90deg, #07101E 0%, #0A1628 40%, #0A1628 60%, #07101E 100%)",
+          borderBottom: "1px solid rgba(26,140,255,0.18)",
         }}
         role="status"
       >
         <div
           className="absolute inset-x-0 bottom-0 h-[1px]"
-          style={{ background: "linear-gradient(90deg, transparent, rgba(0,170,255,0.4), transparent)" }}
+          style={{ background: "linear-gradient(90deg, transparent, rgba(26,140,255,0.4), transparent)" }}
           aria-hidden
         />
         <p className="h-full flex items-center justify-center gap-2 px-4 font-sans text-xs text-white/80">
