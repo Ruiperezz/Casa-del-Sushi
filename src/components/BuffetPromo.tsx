@@ -12,8 +12,7 @@ const features = [
     description:
       "Pides desde la mesa y la barra prepara cada ronda recién elaborada, sin bandejas en exposición.",
     accent: "text-sushi-gold",
-    iconBg: "bg-sushi-gold/12",
-    iconBorder: "border-sushi-gold/25",
+    bar: "rgba(200,149,42,0.85)",
   },
   {
     icon: Flame,
@@ -21,8 +20,7 @@ const features = [
     description:
       "Uramakis, gyozas, nigiris flameados y entrantes premium dentro del precio del buffet.",
     accent: "text-sushi-coral",
-    iconBg: "bg-sushi-coral/12",
-    iconBorder: "border-sushi-coral/25",
+    bar: "rgba(255,92,23,0.85)",
   },
   {
     icon: Wine,
@@ -30,8 +28,7 @@ const features = [
     description:
       "Sake, cervezas japonesas, refrescos y cócteles de la casa. Acompañamientos ideales para tu experiencia.",
     accent: "text-sushi-neon",
-    iconBg: "bg-sushi-neon/10",
-    iconBorder: "border-sushi-neon/20",
+    bar: "rgba(0,170,255,0.85)",
   },
 ];
 
@@ -118,7 +115,7 @@ export default function BuffetPromo() {
           {/* ── Feature cards + rules ── */}
           <div className="xl:col-span-7 flex flex-col gap-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {features.map(({ icon: Icon, title, description, accent, iconBg, iconBorder }, i) => (
+              {features.map(({ icon: Icon, title, description, accent, bar }, i) => (
                 <motion.div
                   key={title}
                   initial={{ opacity: 0, y: 16 }}
@@ -127,14 +124,13 @@ export default function BuffetPromo() {
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                 >
                   <TiltCard intensity={12} className="h-full">
-                    <article className="card-surface p-6 h-full flex flex-col">
-                      <div className={`w-10 h-10 rounded-xl ${iconBg} border ${iconBorder} flex items-center justify-center mb-4`}>
-                        <Icon className={`w-5 h-5 ${accent}`} strokeWidth={1.5} aria-hidden />
-                      </div>
-                      <h4 className="font-accent text-[13px] font-semibold text-white uppercase tracking-[0.12em] mb-2.5">
+                    <article className="card-surface p-6 h-full flex flex-col relative overflow-hidden">
+                      <div className="absolute inset-x-0 top-0 h-[2px] rounded-t-2xl" style={{ background: bar }} />
+                      <Icon className={`w-7 h-7 ${accent} mb-5 mt-2`} strokeWidth={1.25} aria-hidden />
+                      <h4 className="font-display text-base font-semibold text-white mb-2 leading-snug">
                         {title}
                       </h4>
-                      <p className="font-sans text-sm text-sushi-muted leading-relaxed">{description}</p>
+                      <p className="font-sans text-sm text-sushi-muted leading-relaxed flex-1">{description}</p>
                     </article>
                   </TiltCard>
                 </motion.div>

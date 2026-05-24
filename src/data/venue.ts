@@ -34,7 +34,7 @@ export const VENUE_PHOTOS: VenuePhoto[] = [
     title: "Neón y vidriera de autor",
     description:
       "El icónico letrero en neón azul eléctrico, acompañado de una vidriera modernista y aros de luz cálida en el techo.",
-    layout: "wide",
+    layout: "standard",
   },
   {
     id: "banquetas",
@@ -43,7 +43,7 @@ export const VENUE_PHOTOS: VenuePhoto[] = [
     title: "Banquetas y mármol",
     description:
       "Textura acolchada en tono naranja vibrante y mesas de mármol negro con vetas blancas y perfil metálico dorado.",
-    layout: "tall",
+    layout: "standard",
   },
   {
     id: "barra-jardin",
@@ -70,7 +70,7 @@ export const VENUE_PHOTOS: VenuePhoto[] = [
     title: "Distribución del comedor",
     description:
       "Mesas alineadas con precisión, paneles geométricos en techo y vidriera que aporta color y alegría al ambiente.",
-    layout: "wide",
+    layout: "standard",
   },
 ];
 

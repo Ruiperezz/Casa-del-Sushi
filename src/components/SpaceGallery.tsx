@@ -7,10 +7,10 @@ import { SITE } from "../data/site";
 import { scrollToSection } from "../lib/scroll";
 
 const layoutClass: Record<VenuePhoto["layout"], string> = {
-  hero: "md:col-span-2 md:row-span-2 min-h-[300px] md:min-h-[440px]",
-  wide: "md:col-span-2 min-h-[220px]",
-  tall: "md:row-span-2 min-h-[300px] md:min-h-[440px]",
-  standard: "min-h-[200px]",
+  hero: "md:col-span-2 md:row-span-2 min-h-[300px] md:min-h-[480px]",
+  wide: "md:col-span-2 min-h-[240px]",
+  tall: "md:row-span-2 min-h-[300px] md:min-h-[480px]",
+  standard: "min-h-[240px]",
 };
 
 export default function SpaceGallery() {
@@ -38,7 +38,7 @@ export default function SpaceGallery() {
           description={`Imágenes reales de ${SITE.name}: neón azul, banquetas naranja, mármol negro y jardín vertical. Lo que ves es lo que encontrarás.`}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-flow-dense gap-3 mb-10">
           {VENUE_PHOTOS.map((photo) => (
             <button
               key={photo.id}
@@ -50,7 +50,9 @@ export default function SpaceGallery() {
                 src={photo.src}
                 alt={photo.alt}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                style={{ filter: "saturate(1.12) contrast(1.04) brightness(1.02)" }}
                 loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/90 via-sushi-dark/20 to-transparent" aria-hidden />
               <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5">
@@ -115,7 +117,7 @@ export default function SpaceGallery() {
               >
                 <X className="w-5 h-5" />
               </button>
-              <img src={active.src} alt={active.alt} className="w-full max-h-[65vh] object-cover" />
+              <img src={active.src} alt={active.alt} className="w-full max-h-[65vh] object-cover" style={{ filter: "saturate(1.12) contrast(1.04)" }} />
               <div className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h3 className="font-display text-xl font-semibold text-white">{active.title}</h3>
