@@ -1,17 +1,9 @@
 import { useRef, type MouseEvent, useMemo } from "react";
 import { useMotionValue, useTransform, useSpring, motion } from "motion/react";
-import { ArrowRight, ShieldCheck, Star, MapPin, ChevronDown, Sparkles } from "lucide-react";
+import { ArrowRight, ShieldCheck, Star, MapPin, ChevronDown } from "lucide-react";
 import { HERO_IMAGE } from "../data/venue";
 import { SITE } from "../data/site";
 import { scrollToSection } from "../lib/scroll";
-
-// Calcular días desde apertura
-function getDaysSinceOpening() {
-  const opening = new Date(SITE.openingDate);
-  const today = new Date();
-  const diff = today.getTime() - opening.getTime();
-  return Math.floor(diff / (1000 * 60 * 60 * 24));
-}
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -139,17 +131,6 @@ export default function Hero() {
               visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
             }}
           >
-            {/* New opening badge */}
-            <motion.div
-              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sushi-coral/10 border border-sushi-coral/30 mb-5"
-            >
-              <Sparkles className="w-4 h-4 text-sushi-coral animate-pulse" aria-hidden />
-              <span className="font-accent text-xs font-semibold text-sushi-coral-light tracking-wide">
-                Abierto hace {getDaysSinceOpening()} días
-              </span>
-            </motion.div>
-
             {/* Location eyebrow */}
             <motion.p
               variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}

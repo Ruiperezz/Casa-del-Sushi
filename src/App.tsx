@@ -4,7 +4,6 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import TrustStrip from "./components/TrustStrip";
 import Philosophy from "./components/Philosophy";
-import AmbienteSignature from "./components/AmbienteSignature";
 import BuffetPromo from "./components/BuffetPromo";
 import MenuFilter from "./components/MenuFilter";
 import Matchmaker from "./components/Matchmaker";
@@ -77,8 +76,7 @@ export default function App() {
         <Hero />
         <TrustStrip />
         <Philosophy />
-        <AmbienteSignature />
-        <BuffetPromo />
+<BuffetPromo />
         <MenuFilter />
         <Matchmaker />
         <WhyChooseUs />
