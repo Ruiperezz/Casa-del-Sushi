@@ -18,9 +18,9 @@ export default function PromoTicker() {
     <div
       className="relative overflow-hidden select-none"
       style={{
-        background: "linear-gradient(90deg, #0a0600 0%, #100A02 40%, #100A02 60%, #0a0600 100%)",
-        borderTop: "1px solid rgba(255,92,23,0.2)",
-        borderBottom: "1px solid rgba(255,92,23,0.12)",
+        background: "linear-gradient(90deg, #060F1E 0%, #0A1628 40%, #0A1628 60%, #060F1E 100%)",
+        borderTop: "1px solid rgba(26,140,255,0.18)",
+        borderBottom: "1px solid rgba(201,169,110,0.12)",
         padding: "11px 0",
       }}
       aria-hidden
@@ -28,11 +28,11 @@ export default function PromoTicker() {
       {/* Edge fades */}
       <div
         className="absolute left-0 inset-y-0 w-20 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to right, #0a0600, transparent)" }}
+        style={{ background: "linear-gradient(to right, #060F1E, transparent)" }}
       />
       <div
         className="absolute right-0 inset-y-0 w-20 z-10 pointer-events-none"
-        style={{ background: "linear-gradient(to left, #0a0600, transparent)" }}
+        style={{ background: "linear-gradient(to left, #060F1E, transparent)" }}
       />
 
       <div
@@ -47,7 +47,7 @@ export default function PromoTicker() {
             <span style={{ color: item.color }}>{item.text}</span>
             <span
               className="text-[8px]"
-              style={{ color: "rgba(255,92,23,0.5)" }}
+              style={{ color: "rgba(26,140,255,0.5)" }}
             >
               ✦
             </span>

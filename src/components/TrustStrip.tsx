@@ -38,9 +38,9 @@ export default function TrustStrip() {
       aria-label="Datos del restaurante"
       className="relative overflow-hidden"
       style={{
-        background: "#06100C",
-        borderTop: "1px solid rgba(200,149,42,0.28)",
-        borderBottom: "1px solid rgba(0,170,255,0.1)",
+        background: "#07101E",
+        borderTop: "1px solid rgba(201,169,110,0.28)",
+        borderBottom: "1px solid rgba(26,140,255,0.12)",
       }}
     >
       {/* Scan shimmer */}
@@ -57,7 +57,7 @@ export default function TrustStrip() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.07, ease: "easeOut" }}
-              className="bg-[#06100C] px-6 py-5 flex flex-col gap-1"
+              className="bg-[#07101E] px-6 py-5 flex flex-col gap-1"
             >
               <p className={`font-display text-[1.6rem] sm:text-[1.85rem] font-bold leading-none tabular-nums ${textClass}`}>
                 {value}

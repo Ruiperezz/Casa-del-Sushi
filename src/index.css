@@ -1,52 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Figtree:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Bodoni Moda", Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
   --font-accent: "Barlow Condensed", sans-serif;
   --font-wide: "Syncopate", sans-serif;
 
   /*
-   * PALETA FIEL AL LOCAL:
-   * Banquetas naranja vibrante · Neón azul eléctrico · Techo teal oscuro
-   * Mármol negro · Latón dorado · Jardín verde · Madera roble cálida
+   * PALETA TEST — AZUL NOCHE:
+   * Fondo azul marino oscuro · Neón azul primario · Coral banquetas
+   * Oro cálido · Verde jardín · Blanco cálido
    */
 
-  /* ── Fondos — inspirados en el techo teal oscuro del local ── */
-  --color-sushi-dark:          #06100C;   /* negro-teal: el techo del salón */
-  --color-sushi-marble:        #0B0F0D;   /* mármol negro de la barra */
-  --color-sushi-surface:       #0F1F18;   /* superficies elevadas */
-  --color-sushi-surface-warm:  #180F07;   /* zona cálida de madera/barra */
-  --color-sushi-surface-green: #0C1A13;   /* secciones con tono jardín */
-  --color-sushi-surface-alt:   #090E0B;   /* alternativa oscura para ritmo */
+  /* ── Fondos — azul noche inspirado en el ambiente del local ── */
+  --color-sushi-dark:          #0A1628;   /* azul marino oscuro: fondo principal */
+  --color-sushi-marble:        #07101E;   /* más oscuro para contraste */
+  --color-sushi-surface:       #111D2E;   /* tarjetas y superficies elevadas */
+  --color-sushi-surface-warm:  #0D1724;   /* zona cálida con tono azul */
+  --color-sushi-surface-green: #0D1B1A;   /* secciones con tono jardín */
+  --color-sushi-surface-alt:   #080F1A;   /* alternativa oscura para ritmo */
 
   /* ── Verde — el jardín vertical y las paredes ── */
-  --color-sushi-green:         #0B1E16;
+  --color-sushi-green:         #1B3D2F;
   --color-sushi-teal:          #1A4A5C;
 
-  /* ── Azul rey — las sillas y algunos detalles ── */
-  --color-sushi-royal:         #1E3A6E;
+  /* ── Azul rey — acento decorativo ── */
+  --color-sushi-royal:         #0D3BAE;
 
   /* ── Coral/Naranja — las banquetas: EL color del local ── */
-  --color-sushi-coral:         #FF5C17;   /* naranja puro vibrante */
-  --color-sushi-coral-light:   #FF8F5A;   /* versión clara */
-  --color-sushi-coral-dark:    #D94610;   /* hover/pressed */
+  --color-sushi-coral:         #E8673C;   /* coral cálido vibrante */
+  --color-sushi-coral-light:   #FF7B4D;   /* versión clara */
+  --color-sushi-coral-dark:    #C95529;   /* hover/pressed */
 
   /* ── Neón azul eléctrico — el rótulo CASA DEL SUSHI ── */
-  --color-sushi-neon:          #00AAFF;   /* azul eléctrico puro (entre cian y azul) */
-  --color-sushi-neon-dim:      #0077CC;   /* versión apagada */
+  --color-sushi-neon:          #1A8CFF;   /* azul eléctrico brillante */
+  --color-sushi-neon-dim:      #0066FF;   /* versión más intensa */
 
   /* ── Oro/Latón — marcos hexagonales y bordes de mesa ── */
-  --color-sushi-gold:          #C8952A;   /* latón cálido de las lámparas */
-  --color-sushi-gold-light:    #E8B84B;   /* detalle dorado claro */
-  --color-sushi-gold-dim:      #8A6420;   /* oro apagado */
+  --color-sushi-gold:          #C9A96E;   /* oro cálido metalizado */
+  --color-sushi-gold-light:    #D4A853;   /* detalle dorado claro */
+  --color-sushi-gold-dim:      #8A7040;   /* oro apagado */
 
   /* ── Borgoña — la pared oscura detrás de la vidriera ── */
   --color-sushi-burgundy:      #3D1528;
 
   /* ── Tipografía ── */
-  --color-sushi-muted:         #8A9E98;
+  --color-sushi-muted:         #7A8BA8;   /* gris azulado */
 
   /* ── Animaciones ── */
   --animate-neon-pulse:   neon-pulse 3s ease-in-out infinite;
@@ -56,6 +56,8 @@
   --animate-pulse-ring:   pulse-ring 2s ease-out infinite;
   --animate-price-glow:   price-glow 3s ease-in-out infinite;
   --animate-scan:         scan-h 3s linear infinite;
+  --animate-gold-shimmer: gold-shimmer 3s ease-in-out infinite;
+  --animate-neon-logo:    neon-logo-pulse 4s ease-in-out infinite;
 }
 
 :root {
@@ -74,14 +76,36 @@ h1, h2, h3 { text-wrap: balance; }
 @keyframes neon-pulse {
   0%, 100% {
     box-shadow:
-      0 0 10px rgba(0, 170, 255, 0.3),
-      0 0 30px rgba(0, 170, 255, 0.15);
+      0 0 10px rgba(26, 140, 255, 0.3),
+      0 0 30px rgba(26, 140, 255, 0.15);
   }
   50% {
     box-shadow:
-      0 0 20px rgba(0, 170, 255, 0.5),
-      0 0 60px rgba(0, 170, 255, 0.25);
+      0 0 20px rgba(26, 140, 255, 0.5),
+      0 0 60px rgba(26, 140, 255, 0.25);
   }
+}
+
+@keyframes neon-logo-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 7px rgba(26, 140, 255, 0.9),
+      0 0 20px rgba(26, 140, 255, 0.6),
+      0 0 42px rgba(0, 102, 255, 0.4),
+      0 0 82px rgba(0, 51, 170, 0.2);
+  }
+  50% {
+    text-shadow:
+      0 0 4px rgba(26, 140, 255, 0.7),
+      0 0 14px rgba(26, 140, 255, 0.5),
+      0 0 32px rgba(0, 102, 255, 0.3),
+      0 0 60px rgba(0, 51, 170, 0.15);
+  }
+}
+
+@keyframes gold-shimmer {
+  0%, 100% { text-shadow: 0 0 20px rgba(201, 169, 110, 0.2); }
+  50%      { text-shadow: 0 0 40px rgba(201, 169, 110, 0.65), 0 0 80px rgba(201, 169, 110, 0.3); }
 }
 
 @keyframes scroll-hint {
@@ -95,14 +119,14 @@ h1, h2, h3 { text-wrap: balance; }
 }
 
 @keyframes pulse-ring {
-  0%   { box-shadow: 0 0 0 0   rgba(255, 92, 23, 0.6); }
-  70%  { box-shadow: 0 0 0 14px rgba(255, 92, 23, 0); }
-  100% { box-shadow: 0 0 0 0   rgba(255, 92, 23, 0); }
+  0%   { box-shadow: 0 0 0 0   rgba(232, 103, 60, 0.6); }
+  70%  { box-shadow: 0 0 0 14px rgba(232, 103, 60, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(232, 103, 60, 0); }
 }
 
 @keyframes price-glow {
-  0%, 100% { text-shadow: 0 0 20px rgba(200, 149, 42, 0.2); }
-  50%      { text-shadow: 0 0 40px rgba(200, 149, 42, 0.65), 0 0 80px rgba(200, 149, 42, 0.3); }
+  0%, 100% { text-shadow: 0 0 20px rgba(201, 169, 110, 0.2); }
+  50%      { text-shadow: 0 0 40px rgba(201, 169, 110, 0.65), 0 0 80px rgba(201, 169, 110, 0.3); }
 }
 
 @keyframes scan-h {
@@ -124,9 +148,9 @@ h1, h2, h3 { text-wrap: balance; }
 @keyframes neon-flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
     text-shadow:
-      0 0 8px rgba(0, 170, 255, 0.7),
-      0 0 20px rgba(0, 170, 255, 0.4),
-      0 0 40px rgba(0, 170, 255, 0.2);
+      0 0 8px rgba(26, 140, 255, 0.7),
+      0 0 20px rgba(26, 140, 255, 0.4),
+      0 0 40px rgba(26, 140, 255, 0.2);
   }
   20%, 24%, 55% {
     text-shadow: none;
@@ -137,16 +161,16 @@ h1, h2, h3 { text-wrap: balance; }
 /* ─── Scrollbar ─────────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar       { width: 5px; }
-::-webkit-scrollbar-track { background: #050A07; }
-::-webkit-scrollbar-thumb { background: #1A2E26; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-sushi-coral, #FF5C17); }
+::-webkit-scrollbar-track { background: #070E1A; }
+::-webkit-scrollbar-thumb { background: #1A2E4A; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-sushi-neon, #1A8CFF); }
 
 /* ─── Texture utilities ─────────────────────────────────────────────── */
 
 .gold-veins {
   background-image:
-    radial-gradient(ellipse at 15% 25%, rgba(200, 149, 42, 0.07) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 75%, rgba(255, 92, 23, 0.05) 0%, transparent 50%);
+    radial-gradient(ellipse at 15% 25%, rgba(201, 169, 110, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 75%, rgba(26, 140, 255, 0.04) 0%, transparent 50%);
 }
 
 /* Patrón hexagonal inspirado en las lámparas del local */
@@ -159,9 +183,11 @@ h1, h2, h3 { text-wrap: balance; }
 .neon-sign {
   color: #D0EEFF;
   text-shadow:
-    0 0 8px rgba(0, 170, 255, 0.8),
-    0 0 20px rgba(0, 170, 255, 0.5),
-    0 0 40px rgba(0, 170, 255, 0.3);
+    0 0 7px rgba(26, 140, 255, 0.9),
+    0 0 20px rgba(26, 140, 255, 0.6),
+    0 0 42px rgba(0, 102, 255, 0.4),
+    0 0 82px rgba(0, 51, 170, 0.2);
+  animation: var(--animate-neon-logo);
 }
 
 /* ─── Layout helpers ────────────────────────────────────────────────── */
@@ -178,11 +204,12 @@ h1, h2, h3 { text-wrap: balance; }
          rounded-lg cursor-pointer
          focus-visible:outline focus-visible:outline-2
          focus-visible:outline-offset-2 focus-visible:outline-sushi-coral;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
 .btn-primary:hover {
-  background-color: var(--color-sushi-coral-dark);
-  box-shadow: 0 0 24px rgba(255, 92, 23, 0.35);
+  background-color: var(--color-sushi-coral-light);
+  box-shadow: 0 0 28px rgba(232, 103, 60, 0.45), 0 4px 16px rgba(0,0,0,0.3);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -199,7 +226,9 @@ h1, h2, h3 { text-wrap: balance; }
 /* ─── Surface / Card ────────────────────────────────────────────────── */
 
 .card-surface {
-  @apply bg-sushi-surface border border-white/[0.07] rounded-2xl;
+  @apply bg-sushi-surface rounded-2xl;
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 102, 255, 0.06);
 }
 
 /* ─── Form ──────────────────────────────────────────────────────────── */
@@ -216,8 +245,8 @@ h1, h2, h3 { text-wrap: balance; }
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .gold-border-glow-hover:hover {
-  border-color: rgba(200, 149, 42, 0.45);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(201, 169, 110, 0.45);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(201, 169, 110, 0.1);
 }
 
 /* ─── 3D perspective wrapper ────────────────────────────────────────── */
@@ -229,11 +258,13 @@ h1, h2, h3 { text-wrap: balance; }
 /* ─── Glow text utilities ───────────────────────────────────────────── */
 
 /* Latón dorado de las lámparas */
-.glow-gold  { text-shadow: 0 0 24px rgba(200, 149, 42, 0.5); }
+.glow-gold  { text-shadow: 0 0 24px rgba(201, 169, 110, 0.5); }
 /* Naranja de las banquetas */
-.glow-coral { text-shadow: 0 0 20px rgba(255, 92, 23, 0.55); }
+.glow-coral { text-shadow: 0 0 20px rgba(232, 103, 60, 0.55); }
 /* Azul eléctrico del neón */
-.glow-neon  { text-shadow: 0 0 18px rgba(0, 170, 255, 0.55); }
+.glow-neon  { text-shadow: 0 0 18px rgba(26, 140, 255, 0.6); }
+/* Shimmer dorado animado */
+.gold-shimmer { animation: var(--animate-gold-shimmer); }
 
 /* ─── Price glow animado (el precio del buffet) ─────────────────────── */
 
@@ -248,7 +279,7 @@ h1, h2, h3 { text-wrap: balance; }
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(200, 149, 42, 0.07) 50%,
+    rgba(201, 169, 110, 0.07) 50%,
     transparent 100%
   );
   width: 30%;
@@ -272,3 +303,16 @@ h1, h2, h3 { text-wrap: balance; }
     radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.015) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 70%, rgba(255,255,255,0.01) 0%, transparent 50%);
 }
+
+/* Fondo con gradiente azul profundo para secciones principales */
+.section-gradient {
+  background: linear-gradient(135deg, #0A1628 0%, #0D1F1A 50%, #0A1628 100%);
+}
+
+/* Decoración verde oscuro — el jardín vertical */
+.green-overlay {
+  background: radial-gradient(ellipse at 0% 50%, rgba(27, 61, 47, 0.3) 0%, transparent 50%);
+}
+
+/* Neon logo text animation utility */
+.neon-logo-anim { animation: var(--animate-neon-logo); }

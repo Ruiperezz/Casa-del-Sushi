@@ -12,7 +12,7 @@ const features = [
     description:
       "Pides desde la mesa y la barra prepara cada ronda recién elaborada, sin bandejas en exposición.",
     accent: "text-sushi-gold",
-    bar: "rgba(200,149,42,0.85)",
+    bar: "rgba(201,169,110,0.85)",
   },
   {
     icon: Flame,
@@ -20,7 +20,7 @@ const features = [
     description:
       "Uramakis, gyozas, nigiris flameados y entrantes premium dentro del precio del buffet.",
     accent: "text-sushi-coral",
-    bar: "rgba(255,92,23,0.85)",
+    bar: "rgba(232,103,60,0.85)",
   },
   {
     icon: Wine,
@@ -28,7 +28,7 @@ const features = [
     description:
       "Sake, cervezas japonesas, refrescos y cócteles de la casa. Acompañamientos ideales para tu experiencia.",
     accent: "text-sushi-neon",
-    bar: "rgba(0,170,255,0.85)",
+    bar: "rgba(26,140,255,0.85)",
   },
 ];
 

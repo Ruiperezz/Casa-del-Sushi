@@ -45,11 +45,11 @@ export default function Hero() {
       <div className="absolute inset-0 pointer-events-none z-0">
         <div
           className="absolute -bottom-40 right-0 w-[600px] h-[500px] coral-blob"
-          style={{ background: "rgba(255,92,23,0.07)" }}
+          style={{ background: "rgba(232,103,60,0.07)" }}
         />
         <div
           className="absolute top-0 -right-20 w-[300px] h-[300px] coral-blob"
-          style={{ background: "rgba(0,170,255,0.06)", animationDelay: "3.5s" }}
+          style={{ background: "rgba(26,140,255,0.07)", animationDelay: "3.5s" }}
         />
       </div>
 
@@ -81,9 +81,9 @@ export default function Hero() {
             <div
               className="flex items-center gap-2.5 rounded-xl px-4 py-2.5"
               style={{
-                background: "rgba(6,16,12,0.92)",
-                border: "1px solid rgba(200,149,42,0.5)",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.5), 0 0 20px rgba(200,149,42,0.1)",
+                background: "rgba(10,22,40,0.92)",
+                border: "1px solid rgba(201,169,110,0.5)",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.5), 0 0 20px rgba(201,169,110,0.12)",
               }}
             >
               <Star className="w-4 h-4 text-sushi-gold fill-sushi-gold" aria-hidden />
@@ -99,7 +99,7 @@ export default function Hero() {
             <div
               className="flex items-center gap-2 rounded-lg px-3 py-2"
               style={{
-                background: "rgba(6,16,12,0.88)",
+                background: "rgba(10,22,40,0.88)",
                 border: "1px solid rgba(255,255,255,0.1)",
               }}
             >
@@ -112,14 +112,14 @@ export default function Hero() {
         {/* ── Panel contenido ── */}
         <div
           className="relative flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-12 py-12 lg:py-16"
-          style={{ background: "linear-gradient(135deg, rgba(6,16,12,0.97) 0%, rgba(6,16,12,0.92) 100%)" }}
+          style={{ background: "linear-gradient(135deg, rgba(10,22,40,0.97) 0%, rgba(10,22,40,0.92) 100%)" }}
         >
           {/* Textura de venas de oro */}
           <div className="absolute inset-0 gold-veins opacity-50 pointer-events-none" />
           {/* Resplandor naranja en la esquina inferior — como el reflejo de las banquetas */}
           <div
             className="absolute -bottom-20 -left-20 w-80 h-80 pointer-events-none"
-            style={{ background: "radial-gradient(circle, rgba(255,92,23,0.08) 0%, transparent 70%)" }}
+            style={{ background: "radial-gradient(circle, rgba(26,140,255,0.07) 0%, transparent 70%)" }}
           />
 
           <motion.div
