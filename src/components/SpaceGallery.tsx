@@ -1,8 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { X, ArrowRight, Instagram } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionHeading from "./ui/SectionHeading";
 import { VENUE_PHOTOS, type VenuePhoto } from "../data/venue";
+
+gsap.registerPlugin(ScrollTrigger);
 import { SITE } from "../data/site";
 import { scrollToSection } from "../lib/scroll";
 
@@ -15,7 +19,9 @@ const layoutClass: Record<VenuePhoto["layout"], string> = {
 
 export default function SpaceGallery() {
   const [active, setActive] = useState<VenuePhoto | null>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
+  // Keyboard / scroll-lock for lightbox
   useEffect(() => {
     if (!active) return;
     const onKey = (e: KeyboardEvent) => {
@@ -29,6 +35,37 @@ export default function SpaceGallery() {
     };
   }, [active]);
 
+  // GSAP parallax: each gallery image expands as it scrolls into view
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>(".gallery-card");
+      cards.forEach((card) => {
+        const img = card.querySelector<HTMLImageElement>(".gallery-img");
+        if (!img) return;
+
+        gsap.fromTo(
+          img,
+          { scale: 1.14, yPercent: -6 },
+          {
+            scale: 1.0,
+            yPercent: 6,
+            ease: "none",
+            scrollTrigger: {
+              trigger: card,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.5,
+            },
+          }
+        );
+      });
+    }, gridRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="galeria" className="section-pad bg-sushi-marble border-t border-white/[0.06]">
       <div className="max-w-7xl mx-auto px-6">
@@ -38,19 +75,22 @@ export default function SpaceGallery() {
           description={`Imágenes reales de ${SITE.name}: neón azul, banquetas naranja, mármol negro y jardín vertical. Lo que ves es lo que encontrarás.`}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-flow-dense gap-3 mb-10">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 md:grid-flow-dense gap-3 mb-10">
           {VENUE_PHOTOS.map((photo) => (
             <button
               key={photo.id}
               type="button"
               onClick={() => setActive(photo)}
-              className={`group relative overflow-hidden rounded-xl border border-white/[0.08] hover:border-sushi-gold/35 text-left cursor-pointer ${layoutClass[photo.layout]}`}
+              className={`gallery-card group relative overflow-hidden rounded-xl border border-white/[0.08] hover:border-sushi-gold/35 text-left cursor-pointer ${layoutClass[photo.layout]}`}
             >
               <img
                 src={photo.src}
                 alt={photo.alt}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                style={{ filter: "saturate(1.12) contrast(1.04) brightness(1.02)" }}
+                className="gallery-img absolute inset-0 w-full h-full object-cover"
+                style={{
+                  filter: "saturate(1.12) contrast(1.04) brightness(1.02)",
+                  willChange: "transform",
+                }}
                 loading="lazy"
                 decoding="async"
               />

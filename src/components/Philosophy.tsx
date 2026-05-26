@@ -4,6 +4,7 @@ import { CalendarDays } from "lucide-react";
 import { PHILOSOPHY_IMAGE } from "../data/venue";
 import { SITE } from "../data/site";
 import { scrollToSection } from "../lib/scroll";
+import { useParallax } from "../lib/useParallax";
 
 const highlights = [
   { value: SITE.buffetPrice, label: "Buffet libre completo", tone: "text-sushi-coral", glow: "glow-coral" },
@@ -12,6 +13,12 @@ const highlights = [
 ];
 
 export default function Philosophy() {
+  const philoImgRef = useParallax<HTMLImageElement>({
+    scale: [1.1, 1.0],
+    yPercent: [-5, 5],
+    scrub: 1.8,
+  });
+
   const xRaw = useMotionValue(0);
   const yRaw = useMotionValue(0);
 
@@ -59,9 +66,11 @@ export default function Philosophy() {
             >
               <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] shadow-[0_24px_80px_rgba(0,0,0,0.6)]">
                 <img
+                  ref={philoImgRef}
                   src={PHILOSOPHY_IMAGE}
                   alt="Interior de Casa del Sushi en Plaza del Rey: neón azul, vidriera de colores y salón con luz dorada"
                   className="w-full h-[360px] sm:h-[440px] lg:h-[520px] object-cover"
+                  style={{ willChange: "transform" }}
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-sushi-dark/75 via-transparent to-transparent" />

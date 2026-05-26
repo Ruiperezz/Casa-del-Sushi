@@ -4,9 +4,11 @@ import { ArrowRight, ShieldCheck, Star, MapPin, ChevronDown } from "lucide-react
 import { HERO_IMAGE } from "../data/venue";
 import { SITE } from "../data/site";
 import { scrollToSection } from "../lib/scroll";
+import { useHeroParallax } from "../lib/useParallax";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const heroImgRef = useHeroParallax<HTMLImageElement>(0.3);
 
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
@@ -66,9 +68,11 @@ export default function Hero() {
           }}
         >
           <img
+            ref={heroImgRef}
             src={HERO_IMAGE}
             alt="Salón de Casa del Sushi en Plaza del Rey: banquetas naranja vibrante, mesas de mármol negro con ribete dorado y rótulo de neón azul eléctrico"
             className="absolute inset-0 w-full h-full object-cover"
+            style={{ willChange: "transform" }}
             fetchPriority="high"
           />
           {/* Gradiente lateral hacia el panel de texto */}
