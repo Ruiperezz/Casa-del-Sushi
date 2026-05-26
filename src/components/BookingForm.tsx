@@ -11,6 +11,7 @@ import {
   AlertCircle,
   Sparkles,
   ArrowRight,
+  MessageCircle,
 } from "lucide-react";
 
 const timeslots = {
@@ -281,6 +282,28 @@ export default function BookingForm() {
                       </span>
                     )}
                   </motion.button>
+
+                  {/* WhatsApp alternative */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex-1 h-px bg-white/[0.08]" />
+                    <span className="font-sans text-[10px] text-gray-500 uppercase tracking-widest">o</span>
+                    <div className="flex-1 h-px bg-white/[0.08]" />
+                  </div>
+                  <a
+                    href={`https://wa.me/34641114778?text=${encodeURIComponent(
+                      `Hola, me gustaría reservar una mesa en Casa del Sushi.\n📅 Fecha: ${date}\n⏰ Hora: ${selectedTime}\n👥 Personas: ${guests}`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-lg font-accent font-bold uppercase tracking-[0.08em] text-sm text-white transition-all"
+                    style={{
+                      background: "#25D366",
+                      boxShadow: "0 4px 20px rgba(37,211,102,0.25)",
+                    }}
+                  >
+                    <MessageCircle className="w-4 h-4" aria-hidden />
+                    Reservar por WhatsApp
+                  </a>
 
                   <p className="font-sans text-[10px] text-gray-500 text-center leading-relaxed">
                     Sin pago anticipado · Confirmación por teléfono en 24h

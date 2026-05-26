@@ -5,16 +5,19 @@ import Hero from "./components/Hero";
 import TrustStrip from "./components/TrustStrip";
 import Philosophy from "./components/Philosophy";
 import BuffetPromo from "./components/BuffetPromo";
+import CartaVisual from "./components/CartaVisual";
 import MenuFilter from "./components/MenuFilter";
 import Matchmaker from "./components/Matchmaker";
 import WhyChooseUs from "./components/WhyChooseUs";
 import SpaceGallery from "./components/SpaceGallery";
+import ExperienceNarrative from "./components/ExperienceNarrative";
 import PromoTicker from "./components/PromoTicker";
 import Testimonials from "./components/Testimonials";
 import BookingForm from "./components/BookingForm";
 import FAQ from "./components/FAQ";
 import LocationReviews from "./components/LocationReviews";
 import Footer from "./components/Footer";
+import MobileReserveCTA from "./components/MobileReserveCTA";
 import { SITE } from "./data/site";
 
 export default function App() {
@@ -76,11 +79,13 @@ export default function App() {
         <Hero />
         <TrustStrip />
         <Philosophy />
-<BuffetPromo />
+        <BuffetPromo />
+        <CartaVisual />
         <MenuFilter />
         <Matchmaker />
         <WhyChooseUs />
         <SpaceGallery />
+        <ExperienceNarrative />
         <PromoTicker />
         <Testimonials />
         <BookingForm />
@@ -89,6 +94,7 @@ export default function App() {
       </main>
 
       <Footer />
+      <MobileReserveCTA />
       <Analytics />
     </div>
   );

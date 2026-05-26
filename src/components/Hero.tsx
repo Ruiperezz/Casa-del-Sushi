@@ -1,14 +1,29 @@
-import { useRef, type MouseEvent } from "react";
+import { useRef, useMemo, type MouseEvent } from "react";
 import { useMotionValue, useTransform, useSpring, motion } from "motion/react";
-import { ArrowRight, ShieldCheck, Star, MapPin, ChevronDown } from "lucide-react";
+import { ArrowRight, ShieldCheck, Star, MapPin, ChevronDown, TrendingUp } from "lucide-react";
 import { HERO_IMAGE } from "../data/venue";
 import { SITE } from "../data/site";
 import { scrollToSection } from "../lib/scroll";
 import { useHeroParallax } from "../lib/useParallax";
 
+function usePopularitySignal() {
+  return useMemo(() => {
+    const hour = new Date().getHours();
+    const day = new Date().getDay(); // 0=Sun, 6=Sat
+    const isWeekend = day === 0 || day === 5 || day === 6;
+    const isService = (hour >= 12 && hour <= 16) || (hour >= 19 && hour <= 23);
+
+    if (isWeekend && isService) return "Pocas mesas disponibles hoy";
+    if (isService) return "Servicio en curso ahora";
+    if (hour >= 10 && hour < 12) return "Abrimos en breve · Reserva ya";
+    return "Reservas abiertas esta semana";
+  }, []);
+}
+
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const heroImgRef = useHeroParallax<HTMLImageElement>(0.3);
+  const popularitySignal = usePopularitySignal();
 
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
@@ -208,6 +223,24 @@ export default function Hero() {
               >
                 Ver fotos del local
               </button>
+            </motion.div>
+
+            {/* Señal de popularidad */}
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 6 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+              className="flex items-center gap-2 mb-2"
+            >
+              <span
+                className="inline-flex items-center gap-1.5 font-sans text-xs font-medium px-3 py-1.5 rounded-full"
+                style={{
+                  background: "rgba(26,140,255,0.08)",
+                  border: "1px solid rgba(26,140,255,0.2)",
+                  color: "#1A8CFF",
+                }}
+              >
+                <TrendingUp className="w-3 h-3" aria-hidden />
+                {popularitySignal}
+              </span>
             </motion.div>
 
             <motion.p
